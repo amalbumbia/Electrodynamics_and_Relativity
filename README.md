@@ -11,6 +11,7 @@
 
 
 ## Sources
-\textit{A Traveler's Guide to Spacetime} by Thomas Moore
-\textit{Modern General Relativity} by Mike Guidry
-\textit{Spacetime and Geometry} by Sean Carroll
+Introduction to Electrodynamics 4th ed by David J, Griffiths
+A Traveler's Guide to Spacetime by Thomas Moore
+Modern General Relativity by Mike Guidry
+Spacetime and Geometry by Sean Carroll
