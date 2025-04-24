@@ -11,6 +11,7 @@
 
 
 ## Sources
+
 - Introduction to Electrodynamics 4th ed by David J. Griffiths
 - Electrodynamics and Relativity Lecture Notes by David Tong
 - A Traveler's Guide to Spacetime by Thomas Moore
