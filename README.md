@@ -7,3 +7,10 @@
  - Special Relativity
  - Relativistic Mechanics
  - Relativistic Electrodynamics
+
+
+
+## Sources
+\textit{A Traveler's Guide to Spacetime} by Thomas Moore
+\textit{Modern General Relativity} by Mike Guidry
+\textit{Spacetime and Geometry} by Sean Carroll
