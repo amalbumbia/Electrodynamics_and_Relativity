@@ -19,8 +19,6 @@
   </iframe>
 </p>
 
-> **Note:** GitHub’s Markdown viewer still won’t run the `<iframe>`—you’ll see it as a blank box in the repo browser—but when you view the **GitHub Pages** site (the same repo’s Pages URL), the interactive diagram will load in place.
-
 
 ## Sources
 
