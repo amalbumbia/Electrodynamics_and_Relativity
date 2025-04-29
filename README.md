@@ -8,6 +8,18 @@
  - Relativistic Mechanics
  - Relativistic Electrodynamics
 
+## Interactive Minkowski Boost Diagram
+
+<p align="center">
+  <iframe
+    src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/main/minkowski_boost.html"
+    width="720" height="720"
+    frameborder="0"
+    sandbox="allow-scripts allow-same-origin">
+  </iframe>
+</p>
+
+> **Note:** GitHub’s Markdown viewer still won’t run the `<iframe>`—you’ll see it as a blank box in the repo browser—but when you view the **GitHub Pages** site (the same repo’s Pages URL), the interactive diagram will load in place.
 
 
 ## Sources
