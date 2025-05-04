@@ -25,5 +25,3 @@
 - Introduction to Electrodynamics 4th ed by David J. Griffiths
 - Electrodynamics and Relativity Lecture Notes by David Tong
 - A Traveler's Guide to Spacetime by Thomas Moore
-- Modern General Relativity by Mike Guidry
-- Spacetime and Geometry by Sean Carroll
