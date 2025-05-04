@@ -9,7 +9,7 @@
  - Relativistic Electrodynamics
  - Applications
 
-<img width="465" alt="superconductivity_chart" src="https://github.com/amalbumbia/EuclideanLattices/blob/5e534e064bba6abd516db0883ac352edf4f08079/plots/Square/No_Disorder/t1_maxq30/Hofstadter_Butterfly.png">
+<img width="465" alt="superconductivity_chart" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/6469efaad1695ccf08ad28ccda9f46c75237aa13/applications/superconductivity_flowchart.png">
 
 ## Interactive Minkowski Boost Diagram
 
