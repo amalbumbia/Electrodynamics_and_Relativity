@@ -7,6 +7,9 @@
  - Special Relativity
  - Relativistic Mechanics
  - Relativistic Electrodynamics
+ - Applications
+
+<img width="465" alt="superconductivity_chart" src="https://github.com/amalbumbia/EuclideanLattices/blob/5e534e064bba6abd516db0883ac352edf4f08079/plots/Square/No_Disorder/t1_maxq30/Hofstadter_Butterfly.png">
 
 ## Interactive Minkowski Boost Diagram
 
