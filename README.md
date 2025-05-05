@@ -8,7 +8,7 @@
  - Relativistic Mechanics
  - Relativistic Electrodynamics
  - [Electrodynamics as a Gauge Theory](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/why_electrodynamics.html)
- - Applications
+ - [Applications](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/ff9ae8776cff9a50dcd0e7260373b456f1a29108/applications)
 
 ## Interactive Boost Diagram
 
