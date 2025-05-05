@@ -18,7 +18,7 @@
 <img width="600" alt="map" src="">
 
 ## Worldline
-<img width="600" alt="worldline" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/429b01df1d14d4049e2085599da75ccc8cd6b0df/special_relativity/pictures/worldline.png">
+<img width="400" alt="worldline" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/429b01df1d14d4049e2085599da75ccc8cd6b0df/special_relativity/pictures/worldline.png">
 
 ## Proper Time
 <img width="600" alt="propertime" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/429b01df1d14d4049e2085599da75ccc8cd6b0df/special_relativity/pictures/propertime.png">
