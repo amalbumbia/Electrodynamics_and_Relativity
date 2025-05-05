@@ -8,18 +8,26 @@
   <img src="assets/boost_diagram.png" width="400" alt="Minkowski Boost Diagram">
 </a>
 
+## Clock Lattice Visualizer
 <img width="600" alt="clock_lattice" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/d32a1f979cf35d78682c23d700417be0085d320d/special_relativity/pictures/clock_lattice.png">
 
+## Reference Frames
 <img width="600" alt="reference_frame" src="">
 
+## Coordinates and UT Campus
 <img width="600" alt="map" src="">
 
+## Worldline
 <img width="600" alt="worldline" src="">
 
+## Proper Time
 <img width="600" alt="propertime" src="">
 
+## The Three Types of Time
 <img width="600" alt="typestime" src="">
 
+## Geometries
 <img width="600" alt="table" src="">
 
+## Lightcone
 <img width="600" alt="lightcone" src="">
