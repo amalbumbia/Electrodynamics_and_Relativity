@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Relativistic Particle in EM Fields</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #111;
+      color: #eee;
+      text-align: center;
+      margin: 20px;
+    }
+    #einstein-img {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 100px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #fff;
+    }
+    #plot-container {
+      width: 100%;
+      height: 600px;
+      margin-top: 60px;
+    }
+    #slider-container {
+      text-align: left;
+      width: 600px;
+      margin: auto;
+    }
+    label {
+      display: inline-block;
+      width: 40px;
+    }
+  </style>
+</head>
+<body>
+  <img id="einstein-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Albert_Einstein_sticks_his_tongue.jpg/500px-Albert_Einstein_sticks_his_tongue.jpg" alt="Einstein" />
+  <h2>Relativistic Particle Motion in Electromagnetic Fields</h2>
+  <p>
+    A charged particle experiencing the relativistic Lorentz force \( \frac{d\vec{p}}{dt} = q(\vec{E} + \vec{v} \times \vec{B}) \). Keep in mind
+    that everything here is defined with <br> respect to the lab (stationary) frame, and the only difference from the nonrelativistic regime
+    is that we use relativistic momentum \( \vec{p}=\gamma(v)m\vec{v} \).
+  </p>
+
+  <div id="plot-container"></div>
+
+  <div id="gamma-display"><strong>\(\gamma = 1\)</strong></div><br>
+
+  <div id="slider-container">
+    <h4>Electric Field (E)</h4>
+    Ex: <input type="range" id="Ex" min="-5" max="5" value="0" step="0.1"> <span id="Ex-val">0</span><br>
+    Ey: <input type="range" id="Ey" min="-5" max="5" value="0" step="0.1"> <span id="Ey-val">0</span><br>
+    Ez: <input type="range" id="Ez" min="-5" max="5" value="1" step="0.1"> <span id="Ez-val">1</span><br><br>
+
+    <h4>Magnetic Field (B)</h4>
+    Bx: <input type="range" id="Bx" min="-5" max="5" value="0" step="0.1"> <span id="Bx-val">0</span><br>
+    By: <input type="range" id="By" min="-5" max="5" value="1" step="0.1"> <span id="By-val">1</span><br>
+    Bz: <input type="range" id="Bz" min="-5" max="5" value="0" step="0.1"> <span id="Bz-val">0</span><br><br>
+
+    <h4>Initial Velocity (v)</h4>
+    vx: <input type="range" id="vx" min="0" max="0.99" value="0.1" step="0.01"> <span id="vx-val">0.1</span><br>
+    vy: <input type="range" id="vy" min="0" max="0.99" value="0" step="0.01"> <span id="vy-val">0</span><br>
+    vz: <input type="range" id="vz" min="0" max="0.99" value="0" step="0.01"> <span id="vz-val">0</span><br><br>
+  </div>
+
+  <script>
+    const sliders = ["Ex", "Ey", "Ez", "Bx", "By", "Bz", "vx", "vy", "vz"];
+    const values = {};
+
+    sliders.forEach(id => {
+      const slider = document.getElementById(id);
+      const label = document.getElementById(`${id}-val`);
+      values[id] = parseFloat(slider.value);
+
+      slider.addEventListener("input", () => {
+        values[id] = parseFloat(slider.value);
+        label.textContent = slider.value;
+        updateGamma();
+        plotTrajectory();
+      });
+    });
+
+    function updateGamma() {
+      const v2 = values.vx ** 2 + values.vy ** 2 + values.vz ** 2;
+      const gamma = 1 / Math.sqrt(1 - v2);
+      document.getElementById("gamma-display").innerHTML = `<strong>\\(\\gamma_i = ${gamma.toFixed(3)}\\)</strong>`;
+      if (window.MathJax) MathJax.typeset();
+    }
+
+    function plotTrajectory() {
+      const dt = 0.01;
+      const steps = 1000;
+      const q = 1, m = 1; // for simplicity
+
+      let r = [0, 0, 0];
+      let v = [values.vx, values.vy, values.vz];
+      const E = [values.Ex, values.Ey, values.Ez];
+      const B = [values.Bx, values.By, values.Bz];
+
+      const x = [], y = [], z = [];
+
+      for (let i = 0; i < steps; i++) {
+        const v2 = v[0]**2 + v[1]**2 + v[2]**2;
+        const gamma = 1 / Math.sqrt(1 - v2);
+
+        const vxB = [
+          v[1]*B[2] - v[2]*B[1],
+          v[2]*B[0] - v[0]*B[2],
+          v[0]*B[1] - v[1]*B[0]
+        ];
+
+        const a = [
+          (q/m) * (E[0] + vxB[0]) / gamma,
+          (q/m) * (E[1] + vxB[1]) / gamma,
+          (q/m) * (E[2] + vxB[2]) / gamma
+        ];
+
+        for (let j = 0; j < 3; j++) {
+          v[j] += a[j] * dt;
+          if (Math.sqrt(v[0]**2 + v[1]**2 + v[2]**2) >= 1) {
+            const scale = 0.999 / Math.sqrt(v[0]**2 + v[1]**2 + v[2]**2);
+            v = v.map(c => c * scale);
+          }
+          r[j] += v[j] * dt;
+        }
+
+        x.push(r[0]);
+        y.push(r[1]);
+        z.push(r[2]);
+      }
+
+      const trace = {
+        type: "scatter3d",
+        mode: "lines",
+        x: x,
+        y: y,
+        z: z,
+        line: { width: 6, color: 'lime' }
+      };
+
+      const layout = {
+        paper_bgcolor: "#111",
+        plot_bgcolor: "#111",
+        margin: { l: 0, r: 0, b: 0, t: 0 },
+        scene: {
+          xaxis: { title: "x",
+            color: "#fff",
+          gridcolor: "#444"
+          },
+          yaxis: { title: "y",
+          color: "#fff",
+          gridcolor: "#444"
+          },
+          zaxis: { title: "z" ,
+            color: "#fff",
+          gridcolor: "#444"
+          },
+        }
+      };
+
+      Plotly.newPlot("plot-container", [trace], layout);
+    }
+
+    updateGamma();
+    plotTrajectory();
+  </script>
+</body>
+</html>

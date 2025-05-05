@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Doppler Shift with Round Trip</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #111;
+      color: #eee;
+      text-align: center;
+      margin: 30px;
+    }
+
+    #doppler-plot {
+      margin: auto;
+    }
+
+    #slider-container {
+      margin-top: 20px;
+    }
+
+    img#einstein {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 100px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #fff;
+    }
+  </style>
+</head>
+<body>
+  <img id="einstein" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Albert_Einstein_sticks_his_tongue.jpg/500px-Albert_Einstein_sticks_his_tongue.jpg" alt="Einstein">
+
+  <h2>Doppler Shift with Accelerated Round Trip</h2>
+  <p>
+    An observer moving with constant proper acceleration 
+    perceives the frequency of light from a stationary source.<br> The observer accelerates away from the source,
+    turns around at proper time \( \tau_{\text{turn}} \), and returns.
+  </p>
+
+  <div id="doppler-plot" style="width: 800px; height: 500px;"></div>
+
+  <div id="slider-container">
+    <label>Proper Acceleration \( \alpha \) (in \( \text{m/s}^{2} \)): </label>
+    <input type="range" id="alpha-slider" min="0.1" max="2" value="1" step="0.1" />
+    <span id="alpha-value">1.0</span><br><br>
+
+    <label>Turnaround Time \( \tau_{\text{turn}} \): </label>
+    <input type="range" id="turn-slider" min="1" max="10" value="5" step="0.5" />
+    <span id="turn-value">5.0</span>
+  </div>
+
+  <p style="margin-top: 30px;">
+    This is a demonstration of the <em>relativistic Doppler effect</em>.
+    First, notice how there is a jump discontinuity at the turnaround time. This is merely due to the fact that we are 
+    arbitrarily putting this in the code (instantaneous decleration is unphysical). Nonetheless, notice the assymetry on each side.
+    As we move away from the source we experience a redshift; however, as we move towards the source, we experience a very steep blueshift
+  </p>
+
+  <script>
+    function velocity(alpha, tau) {
+      // we derive this just by inverting eqn 12.40 in griffiths
+      return (alpha * tau) / Math.sqrt(1 + Math.pow(alpha * tau, 2));
+    }
+
+    function dopplerShift(v) {
+      // we let the frequency of the source equal 1 to just visualize on the shapes of the graph
+      return Math.sqrt((1 - v) / (1 + v));
+    }
+
+    function updatePlot(alpha, tauTurn) {
+      const tau = [], freq = [];
+      const totalTime = 2 * tauTurn;
+
+      for (let t = 0; t <= totalTime; t += 0.05) {
+        const outbound = t <= tauTurn;
+        const direction = outbound ? 1 : -1;
+        const localTau = outbound ? t : t - tauTurn;
+        const v = direction * velocity(alpha, localTau);
+        const f = dopplerShift(v);
+        tau.push(t);
+        freq.push(f);
+      }
+
+      const trace = {
+        x: tau,
+        y: freq,
+        mode: 'lines+markers',
+        name: 'Apparent Frequency',
+        line: { color: 'lime' },
+        marker: { color: 'lime' }
+      };
+
+      const layout = {
+        title: {
+          text: "Doppler-Shifted Frequency vs Proper Time",
+          font: { color: "#eee" }
+        },
+        paper_bgcolor: "#111",
+        plot_bgcolor: "#111",
+        xaxis: {
+          title: "\\(\\tau\\) (s)",
+          color: "#fff",
+          gridcolor: "#444"
+        },
+        yaxis: {
+          title: "Apparent Frequency (relative to rest)",
+          color: "#fff",
+          gridcolor: "#444"
+        },
+      };
+
+      Plotly.newPlot("doppler-plot", [trace], layout);
+    }
+
+    const alphaSlider = document.getElementById("alpha-slider");
+    const turnSlider = document.getElementById("turn-slider");
+    const alphaLabel = document.getElementById("alpha-value");
+    const turnLabel = document.getElementById("turn-value");
+
+    function refreshPlot() {
+      const alpha = parseFloat(alphaSlider.value);
+      const tauTurn = parseFloat(turnSlider.value);
+      alphaLabel.textContent = alpha.toFixed(1);
+      turnLabel.textContent = tauTurn.toFixed(1);
+      updatePlot(alpha, tauTurn);
+      if (window.MathJax) MathJax.typeset();  // renders Latex for prettiness
+    }
+
+    alphaSlider.addEventListener("input", refreshPlot);
+    turnSlider.addEventListener("input", refreshPlot);
+
+    refreshPlot();
+  </script>
+</body>
+</html>

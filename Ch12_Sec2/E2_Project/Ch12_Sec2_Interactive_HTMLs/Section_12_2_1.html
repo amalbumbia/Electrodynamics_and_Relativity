@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Proper Velocity vs Proper Time</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+  <style>
+    body {
+      background-color: #111;
+      color: #eee;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      margin: 30px;
+    }
+    #einstein-img {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 100px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #fff;
+    }
+    #slider-container {
+      margin-top: 30px;
+    }
+    input[type=range] {
+      width: 300px;
+    }
+    label, span {
+      font-size: 1.1em;
+    }
+    .info {
+      color: #ccc;
+      font-size: 0.95em;
+      margin-bottom: 20px;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+<body>
+  <img id="einstein-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Albert_Einstein_sticks_his_tongue.jpg/500px-Albert_Einstein_sticks_his_tongue.jpg" alt="Einstein" />
+  <h2>Proper and Coordinate Velocity vs. Proper Time</h2>
+  <p id="description">
+    For constant proper acceleration \( \alpha = 1.0 \, \text{m/s}^{2} \)
+  </p>
+
+  <div class="info">
+    <p>
+      In special relativity, an object experiencing constant proper acceleration follows a hyperbolic trajectory in spacetime. The plot below compares:
+    </p>
+    <ul style="text-align:left; display:inline-block;">
+      <li><strong>Proper velocity</strong> \( \eta = \gamma v \): grows linearly with proper time \( \tau \)</li>
+      <li><strong>Coordinate velocity</strong> \( v \): asymptotically approaches the speed of light</li>
+    </ul>
+  </div>
+
+  <div id="velocity-plot" style="width: 800px; height: 500px; margin: auto;"></div>
+
+  <div id="slider-container">
+    <label>
+      Proper Acceleration \( \alpha \) (in \( \text{m/s}^{2} \)): 
+    </label><br>
+    <input type="range" id="accel-slider" min="0.1" max="2" value="1" step="0.1" />
+    <span id="accel-value">1.0</span>
+  </div>
+
+  <script>
+    function gamma(v) {
+      return 1 / Math.sqrt(1 - v * v);
+    }
+
+    function updatePlot(a) {
+      const tau = [], eta = [], v = [];
+      for (let t = 0; t <= 5; t += 0.05) {
+        tau.push(t);
+        const properV = a * t;
+        const coordV = properV / Math.sqrt(1 + properV * properV);
+        eta.push(properV);
+        v.push(coordV);
+      }
+
+      const traces = [
+        {
+          x: tau,
+          y: eta,
+          name: "Proper Velocity (\\( \\eta = \\gamma v \\))",
+          mode: 'lines+markers',
+          line: { color: 'lime' },
+          marker: { color: 'lime' }
+        },
+        {
+          x: tau,
+          y: v,
+          name: "Coordinate Velocity (v)",
+          mode: 'lines+markers',
+          line: { color: 'lightgreen', dash: 'dot' },
+          marker: { color: 'lightgreen' }
+        }
+      ];
+
+      const layout = {
+        title: {
+          text: "Velocity vs. Proper Time (τ)",
+          font: { color: '#fff', size: 22 }
+        },
+        plot_bgcolor: "#111",
+        paper_bgcolor: "#111",
+        font: { color: '#fff' },
+        xaxis: {
+          title: "Proper Time τ (s)",
+          gridcolor: '#888',
+          zerolinecolor: '#aaa'
+        },
+        yaxis: {
+          title: "Velocity (natural units)",
+          range: [0, 1.5],
+          gridcolor: '#888',
+          zerolinecolor: '#aaa'
+        },
+        legend: { x: 0.1, y: 1 }
+      };
+
+      Plotly.newPlot("velocity-plot", traces, layout);
+      MathJax.typesetPromise(); // Update MathJax
+    }
+
+    const slider = document.getElementById("accel-slider");
+    const valueLabel = document.getElementById("accel-value");
+    const desc = document.getElementById("description");
+
+    slider.addEventListener("input", () => {
+      const a = parseFloat(slider.value);
+      valueLabel.textContent = a.toFixed(1);
+      desc.innerHTML = `For constant proper acceleration \\( \\alpha = ${a.toFixed(1)} \\, \\text{m/s}^{2} \\)`;
+      MathJax.typesetPromise();
+      updatePlot(a);
+    });
+
+    // Initial plot
+    updatePlot(parseFloat(slider.value));
+  </script>
+</body>
+</html>
