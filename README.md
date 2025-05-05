@@ -5,8 +5,8 @@
  The outline of subtopics covered in this repository are as follows:
 
  - [Special Relativity](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/dfdc289b99c800f50e0a8377334629b777b9947b/special_relativity)
- - Relativistic Mechanics
- - Relativistic Electrodynamics
+ - [Relativistic Mechanics](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/d878b18f4b3361b7f9c400208f3ab3cfad1a70a3/relativistic_mechanics)
+ - [Relativistic Electrodynamics]()
  - [Electrodynamics as a Gauge Theory](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/why_electrodynamics.html)
  - [Applications](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/ff9ae8776cff9a50dcd0e7260373b456f1a29108/applications)
 
