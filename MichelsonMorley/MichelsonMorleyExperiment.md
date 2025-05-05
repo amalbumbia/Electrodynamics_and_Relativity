@@ -119,3 +119,8 @@ In 1905, Albert Einstein published his paper outlining his theory of special rel
 
 **1. The principle of relativity:** The same laws of physics apply in all inertial reference systems.
 **2. The universal speed of light:** The speed of light in a vacuum is the same for all inertial observers, regardless of the motion of the source.
+
+From this he derived a time dilation factor proportional to $\frac{1}{\sqrt{1-\frac{v^2}{c^2}}}$, and the familiar length contraction factor first introduced by Lorentz. This theory accounted for almost all of the discrepancy between the ether theory and the then-known properties of light (and many of the properties of light determined experimentally, though not all&mdash;one notable exception being its quantization), all without requiring a priveleged reference frame or the ether. This brings us to the rest of our project. 
+
+### References
+
