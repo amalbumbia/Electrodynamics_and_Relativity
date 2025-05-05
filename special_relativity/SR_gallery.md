@@ -12,13 +12,13 @@
 <img width="600" alt="clock_lattice" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/d32a1f979cf35d78682c23d700417be0085d320d/special_relativity/pictures/clock_lattice.png">
 
 ## Reference Frames
-<img width="600" alt="reference_frame" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/0a56a44daa56c2ea8d0e41d8d61404629970d161/special_relativity/pictures/ref_frames.png">
+<img width="400" alt="reference_frame" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/0a56a44daa56c2ea8d0e41d8d61404629970d161/special_relativity/pictures/ref_frames.png">
 
 ## Coordinates and UT Campus
 <img width="600" alt="map" src="">
 
 ## Worldline
-<img width="400" alt="worldline" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/429b01df1d14d4049e2085599da75ccc8cd6b0df/special_relativity/pictures/worldline.png">
+<img width="250" alt="worldline" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/429b01df1d14d4049e2085599da75ccc8cd6b0df/special_relativity/pictures/worldline.png">
 
 ## Proper Time
 <img width="600" alt="propertime" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/429b01df1d14d4049e2085599da75ccc8cd6b0df/special_relativity/pictures/propertime.png">
