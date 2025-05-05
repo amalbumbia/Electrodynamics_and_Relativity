@@ -8,3 +8,18 @@
   <img src="assets/boost_diagram.png" width="400" alt="Minkowski Boost Diagram">
 </a>
 
+<img width="600" alt="clock_lattice" src="">
+
+<img width="600" alt="reference_frame" src="">
+
+<img width="600" alt="map" src="">
+
+<img width="600" alt="worldline" src="">
+
+<img width="600" alt="propertime" src="">
+
+<img width="600" alt="typestime" src="">
+
+<img width="600" alt="table" src="">
+
+<img width="600" alt="lightcone" src="">
