@@ -18,16 +18,16 @@
 <img width="600" alt="map" src="">
 
 ## Worldline
-<img width="600" alt="worldline" src="">
+<img width="600" alt="worldline" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/429b01df1d14d4049e2085599da75ccc8cd6b0df/special_relativity/pictures/worldline.png">
 
 ## Proper Time
-<img width="600" alt="propertime" src="">
+<img width="600" alt="propertime" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/429b01df1d14d4049e2085599da75ccc8cd6b0df/special_relativity/pictures/propertime.png">
 
 ## The Three Types of Time
-<img width="600" alt="typestime" src="">
+<img width="600" alt="typestime" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/429b01df1d14d4049e2085599da75ccc8cd6b0df/special_relativity/pictures/typesoftime.png">
 
 ## Geometries
-<img width="600" alt="table" src="">
+<img width="600" alt="table" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/429b01df1d14d4049e2085599da75ccc8cd6b0df/special_relativity/pictures/table.png">
 
 ## Lightcone
 <img width="600" alt="lightcone" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/2d6de20aa0d8455825e9d963d64bb2d0e92a621d/special_relativity/pictures/lightcone.png">
