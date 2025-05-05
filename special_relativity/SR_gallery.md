@@ -30,4 +30,4 @@
 <img width="600" alt="table" src="">
 
 ## Lightcone
-<img width="600" alt="lightcone" src="">
+<img width="600" alt="lightcone" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/2d6de20aa0d8455825e9d963d64bb2d0e92a621d/special_relativity/pictures/lightcone.png">
