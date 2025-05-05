@@ -8,7 +8,7 @@
   <img src="assets/boost_diagram.png" width="400" alt="Minkowski Boost Diagram">
 </a>
 
-<img width="600" alt="clock_lattice" src="">
+<img width="600" alt="clock_lattice" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/d32a1f979cf35d78682c23d700417be0085d320d/special_relativity/pictures/clock_lattice.png">
 
 <img width="600" alt="reference_frame" src="">
 
