@@ -63,6 +63,6 @@ $t=\gamma(33ns-\frac{.8c}{c^2}(10m))=9.7ns$
 Then the front of the ladder exits the tunnel at about $t=25ns$, then the back end of the ladder enters the tunnel and the rear door closes and opens at about $t=56ns$.
 
 <img src="./pictures/LadderTunnel2.png">
-
+<img src="./pictures/LadderTunnel4.png">
 
 So we again find that, while the ordering of events differs significantly in both frames, both agree on what ultimately happens to the ladder and the tunnel&emdash;and we find that these aren't really paradoxes at all, we're just used to thinking of things in very nonrelatavistic terms.
