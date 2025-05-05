@@ -21,7 +21,7 @@ If the ether flows at some velocity in the plane of the device, at some angle th
   <img src="Morley,_Edward_1885_-_DPLA_-_14e3c8f7e1c1b3728376637d7c07405e.jpg" width="250">
 </p>
 <p align="center">
-  American physicists Albert A. Michelson (1852-1931) (left) and Edward W. Morley (1838-1923) (right)$^{[6]}$$^{[7]}$
+  American physicists Albert A. Michelson (1852-1931) (left) and Edward W. Morley (1838-1923) (right)<sup>[6][7]</sup>
 </p>
 
 This is the basic principle behind the design of Albert A. Michelson and Edward W. Morley's famous interferometer in their 1887 experiment (and, in fact, the above schematic comes from their 1887 paper), where they used a version of this device to attempt to measure the speed of the ether relative to the surface of the Earth. 
@@ -71,7 +71,7 @@ Unfortunately, this still wouldn't explain the null result of the Michelson-Morl
   <img src="Ggstokes.jpg" width="250">
 </p>
 <p align="center">
-  Irish physicist George Gabriel Stokes (1819-1903)$^{[6]}$
+  Irish physicist George Gabriel Stokes (1819-1903)<sup>[6]</sup>
 </p>
 
 This problem could be solved if, as George Stokes supposed in 1845, instead of partially dragging the ether, matter dragged the ether completely. Then there would be no relative velocity of the ether in the air around the apparatus, leading to the Michelson-Morley experiment's null result, nor would there be a relative velocity dependent on the direction of the telescope with the prism, as in Arago's experiment. Unfortunately, this also means that the velocity of the Earth relative to the stars would also not properly predict stellar aberration. (Stokes attempted to come up with a variety of solutions to this problem, but all ultimately ran into some problem or another.)
@@ -84,7 +84,7 @@ So the partial drag hypothesis accounted for stellar aberration perfectly well, 
   <img src="Hendrik_Antoon_Lorentz.jpg" width="250">
 </p>
 <p align="center">
-  Dutch physicist Hendrik Lorentz (1853-1928)$^{[8]}$
+  Dutch physicist Hendrik Lorentz (1853-1928)<sup>[8]</sup>
 </p>
 
 From 1890 to 1904, Lorentz formulated a set of equations that could account for the then-known properties of light in the ether theory. He found that, when working from Maxwell's equations, and taking both the speed of light in the ether and the velocity of the matter in question relative to the ether into account, the transformations between reference frames could be made simpler by introducing a *local time* of the system, separate but dependent on the *universal time* external to the system. (This idea can be seen as a sort of precursor to time dilation in special relativity.)
@@ -114,6 +114,13 @@ leading to the lack of a phase shift in the experiment *without* necessitating t
 But once again unfortunately for the ether theory, Lorentz's modification too had a fatal flaw: it priveleges one reference frame, that of the ether itself, above all others, and his transformations hence are not quite equivalent when jumping from one non-ethereal reference frame to another. The ether theory, at the time, could yet have been proven correct, but later experiment would show no such priveleged reference frame. This brings us to the final nail in the coffin of the ether theory.
 
 ### Einstein's Theory of Special Relativity
+
+<p align="center">
+  <img src="Albert_Einstein_sticks_his_tongue_1951.jpg" width="250">
+</p>
+<p align="center">
+  Albert Einstein (1879-1955)<sup>[9]</sup>
+</p>
 
 In 1905, Albert Einstein published his paper outlining his theory of special relativity. He began with two postulates:
 
