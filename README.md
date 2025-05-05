@@ -9,14 +9,7 @@
  - Relativistic Electrodynamics
  - Applications
 
-## Interactive Minkowski Boost Diagram
+## Interactive Boost Diagram
 
-<p align="center">
-  <iframe
-    src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/main/minkowski_boost.html"
-    width="720" height="720"
-    frameborder="0"
-    sandbox="allow-scripts allow-same-origin">
-  </iframe>
-</p>
+[![Boost Diagram](assets/boost_diagram.png)](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/interactive/minkowski_boost.html)
 
