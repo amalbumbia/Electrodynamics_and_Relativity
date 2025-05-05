@@ -2,115 +2,191 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Minkowski Boost Diagram</title>
-  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <title>Lorentz Boost Diagram (D3.js Corrected)</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
     body { font-family: Arial, sans-serif; text-align: center; }
-    #slider-container { margin: 10px; }
+    #chart { margin: 0 auto; }
+    .axis path, .axis line { stroke: #000; fill: none; }
+    .axis text { fill: #000; font-size: 12px; }
   </style>
 </head>
 <body>
-  <h2>Minkowski Boost Diagram</h2>
+  <h2>Lorentz Boost Diagram</h2>
   <div id="slider-container">
-    β = <input id="beta-slider" type="range" min="-0.95" max="0.95" step="0.025" value="0">
-    <span id="beta-value">0.000</span>
+    β = <input id="beta-slider" type="range" min="-0.95" max="0.95" step="0.01" value="0"> 
+    <span id="beta-value">0.00</span>
+    &nbsp; γ = <span id="gamma-value">1.000</span>
   </div>
-  <div id="minkowski" style="width:720px;height:720px;margin:0 auto;"></div>
+  <svg id="chart" width="720" height="720"></svg>
   <p id="inv-readout" style="font-size:1.1em;">&nbsp;</p>
+
 <script>
-  const extent = 1.3, d_tau = 0.25, gridPts = 5;
-  // fallback for linspace
-  if(typeof numeric==='undefined'){ window.numeric={ linspace:(a,b,n)=>{ const arr=[]; for(let i=0;i<n;i++) arr.push(a+i*(b-a)/(n-1)); return arr; } }; }
-  function gamma(b){ return 1/Math.sqrt(1 - b*b); }
-  function boost(b,x,ct){ const g=gamma(b); return [g*(x - b*ct), g*(ct - b*x)]; }
+// Dimensions
+const width = 720, height = 720;
+const margin = { top: 20, right: 20, bottom: 40, left: 40 };
+const extent = 1.3;
 
-  function buildTraces(b){
-    let traces = [];
-    // light cone
-    const t = numeric.linspace(0,extent,200);
-    [1,-1].forEach(s=>{
-      traces.push({ x:t.map(v=>s*v), y:t, mode:'lines', line:{dash:'dash'}, name:'light-cone' });
-      traces.push({ x:t.map(v=>s*v), y:t.map(v=>-v), mode:'lines', line:{dash:'dash'}, showlegend:false });
-    });
-    // primed axes
-    const u = numeric.linspace(-extent,extent,300);
-    traces.push({ x:u.map(v=>b*v), y:u, mode:'lines', line:{width:3,color:'red'}, name:"ct' axis" });
-    traces.push({ x:u, y:u.map(v=>b*v), mode:'lines', line:{width:3,color:'blue'}, name:"x' axis" });
-    // grid lines
-    const factor=extent*(1+1.5*Math.abs(b));
-    const ctArr=numeric.linspace(-factor,factor,200);
-    const pts=numeric.linspace(-0.8*extent,0.8*extent,gridPts);
-    pts.forEach(x0=>{
-      let X=[], T=[];
-      ctArr.forEach(c=>{ const [xB,tB]=boost(-b,x0,c); X.push(xB); T.push(tB); });
-      traces.push({ x:X, y:T, mode:'lines', line:{width:1,color:'red'}, opacity:0.6, showlegend:false });
-    });
-    pts.forEach(ct0=>{
-      let X=[], T=[];
-      ctArr.forEach(xv=>{ const [xB,tB]=boost(-b,xv,ct0); X.push(xB); T.push(tB); });
-      traces.push({ x:X, y:T, mode:'lines', line:{width:1,color:'blue'}, opacity:0.6, showlegend:false });
-    });
-    // tau ticks
-    const g=gamma(b), n=Math.ceil(extent/(d_tau*g));
-    let taus=[]; for(let k=-n;k<=n;k++) taus.push(k*d_tau);
-    traces.push({ x:taus.map(t=>b*g*t), y:taus.map(t=>g*t), mode:'markers', marker:{size:6,color:'red'}, name:'τ ticks' });
-    // hyperbolae
-    const xArr=numeric.linspace(-extent,extent,300);
-    for(let tau=0.25;tau<extent;tau+=0.25){
-      let posY=[], negY=[];
-      xArr.forEach(xv=>{ const c=Math.sqrt(xv*xv+tau*tau); posY.push(c); negY.push(-c); });
-      traces.push({ x:xArr, y:posY, mode:'lines', line:{width:1,color:'grey'}, opacity:0.7, showlegend:false });
-      traces.push({ x:xArr, y:negY, mode:'lines', line:{width:1,color:'grey'}, opacity:0.7, showlegend:false });
+// Scales
+const theta = d3.scaleLinear()
+  .domain([-extent, extent])
+  .range([margin.left, width - margin.right]);
+const thetaY = d3.scaleLinear()
+  .domain([-extent, extent])
+  .range([height - margin.bottom, margin.top]);
+
+// SVG container
+const svg = d3.select('#chart');
+
+// Axis groups
+const xAxisGroup = svg.append('g')
+  .attr('class', 'axis')
+  .attr('transform', `translate(0,${thetaY(0)})`);
+const yAxisGroup = svg.append('g')
+  .attr('class', 'axis')
+  .attr('transform', `translate(${theta(0)},0)`);
+
+// Axis generators
+const xAxis = d3.axisBottom(theta).ticks(7);
+const yAxis = d3.axisLeft(thetaY).ticks(7);
+
+// Line generator
+const lineGen = d3.line()
+  .x(d => theta(d[0]))
+  .y(d => thetaY(d[1]));
+
+// Math helpers
+function gamma(b) {
+  return 1 / Math.sqrt(1 - b*b);
+}
+function boost(b, x, ct) {
+  const g = gamma(b);
+  return [ g*(x - b*ct), g*(ct - b*x) ];
+}
+
+// Numeric.js fallback
+if (typeof numeric === 'undefined') {
+  window.numeric = {
+    linspace: (a, b, n) => {
+      const arr = [];
+      for (let i = 0; i < n; i++) arr.push(a + i*(b-a)/(n-1));
+      return arr;
     }
-    return traces;
+  };
+}
+
+// Generate all curves
+function generateData(beta) {
+  const traces = [];
+  // Light cone
+  const t = numeric.linspace(0, extent, 200);
+  [1, -1].forEach(s => {
+    traces.push({ pts: t.map(v => [s*v,  v]), color: 'black', dash: '5,5', opacity: 0.8 });
+    traces.push({ pts: t.map(v => [s*v, -v]), color: 'black', dash: '5,5', opacity: 0.8 });
+  });
+  // Unprimed small grid
+  const region = 0.5, lines = 5;
+  const gu = numeric.linspace(-0.95*extent, 0.95*extent, 11);
+  gu.forEach(x0 => {
+    traces.push({ pts: gu.map(y => [x0, y]), color: 'gray', dash: '2,2', opacity: 0.8 });
+  });
+  gu.forEach(y0 => {
+    traces.push({ pts: gu.map(x => [x, y0]), color: 'gray', dash: '2,2', opacity: 0.8 });
+  });
+  // Boosted grid
+  const pts = numeric.linspace(-0.95*extent, .95*extent, 11);
+  const factor = extent * (1 + 1.5*Math.abs(beta));
+  const ctArr = numeric.linspace(-factor, factor, 200);
+  pts.forEach(x0 => {
+    traces.push({ pts: ctArr.map(c => boost(-beta, x0, c)), color: 'red', opacity: 0.3 });
+  });
+  pts.forEach(ct0 => {
+    traces.push({ pts: ctArr.map(x => boost(-beta, x, ct0)), color: 'blue', opacity: 0.3 });
+  });
+  // Hyperbolae
+  const xArr = numeric.linspace(-extent, extent, 300);
+  for (let tau = 0.5; tau <= extent; tau += 0.5) {
+    traces.push({ pts: xArr.map(x => [ x,  Math.sqrt(x*x + tau*tau) ]), color: 'gray', opacity: 0.8 });
+    traces.push({ pts: xArr.map(x => [ x, -Math.sqrt(x*x + tau*tau) ]), color: 'gray', opacity: 0.8 });
   }
+  return traces;
+}
 
-  function buildClickPoints(b){
-    // sample all curves at fine resolution for click detection
-    let ptsX=[], ptsY=[];
-    const lines=buildTraces(b).filter(tr=>tr.mode==='lines');
-    lines.forEach(tr=>{
-      const N = tr.x.length;
-      for(let i=0;i<N;i++){ ptsX.push(tr.x[i]); ptsY.push(tr.y[i]); }
-    });
-    return { x:ptsX, y:ptsY, mode:'markers', marker:{size:8,opacity:0}, hoverinfo:'skip', showlegend:false };
-  }
+// Main draw routine
+function draw(beta) {
+  const data = generateData(beta);
+  const paths = svg.selectAll('.trace').data(data);
+  paths.enter().append('path').attr('class','trace')
+    .merge(paths)
+      .attr('fill','none')
+      .attr('stroke', d => d.color)
+      .attr('stroke-width', 1)
+      .attr('stroke-dasharray', d => d.dash || '')
+      .attr('opacity', d => d.opacity || 1)
+      .attr('d', d => lineGen(d.pts));
+  paths.exit().remove();
 
-  const layout={ xaxis:{range:[-extent,extent],fixedrange:true,title:'x'},
-                 yaxis:{range:[-extent,extent],fixedrange:true,title:'ct'},
-                 margin:{l:40,r:20,t:60,b:90},width:720,height:720,dragmode:false };
-  let currentBeta=0;
-  Plotly.newPlot('minkowski', [ ...buildTraces(0), buildClickPoints(0) ], layout);
+  // Unprimed axes
+  svg.selectAll('.axis-primary').remove();
+  svg.append('path').attr('class','axis-primary')
+    .attr('d', lineGen([[-extent,0],[extent,0]]))
+    .attr('stroke','black').attr('stroke-width',2).attr('opacity',0.8);
+  svg.append('path').attr('class','axis-primary')
+    .attr('d', lineGen([[0,-extent],[0,extent]]))
+    .attr('stroke','black').attr('stroke-width',2).attr('opacity',0.8);
 
-  let A=null, B=null;
-  function classify(s2){ return Math.abs(s2)<1e-8?'light-like':(s2>0?'time-like':'space-like'); }
-  function updateShapes(label){
-    let shapes=[], ann=[];
-    if(A) shapes.push({type:'circle',xref:'x',yref:'y',x0:A[0]-0.02,x1:A[0]+0.02,y0:A[1]-0.02,y1:A[1]+0.02,line:{color:'orange'},fillcolor:'orange'});
-    if(B){
-      shapes.push({type:'circle',xref:'x',yref:'y',x0:B[0]-0.02,x1:B[0]+0.02,y0:B[1]-0.02,y1:B[1]+0.02,line:{color:'green'},fillcolor:'green'});
-      shapes.push({type:'line',xref:'x',yref:'y',x0:A[0],y0:A[1],x1:B[0],y1:B[1],line:{dash:'dot',width:2,color:'black'}});
-      ann.push({x:(A[0]+B[0])/2,y:(A[1]+B[1])/2,text:label,showarrow:false,bgcolor:'rgba(255,255,255,0.9)',bordercolor:'black',borderwidth:1});
-    }
-    Plotly.relayout('minkowski',{ shapes:shapes, annotations:ann });
-    document.getElementById('inv-readout').textContent = label;
-  }
-
-  document.getElementById('minkowski').on('plotly_click', evt=>{
-    const x=evt.points[0].x, y=evt.points[0].y;
-    if(A && B){ A = B = null; updateShapes(' '); return; }
-    if(!A){ A=[x,y]; updateShapes('Picked Event A'); return; }
-    B=[x,y]; const s2=(B[1]-A[1])**2 - (B[0]-A[0])**2;
-    updateShapes(`s² = ${s2.toFixed(3)} (${classify(s2)})`);
+  // Primed axes
+  svg.selectAll('.axis-primed').remove();
+  const ctLine = [ boost(-beta, 0, -extent), boost(-beta, 0,  extent) ];
+  const xLine  = [ boost(-beta,-extent, 0), boost(-beta, extent, 0) ];
+  [{pts:ctLine, color:'red'}, {pts:xLine, color:'blue'}].forEach(o => {
+    svg.append('path').attr('class','axis-primed')
+      .attr('d', lineGen(o.pts))
+      .attr('stroke', o.color).attr('stroke-width',2).attr('opacity',0.8);
   });
 
-  document.getElementById('beta-slider').oninput = function(){
-    const b = parseFloat(this.value);
-    document.getElementById('beta-value').textContent = b.toFixed(3);
-    currentBeta = b;
-    Plotly.react('minkowski', [ ...buildTraces(b), buildClickPoints(b) ], layout);
-    if(A) updateShapes(document.getElementById('inv-readout').textContent);
-  };
+  // Render axes
+  xAxisGroup.call(xAxis).raise();
+  yAxisGroup.call(yAxis).raise();
+}
+
+// Initialize
+let currentBeta = 0;
+draw(currentBeta);
+d3.select('#gamma-value').text(gamma(currentBeta).toFixed(3));
+
+// Interaction handlers
+let A=null, B=null;
+function classify(s2) { return Math.abs(s2)<1e-8?'light-like':(s2>0?'time-like':'space-like'); }
+function clearMarkers(){ svg.selectAll('.marker').remove(); }
+function redrawMarkers(label){
+  clearMarkers();
+  if(A) svg.append('circle').attr('class','marker')
+    .attr('cx', theta(A[0])).attr('cy', thetaY(A[1])).attr('r',4).attr('fill','orange');
+  if(B) {
+    svg.append('circle').attr('class','marker')
+      .attr('cx', theta(B[0])).attr('cy', thetaY(B[1])).attr('r',4).attr('fill','green');
+    svg.append('line').attr('class','marker')
+      .attr('x1', theta(A[0])).attr('y1', thetaY(A[1]))
+      .attr('x2', theta(B[0])).attr('y2', thetaY(B[1]))
+      .attr('stroke','black').attr('stroke-dasharray','4,2');
+  }
+  d3.select('#inv-readout').text(label);
+}
+svg.on('click', event => {
+  const [mx,my] = d3.pointer(event);
+  const x = theta.invert(mx), y = thetaY.invert(my);
+  if(!A){ A=[x,y]; redrawMarkers('Picked Event A'); return; }
+  if(!B){ B=[x,y]; const s2=(B[1]-A[1])**2 - (B[0]-A[0])**2;
+    redrawMarkers(`s² = ${s2.toFixed(3)} (${classify(s2)})`); return; }
+  A=B=null; clearMarkers(); d3.select('#inv-readout').text('');
+});
+d3.select('#beta-slider').on('input', function(){
+  currentBeta = +this.value;
+  d3.select('#beta-value').text(currentBeta.toFixed(2));
+  d3.select('#gamma-value').text(gamma(currentBeta).toFixed(3));
+  A=B=null; clearMarkers(); draw(currentBeta);
+});
 </script>
 </body>
 </html>
