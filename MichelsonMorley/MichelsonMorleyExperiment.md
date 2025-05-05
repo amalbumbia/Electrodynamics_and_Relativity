@@ -16,7 +16,15 @@ where *s* is the light source, *a* (and $a_{1}$) is the beamsplitter(s), $abad$ 
 
 If the ether flows at some velocity in the plane of the device, at some angle the flow will be in the direction of one of the orthogonal paths, and the speed will be faster down that path than the other; at some angle the flow will be in the direction of the other path, and which path is faster will be reversed; and at intermediate angles, the relative speed of light down each arm will shift between these two extremes. So if we rotate the device slowly, we should be able to measure a shift in the interference pattern as the angle of the device changes. If we know the usual wavelength and speed of the light used, we can use this measurement to calculate the speed of the ether in the plane of the device.
 
-This is the basic principle behind the design of Albert A. Michelson and Edward W. Morley's famous interferometer in their 1887 experiment (and, in fact, the above figure comes from their 1887 paper), where they used a version of this device to attempt to measure the speed of the ether relative to the surface of the Earth. 
+<p align="center">
+  <img src="MichelsonPicture.jpg" width="224">
+  <img src="Morley,_Edward_1885_-_DPLA_-_14e3c8f7e1c1b3728376637d7c07405e.jpg" width="250">
+</p>
+<p align="center">
+  American physicists Albert A. Michelson (1852-1931) (left) and Edward W. Morley (1838-1923) (right)
+</p>
+
+This is the basic principle behind the design of Albert A. Michelson and Edward W. Morley's famous interferometer in their 1887 experiment (and, in fact, the above schematic comes from their 1887 paper), where they used a version of this device to attempt to measure the speed of the ether relative to the surface of the Earth. 
 
 As the speed of light is quite large, the speed of the ether was likely to be small relative to it, leading to comparatively minute changes in the velocity down each arm. To counter this, Michelson and Morley added a series of mirrors to increase the actual optical path length of each arm of the apparatus; an increase in the distance travelled by the light meant that smaller changes in speed would have a greater impact on the relative phase shift of the light by the time it reached the target, increasing the sensitivity of the device. To reduce vibrational noise and other external noise sources, while still allowing the full apparatus to rotate, they placed the full apparatus on a large stone block suspended in a pool of mercury. The design of the final device, and a picture thereof, are shown below.
 
@@ -79,3 +87,35 @@ So the partial drag hypothesis accounted for stellar aberration perfectly well, 
   Dutch physicist Hendrik Lorentz (1853-1928)
 </p>
 
+From 1890 to 1904, Lorentz formulated a set of equations that could account for the then-known properties of light in the ether theory. He found that, when working from Maxwell's equations, and taking both the speed of light in the ether and the velocity of the matter in question relative to the ether into account, the transformations between reference frames could be made simpler by introducing a *local time* of the system, separate but dependent on the *universal time* external to the system. (This idea can be seen as a sort of precursor to time dilation in special relativity.)
+
+To account for the null result of the Michelson-Morley experiment, Lorentz also hypothesized that matter travelling through the ether experiences a *length contraction* proportional to 
+
+$\sqrt{1-{\frac{v^2}{c^2}}}$
+
+where *v* is the speed of the matter and *c* the speed of light through the ether.
+
+Ignoring length contraction, let's take a look at the Michelson-Morley interferometer. Denoting the length of each arm $L_{0}$, and setting the direction of the velocity of the ether to be directly down one of the arms, we find that $T_{1}$, the time taken to travel down and back the arm parallel to the velocity through the ether, is
+
+$T_{1}=\frac{L_{0}}{c-v}+\frac{L_{0}}{c+v}=\frac{2L_{0}c}{c^2-v^2}=\frac{2L_{0}}{c(1-\frac{v^2}{c^2})}$
+
+and $T_{2}$, the time taken to travel down the perpindicular arm, is 
+
+$T_{2}=\frac{2L_{0}}{\sqrt{c^2-v^2}}$
+
+which is clearly different, leading to the phase shift that Michelson and Morley expected.
+
+Now, modifying the length of the arms with Lorentz's contraction factor, we find that $T_{2}$ is unchanged, while $T_{1}$ becomes
+
+$T_{1}=\sqrt{1-{\frac{v^2}{c^2}}}\frac{2L_{0}}{c(1-\frac{v^2}{c^2})}=\frac{2L_{0}}{\sqrt{c^2-v^2}}=T_{2}$
+
+leading to the lack of a phase shift in the experiment *without* necessitating the abandonment of the ether theory. It also had the added benefit of more accurately matching observed stellar aberrations. 
+
+But once again unfortunately for the ether theory, Lorentz's modification too had a fatal flaw: it priveleges one reference frame, that of the ether itself, above all others, and his transformations hence are not quite equivalent when jumping from one non-ethereal reference frame to another. The ether theory, at the time, could yet have been proven correct, but later experiment would show no such priveleged reference frame. This brings us to the final nail in the coffin of the ether theory.
+
+### Einstein's Theory of Special Relativity
+
+In 1905, Albert Einstein published his paper outlining his theory of special relativity. He began with two postulates:
+
+**1. The principle of relativity:** The same laws of physics apply in all inertial reference systems.
+**2. The universal speed of light:** The speed of light in a vacuum is the same for all inertial observers, regardless of the motion of the source.
