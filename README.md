@@ -4,11 +4,11 @@
 
  The outline of subtopics covered in this repository are as follows:
 
- - Special Relativity
+ - [Special Relativity](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/dfdc289b99c800f50e0a8377334629b777b9947b/special_relativity)
  - Relativistic Mechanics
  - Relativistic Electrodynamics
- - Applications
  - [Electrodynamics as a Gauge Theory](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/why_electrodynamics.html)
+ - Applications
 
 ## Interactive Boost Diagram
 
