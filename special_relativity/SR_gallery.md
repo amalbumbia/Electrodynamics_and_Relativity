@@ -7,3 +7,4 @@
 <a href="https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/interactive/minkowski_boost.html">
   <img src="assets/boost_diagram.png" width="400" alt="Minkowski Boost Diagram">
 </a>
+
