@@ -8,9 +8,16 @@
  - Relativistic Mechanics
  - Relativistic Electrodynamics
  - Applications
+ - [Electrodynamics as a Gauge Theory](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/why_electrodynamics.html)
 
 ## Interactive Boost Diagram
 
 <a href="https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/interactive/minkowski_boost.html">
   <img src="assets/boost_diagram.png" width="400" alt="Minkowski Boost Diagram">
+</a>
+
+## Interactive Solenoid
+
+<a href="https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/interactive/solenoid_3d.html">
+  <img src="assets/solenoid.png" width="400" alt="solenoid">
 </a>
