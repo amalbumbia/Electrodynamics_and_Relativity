@@ -1,0 +1,74 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+h1, h2, h3 {
+    color: #1a237e;
+}
+.container {
+    background-color: white;
+    border-radius: 5px;
+    padding: 30px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.section {
+    margin-bottom: 30px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 20px;
+}
+.section:last-child {
+    border-bottom: none;
+}
+a {
+    color: #3f51b5;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+}
+.flowchart {
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+    display: block;
+}
+.interactive-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 30px 0;
+}
+.interactive-item {
+    width: 400px;
+    margin: 10px;
+    text-align: center;
+}
+.interactive-item img {
+    width: 100%;
+    border-radius: 5px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.interactive-item img:hover {
+    transform: scale(1.03);
+}
+.attribution {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 0.9em;
+    color: #666;
+}
+.nav-links {
+    margin-left: 20px;
+}
+@media (max-width: 768px) {
+    .interactive-item {
+        width: 100%;
+    }
+}
+

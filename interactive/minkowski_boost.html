@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <link rel="stylesheet" href="../assets/header-css.css">
+  <link rel="stylesheet" href="../assets/mainStyle.css">
+
   <title>Lorentz Boost Diagram (D3.js Corrected)</title>
   <script src="https://d3js.org/d3.v7.min.js"></script>
   <style>
@@ -11,7 +14,9 @@
     .axis text { fill: #000; font-size: 12px; }
   </style>
 </head>
+
 <body>
+  <div id="header-placeholder"></div> 
   <h2>Lorentz Boost Diagram</h2>
   <div id="slider-container">
     β = <input id="beta-slider" type="range" min="-0.95" max="0.95" step="0.01" value="0"> 
@@ -188,5 +193,6 @@ d3.select('#beta-slider').on('input', function(){
   A=B=null; clearMarkers(); draw(currentBeta);
 });
 </script>
+<script src="../header-loader.js"></script>
 </body>
 </html>

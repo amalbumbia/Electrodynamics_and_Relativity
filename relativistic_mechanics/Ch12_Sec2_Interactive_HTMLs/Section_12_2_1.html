@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="../../assets/header-css.css">
+  <link rel="stylesheet" href="../../assets/mainStyle.css">
   <meta charset="UTF-8" />
   <title>Proper Velocity vs Proper Time</title>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -44,6 +46,7 @@
   </style>
 </head>
 <body>
+  <div id="header-placeholder"></div> 
   <img id="einstein-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Albert_Einstein_sticks_his_tongue.jpg/500px-Albert_Einstein_sticks_his_tongue.jpg" alt="Einstein" />
   <h2>Proper and Coordinate Velocity vs. Proper Time</h2>
   <p id="description">
@@ -145,5 +148,6 @@
     // Initial plot
     updatePlot(parseFloat(slider.value));
   </script>
+  <script src="../../header-loader.js"></script>
 </body>
 </html>

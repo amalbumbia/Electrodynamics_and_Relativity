@@ -1,0 +1,157 @@
+/* header.css - Add this to your mainStyle.css file */
+
+.site-header {
+    background-color: #1a237e;
+    color: white;
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    height: 60px;
+}
+
+.logo a {
+    color: white;
+    font-size: 1.4em;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+}
+
+.main-nav li {
+    position: relative;
+    margin: 0 5px;
+}
+
+.main-nav a {
+    color: white;
+    text-decoration: none;
+    padding: 20px 10px;
+    display: block;
+    font-size: 0.95em;
+    transition: background-color 0.3s;
+}
+
+.main-nav a:hover {
+    background-color: rgba(255,255,255,0.1);
+    text-decoration: none;
+}
+
+/* Dropdown styling */
+.dropdown-menu {
+    display: none !important; /* Force hide by default */
+    position: absolute;
+    background-color: #283593;
+    min-width: 180px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 0;
+    flex-direction: column;
+}
+
+.dropdown-menu li {
+    margin: 0;
+    width: 100%;
+}
+
+.dropdown-menu a {
+    padding: 12px 16px;
+    display: block;
+    white-space: nowrap;
+}
+
+/* Only show dropdown on hover - override with !important */
+.dropdown:hover .dropdown-menu {
+    display: block !important;
+}
+
+/* Ensure dropdown is hidden by default */
+.main-nav .dropdown .dropdown-menu {
+    display: none !important;
+}
+
+/* More specific selector for the hover state */
+.main-nav .dropdown:hover .dropdown-menu {
+    display: block !important;
+}
+
+/* Mobile menu toggle */
+.mobile-nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 21px;
+    cursor: pointer;
+}
+
+.mobile-nav-toggle span {
+    height: 3px;
+    width: 100%;
+    background-color: white;
+    border-radius: 3px;
+}
+
+/* Mobile responsive styles */
+@media (max-width: 800px) {
+    .mobile-nav-toggle {
+        display: flex;
+    }
+    
+    .main-nav {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        background-color: #1a237e;
+        display: none;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    
+    .main-nav.active {
+        display: block;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+    }
+    
+    .main-nav li {
+        margin: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    
+    .dropdown-menu {
+        position: static;
+        box-shadow: none;
+        background-color: rgba(0,0,0,0.1);
+        display: none;
+    }
+    
+    .dropdown.active .dropdown-menu {
+        display: block;
+    }
+    
+    .dropdown-toggle::after {
+        content: '▾';
+        float: right;
+    }
+}

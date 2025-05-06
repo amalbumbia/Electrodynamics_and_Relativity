@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="../assets/header-css.css">
+  <link rel="stylesheet" href="../assets/mainStyle.css">
   <meta charset="UTF-8">
   <title>Relativistic Solenoid – 3D View</title>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -14,6 +16,7 @@
   </style>
 </head>
 <body>
+  <div id="header-placeholder"></div> 
 
   <div id="controls">
     <label>β (v/c): <span id="betaVal">0.00</span></label><br>
@@ -146,6 +149,7 @@
     // initial draw
     updatePlot();
   </script>
+  <script src="../header-loader.js"></script>
 
 </body>
 </html>
