@@ -12,6 +12,10 @@ I'm going to go through each of the changes
 > - [ ] Break up some of the styles in `/assets/mainStyle.css`
 > - [ ] Integrate all the seperate filetypes into a homepage
 > - [ ] Fix the markdown references to refer to those in this site and format the pages. This will get overriden when running the html generator so make copies
+> - [ ] Switch to amal's github pages. WHEN YOU DO, GO TO `header-loder.js` AND CHANGE 
+>   `const isGitHubPages = window.location.hostname.includes('azalamer.com');` 
+>   to 
+>   `const isGitHubPages = window.location.hostname.includes('github.io');` 
 
 ## The Homepage
 This was largely self explanatory, and I dont think requires much information on. It's a static site homepage with theming. 
