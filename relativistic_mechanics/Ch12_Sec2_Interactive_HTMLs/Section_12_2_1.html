@@ -10,67 +10,44 @@
   <script id="MathJax-script" async
     src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
   </script>
-  <style>
-    body {
-      background-color: #111;
-      color: #eee;
-      font-family: 'Segoe UI', sans-serif;
-      text-align: center;
-      margin: 30px;
-    }
-    #einstein-img {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      width: 100px;
-      border-radius: 10px;
-      box-shadow: 0 0 10px #fff;
-    }
-    #slider-container {
-      margin-top: 30px;
-    }
-    input[type=range] {
-      width: 300px;
-    }
-    label, span {
-      font-size: 1.1em;
-    }
-    .info {
-      color: #ccc;
-      font-size: 0.95em;
-      margin-bottom: 20px;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  </style>
+  
 </head>
 <body>
   <div id="header-placeholder"></div> 
-  <img id="einstein-img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Albert_Einstein_sticks_his_tongue.jpg/500px-Albert_Einstein_sticks_his_tongue.jpg" alt="Einstein" />
-  <h2>Proper and Coordinate Velocity vs. Proper Time</h2>
-  <p id="description">
-    For constant proper acceleration \( \alpha = 1.0 \, \text{m/s}^{2} \)
-  </p>
-
-  <div class="info">
-    <p>
-      In special relativity, an object experiencing constant proper acceleration follows a hyperbolic trajectory in spacetime. The plot below compares:
+  
+  <div class="container">
+    <div class="figure-corner">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/46/Albert_Einstein_sticks_his_tongue.jpg/500px-Albert_Einstein_sticks_his_tongue.jpg" alt="Einstein" />
+    </div>
+    
+    <h1>Proper and Coordinate Velocity vs. Proper Time</h1>
+    <p id="description">
+      For constant proper acceleration \( \alpha = 1.0 \, \text{m/s}^{2} \)
     </p>
-    <ul style="text-align:left; display:inline-block;">
-      <li><strong>Proper velocity</strong> \( \eta = \gamma v \): grows linearly with proper time \( \tau \)</li>
-      <li><strong>Coordinate velocity</strong> \( v \): asymptotically approaches the speed of light</li>
-    </ul>
-  </div>
 
-  <div id="velocity-plot" style="width: 800px; height: 500px; margin: auto;"></div>
+    <div class="info-box text-left">
+      <p>
+        In special relativity, an object experiencing constant proper acceleration follows a hyperbolic trajectory in spacetime. The plot below compares:
+      </p>
+      <ul>
+        <li><strong>Proper velocity</strong> \( \eta = \gamma v \): grows linearly with proper time \( \tau \)</li>
+        <li><strong>Coordinate velocity</strong> \( v \): asymptotically approaches the speed of light</li>
+      </ul>
+    </div>
 
-  <div id="slider-container">
-    <label>
-      Proper Acceleration \( \alpha \) (in \( \text{m/s}^{2} \)): 
-    </label><br>
-    <input type="range" id="accel-slider" min="0.1" max="2" value="1" step="0.1" />
-    <span id="accel-value">1.0</span>
+    <div class="dark-visualization">
+      <div id="velocity-plot" class="visualization-plot dark-plot"></div>
+    </div>
+
+    <div class="interactive-controls">
+      <div class="control-group">
+        <label>
+          Proper Acceleration \( \alpha \) (in \( \text{m/s}^{2} \)): 
+        </label>
+        <input type="range" id="accel-slider" min="0.1" max="2" value="1" step="0.1" />
+        <span id="accel-value" class="slider-value">1.0</span>
+      </div>
+    </div>
   </div>
 
   <script>
