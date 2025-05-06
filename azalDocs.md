@@ -8,8 +8,11 @@ Azal only really touched 4 parts of this site
 I'm going to go through each of the changes
 
 # Notes
-TODO:
-- [ ] Break up some of the styles o=in `/assets/mainStyle.css`
+> TODO:
+> - [ ] Break up some of the styles in `/assets/mainStyle.css`
+> - [ ] Integrate all the seperate filetypes into a homepage
+> - [ ] Fix the markdown references to refer to those in this site and format the pages. This will get overriden when running the html generator so make copies
+
 ## The Homepage
 This was largely self explanatory, and I dont think requires much information on. It's a static site homepage with theming. 
 
@@ -25,6 +28,9 @@ Full disclosure, a lot of the CSS styling for this part i asked claude to write 
 *DO NOT MAKE INLINE STYLES FOR YOUR HTML. ITS BAD*
 
 ## Markdown to HTML Generator
+_TO MAKE ANY CHANGES TO THE HTML FILES FROM MARKDOWN, EDIT THE MARKDOWN FILES AND RUN THIS!_
+_AT YOUR OWN RISK_
+
 Another thing I cant take credit for. I had the pandoc idea but claude wrote the bash script to loop recursivley through files and update link references. In a nutshell though, we use an html template which includes the header and imports, and then when you modify a markdown file somewhere in the project and run the script, it will regenerate the HTML. Claude was especially helpful for making mathjax autoimport with the right divs.
 IMPORTANT: If you custom modified an HTML, and run the script, *IT WILL OVERRIDE YOUR WORK*!
 To make the bash script executable run
