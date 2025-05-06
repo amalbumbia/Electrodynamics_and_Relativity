@@ -1,12 +1,10 @@
 #!/bin/bash
-# Save as convert_all_markdown.sh
+# Save as convert_all_markdown_with_math.sh
 
 # Store the root directory
 ROOT_DIR=$(pwd)
-# Path to your template file - adjust as needed
-TEMPLATE_FILE="$ROOT_DIR/template.html"
 
-# Create a temporary template file we'll modify for each conversion
+# Create a temporary template file with MathJax support
 cat > "$ROOT_DIR/temp_template.html" << 'EOF'
 <!DOCTYPE html>
 <html lang="en">
@@ -15,6 +13,9 @@ cat > "$ROOT_DIR/temp_template.html" << 'EOF'
   <title>$title$</title>
   <link rel="stylesheet" href="{{CSS_PATH_HEADER}}">
   <link rel="stylesheet" href="{{CSS_PATH_MAIN}}">
+  <!-- MathJax Configuration -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
   <div id="header-placeholder"></div>
@@ -38,28 +39,23 @@ find "$ROOT_DIR" -type f -name "*.md" | while read -r file; do
     # Output HTML file path (same directory as markdown)
     output_file="$dir/${filename}.html"
     
-    # Calculate relative path from the markdown file to the root assets
-    # First, get the relative path from root to the markdown file directory
+    # Calculate relative path to root
     rel_path=${dir#$ROOT_DIR}
-    
-    # Count the number of directories to go up to reach root
     depth=$(echo "$rel_path" | tr -cd '/' | wc -c)
-    
-    # Build the path prefix to get back to root
     path_prefix=""
     for ((i=0; i<depth; i++)); do
         path_prefix="../$path_prefix"
     done
     
-    # Create a custom template for this file with the correct paths
+    # Create a custom template with correct paths
     cp "$ROOT_DIR/temp_template.html" "$dir/custom_template.html"
     sed -i.bak "s|{{CSS_PATH_HEADER}}|${path_prefix}assets/header-css.css|g" "$dir/custom_template.html"
     sed -i.bak "s|{{CSS_PATH_MAIN}}|${path_prefix}assets/mainStyle.css|g" "$dir/custom_template.html"
     sed -i.bak "s|{{JS_PATH}}|${path_prefix}header-loader.js|g" "$dir/custom_template.html"
     
-    # Convert the markdown file using the custom template
+    # Convert with math support
     echo "Converting $file to $output_file"
-    pandoc "$file" -o "$output_file" --template="$dir/custom_template.html" --metadata title="$filename"
+    pandoc "$file" -o "$output_file" --template="$dir/custom_template.html" --metadata title="$filename" --mathjax
     
     # Clean up the custom template
     rm "$dir/custom_template.html" "$dir/custom_template.html.bak" 2>/dev/null
