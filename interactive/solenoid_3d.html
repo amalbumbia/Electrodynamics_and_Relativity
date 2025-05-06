@@ -1,32 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <link rel="stylesheet" href="../assets/header-css.css">
+  <link rel="stylesheet" href="../assets/mainStyle.css">
   <meta charset="UTF-8">
   <title>Relativistic Solenoid – 3D View</title>
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-  <style>
-    body { font-family: sans-serif; text-align: center; margin: 0; padding: 20px; }
-    #controls { margin-bottom: 10px; }
-    #controls input[type=range] { width: 300px; }
-    #plot { width: 800px; height: 450px; margin: auto; }
-    #readout { margin-top: 10px; font-size: 1.1em; }
-    button { padding: 5px 10px; font-size: 1em; }
-  </style>
+  
 </head>
 <body>
+  <div id="header-placeholder"></div> 
 
-  <div id="controls">
-    <label>β (v/c): <span id="betaVal">0.00</span></label><br>
-    <input type="range" id="betaSlider" min="0" max="0.99" step="0.01" value="0"><br>
+  <div class="container">
+    <h1>Relativistic Solenoid – 3D View</h1>
+    
+    <div class="interactive-controls">
+      <div class="control-group">
+        <label>β (v/c): <span id="betaVal">0.00</span></label><br>
+        <input type="range" id="betaSlider" min="0" max="0.99" step="0.01" value="0">
+      </div>
 
-    <button id="playPause">Play</button><br>
+      <div class="control-group">
+        <button id="playPause" class="control-button">Play</button>
+      </div>
 
-    <label>Time frame: <span id="timeVal">0</span></label><br>
-    <input type="range" id="timeSlider" min="0" max="200" step="1" value="0">
+      <div class="control-group">
+        <label>Time frame: <span id="timeVal">0</span></label><br>
+        <input type="range" id="timeSlider" min="0" max="200" step="1" value="0">
+      </div>
+    </div>
+
+    <div id="plot" class="visualization-plot"></div>
+    <div id="readout" class="data-readout">I / I₀ = 1.000   γ = 1.000</div>
   </div>
-
-  <div id="plot"></div>
-  <div id="readout">I / I₀ = 1.000   γ = 1.000</div>
 
   <script>
     // ---- Physics parameters ----
@@ -146,6 +152,7 @@
     // initial draw
     updatePlot();
   </script>
+  <script src="../header-loader.js"></script>
 
 </body>
 </html>
