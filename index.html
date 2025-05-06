@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relativistic Electrodynamics - UT Austin</title>
+    <link rel="stylesheet" href="assets/mainStyle.css">
     <style>
-        /* Essential styles - directly embedded to ensure they load */
+        /* Embedded critical CSS in case external stylesheet fails to load */
         body {
             font-family: 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
@@ -20,17 +21,14 @@
             border-radius: 5px;
             padding: 30px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            margin-top: 70px; /* Space for fixed header */
         }
         /* Header styles */
         .site-header {
             background-color: #1a237e;
             color: white;
             padding: 0;
-            position: fixed;
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
             z-index: 1000;
             box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
@@ -66,9 +64,9 @@
             display: block;
             font-size: 0.95em;
         }
-        /* Dropdown styling */
+        /* Dropdown styles */
         .dropdown-menu {
-            display: none;
+            display: none !important;
             position: absolute;
             background-color: #283593;
             min-width: 180px;
@@ -78,89 +76,14 @@
             left: 0;
             padding: 0;
         }
-        .dropdown-menu li {
-            margin: 0;
-            width: 100%;
-        }
-        .dropdown-menu a {
-            padding: 12px 16px;
-            display: block;
-            white-space: nowrap;
-        }
         .dropdown:hover .dropdown-menu {
-            display: block;
-        }
-        .section {
-            margin-bottom: 30px;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 20px;
-        }
-        .flowchart {
-            width: 100%;
-            max-width: 800px;
-            margin: 20px auto;
-            display: block;
-        }
-        .interactive-section {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            margin: 30px 0;
-        }
-        .interactive-item {
-            width: 400px;
-            margin: 10px;
-            text-align: center;
-        }
-        .interactive-item img {
-            width: 100%;
-            border-radius: 5px;
-            transition: transform 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        }
-        .attribution {
-            text-align: center;
-            margin-top: 40px;
-            font-size: 0.9em;
-            color: #666;
-        }
-        @media (max-width: 768px) {
-            .interactive-item {
-                width: 100%;
-            }
-            .main-nav {
-                display: none;
-            }
+            display: block !important;
         }
     </style>
 </head>
 <body>
-    <!-- Directly embedded header - no JavaScript required -->
-    <div class="site-header">
-        <div class="header-container">
-            <div class="logo">
-                <a href="./index.html">Relativistic Electrodynamics</a>
-            </div>
-            <nav class="main-nav">
-                <ul>
-                    <li><a href="./special_relativity/Special_Relativity_Tutorial.pdf">Special Relativity</a></li>
-                    <li><a href="./relativistic_mechanics/Ch12_Sec2_Interactive_HTMLs/Section_12_2_1.html">Relativistic Mechanics</a></li>
-                    <li><a href="./relativistic_electrodynamics/12.3.ipynb">Relativistic Electrodynamics</a></li>
-                    <li><a href="./why_electrodynamics.html">Gauge Theory</a></li>
-                    <li><a href="./applications/superconductivity/Superconductivity_Tutorial.pdf">Applications</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle">Interactive ▾</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="./interactive/minkowski_boost.html">Minkowski Boost</a></li>
-                            <li><a href="./interactive/solenoid_3d.html">3D Solenoid</a></li>
-                            <li><a href="./relativistic_mechanics/Ch12_Sec2_Interactive_HTMLs/Relativistic_Doppler_Effect.html">Doppler Effect</a></li>
-                            <li><a href="./relativistic_mechanics/Ch12_Sec2_Interactive_HTMLs/Section_12_2_4.html">Section 12.2.4</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </nav>
-        </div>
-    </div>
+    <!-- Header will be loaded here -->
+    <div id="header-placeholder"></div>
     
     <div class="container">
         <header>
@@ -170,21 +93,21 @@
 
         <div class="section">
             <h2>Content Overview</h2>
-            <img src="mega_flowchart.png" alt="Electrodynamics Content Flowchart" class="flowchart">
+            <img src="mega_flowchart.png" alt="Electrodynamics Content Flowchart" class="flowchart" style="width: 100%; max-width: 800px; margin: 20px auto; display: block;">
         </div>
 
         <div class="section">
             <h2>Interactive Visualizations</h2>
-            <div class="interactive-section">
-                <div class="interactive-item">
+            <div class="interactive-section" style="display: flex; flex-wrap: wrap; justify-content: space-around; margin: 30px 0;">
+                <div class="interactive-item" style="width: 400px; margin: 10px; text-align: center;">
                     <a href="interactive/minkowski_boost.html">
-                        <img src="assets/boost_diagram.png" alt="Minkowski Boost Diagram">
+                        <img src="assets/boost_diagram.png" alt="Minkowski Boost Diagram" style="width: 100%; border-radius: 5px; transition: transform 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                         <h3>Interactive Minkowski Boost Diagram</h3>
                     </a>
                 </div>
-                <div class="interactive-item">
+                <div class="interactive-item" style="width: 400px; margin: 10px; text-align: center;">
                     <a href="interactive/solenoid_3d.html">
-                        <img src="assets/solenoid.png" alt="3D Solenoid Visualization">
+                        <img src="assets/solenoid.png" alt="3D Solenoid Visualization" style="width: 100%; border-radius: 5px; transition: transform 0.3s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
                         <h3>Interactive 3D Solenoid</h3>
                     </a>
                 </div>
@@ -239,10 +162,13 @@
             </div>
         </div>
 
-        <div class="attribution">
+        <div class="attribution" style="text-align: center; margin-top: 40px; font-size: 0.9em; color: #666;">
             <p>Created by students at UT Austin | <a href="https://github.com/amalbumbia/Electrodynamics_and_Relativity">View on GitHub</a></p>
             <p>Licensed under the terms specified in the LICENSE file</p>
         </div>
     </div>
+    
+    <!-- Load the header script -->
+    <script src="header-loader.js"></script>
 </body>
 </html>

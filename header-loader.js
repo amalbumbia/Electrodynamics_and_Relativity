@@ -1,93 +1,129 @@
-// Header loader that works both locally and on GitHub Pages
-
+/**
+ * Universal header loader for both local development and GitHub Pages
+ * This script will:
+ * 1. Detect whether we're on GitHub Pages or local development
+ * 2. Calculate the correct path to the header file
+ * 3. Load the header content
+ * 4. Fix relative paths in the header based on current page location
+ */
 document.addEventListener('DOMContentLoaded', function() {
-    // Check if we're on GitHub Pages or local
-    function isGitHubPages() {
-        return window.location.hostname.includes('github.io');
-    }
+    // Debug information to console
+    console.log('Header loader running');
+    console.log('Current URL:', window.location.href);
     
-    // Get repository name from URL for GitHub Pages
+    // Detect GitHub Pages vs local development
+    const isGitHubPages = window.location.hostname.includes('github.io');
+    console.log('Environment:', isGitHubPages ? 'GitHub Pages' : 'Local development');
+    
+    // Get repository name (needed for GitHub Pages path calculation)
     function getRepoName() {
-        if (!isGitHubPages()) {
-            return '';
-        }
-        const pathArray = window.location.pathname.split('/');
-        // GitHub Pages always has the repo name as the first path segment
-        return pathArray.length > 1 ? '/' + pathArray[1] : '';
+        if (!isGitHubPages) return '';
+        
+        const pathParts = window.location.pathname.split('/');
+        // GitHub Pages URL format: username.github.io/repo-name/...
+        return pathParts.length > 1 ? pathParts[1] : '';
     }
     
-    // Determine path to root based on current location
+    // Calculate path to root directory based on current location
     function getPathToRoot() {
-        // Get current path - either with or without repo name prefix
+        // Get current path
         const fullPath = window.location.pathname;
         const repoName = getRepoName();
         
-        // For GitHub Pages, remove the repo name from the path for proper calculation
-        const pathWithoutRepo = repoName ? fullPath.substring(repoName.length) : fullPath;
+        // For GitHub Pages, remove repo name from path calculation
+        let pathWithoutRepo = fullPath;
+        if (isGitHubPages && repoName) {
+            // Remove leading slash and repo name
+            const repoPath = '/' + repoName;
+            pathWithoutRepo = fullPath.startsWith(repoPath) ? 
+                              fullPath.substring(repoPath.length) : 
+                              fullPath;
+        }
         
         // Split by '/' and remove empty entries
         const parts = pathWithoutRepo.split('/').filter(part => part !== '');
         
-        // If we're at root, return empty string (local) or repo name (GitHub Pages)
+        // If we're at root or index.html at root, return appropriate path
         if (parts.length === 0 || (parts.length === 1 && parts[0] === 'index.html')) {
-            return repoName ? repoName + '/' : '';
+            return isGitHubPages && repoName ? '/' + repoName + '/' : './';
         }
         
-        // Build relative path (one ../ for each directory level)
-        const relativePath = '../'.repeat(parts.length - (parts[parts.length-1].includes('.') ? 1 : 0));
+        // For files in subdirectories, calculate relative path to root
+        // Number of "../" needed equals the depth of the current page
+        const depth = parts.length - (parts[parts.length-1].includes('.') ? 1 : 0);
+        const relativePath = '../'.repeat(depth);
         
-        // If on GitHub Pages, prepend repo name to the root path
-        return repoName ? repoName + '/' + relativePath : relativePath;
+        // Return the appropriate path prefix
+        return isGitHubPages && repoName ? 
+               '/' + repoName + '/' : 
+               relativePath;
     }
     
-    // Get the path to root directory
+    // Get path to root
     const pathToRoot = getPathToRoot();
-    
-    // Log for debugging
-    console.log('Environment:', isGitHubPages() ? 'GitHub Pages' : 'Local');
     console.log('Path to root:', pathToRoot);
     
-    // Fetch the header
-    fetch(pathToRoot + 'header.html')
+    // Path to header file
+    const headerPath = pathToRoot.endsWith('/') ? 
+                      pathToRoot + 'header.html' : 
+                      pathToRoot + '/header.html';
+    console.log('Header path:', headerPath);
+    
+    // Fetch the header content
+    fetch(headerPath)
         .then(response => {
             if (!response.ok) {
-                throw new Error('Failed to load header.html');
+                throw new Error(`Failed to load header (${response.status}: ${response.statusText})`);
             }
             return response.text();
         })
         .then(data => {
-            // Insert header at the beginning of the body
+            // Insert header content
             const headerPlaceholder = document.getElementById('header-placeholder');
-            if (headerPlaceholder) {
-                headerPlaceholder.outerHTML = data;
-            } else {
-                document.body.insertAdjacentHTML('afterbegin', data);
+            if (!headerPlaceholder) {
+                console.error('No header placeholder found. Add <div id="header-placeholder"></div> to your HTML.');
+                return;
             }
             
-            // Fix paths in header based on current location
-            document.querySelectorAll('.site-header a').forEach(link => {
+            headerPlaceholder.innerHTML = data;
+            
+            // Fix paths in the header 
+            document.querySelectorAll('#header-placeholder a').forEach(link => {
                 const href = link.getAttribute('href');
                 
-                // Skip links that are fragment identifiers or already absolute URLs
-                if (!href || href.startsWith('#') || href.includes('://')) {
+                // Skip non-relevant links
+                if (!href || href === '#' || href.startsWith('http') || href.startsWith('mailto:')) {
                     return;
                 }
                 
-                // For links that don't already have the correct path prefix
-                if (!href.startsWith(pathToRoot) && !href.startsWith('../')) {
-                    // Don't modify dropdown toggle
-                    if (link.classList.contains('dropdown-toggle')) {
-                        return;
+                // Don't modify dropdown toggle
+                if (link.classList.contains('dropdown-toggle')) {
+                    return;
+                }
+                
+                // Fix relative paths
+                if (href.startsWith('./') || href.startsWith('../')) {
+                    // Already relative - leave as is
+                    return;
+                } else if (href.startsWith('/')) {
+                    // Absolute path from root - add repo name for GitHub Pages
+                    if (isGitHubPages && getRepoName()) {
+                        link.href = '/' + getRepoName() + href;
                     }
-                    link.href = pathToRoot + href;
+                } else {
+                    // Plain relative path - add path to root
+                    const newPath = pathToRoot.endsWith('/') ? 
+                                  pathToRoot + href : 
+                                  pathToRoot + '/' + href;
+                    link.href = newPath;
                 }
             });
             
-            // Mobile menu functionality
+            // Initialize mobile menu functionality
             const mobileToggle = document.querySelector('.mobile-nav-toggle');
             const mainNav = document.querySelector('.main-nav');
             
-            if (mobileToggle) {
+            if (mobileToggle && mainNav) {
                 mobileToggle.addEventListener('click', function() {
                     mainNav.classList.toggle('active');
                 });
@@ -104,9 +140,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     });
                 }
             });
+            
+            console.log('Header loaded successfully');
         })
         .catch(error => {
             console.error('Error loading header:', error);
-            console.log('Path tried:', pathToRoot + 'header.html');
+            console.log('Tried to load from:', headerPath);
+            
+            // Provide fallback or alternative error handling
+            const headerPlaceholder = document.getElementById('header-placeholder');
+            if (headerPlaceholder) {
+                headerPlaceholder.innerHTML = `
+                    <div class="site-header" style="background-color: #1a237e; color: white; padding: 0 20px; height: 60px; display: flex; align-items: center;">
+                        <div style="font-weight: bold; font-size: 1.4em;">
+                            <a href="${pathToRoot}" style="color: white; text-decoration: none;">Relativistic Electrodynamics</a>
+                        </div>
+                    </div>
+                `;
+            }
         });
 });
