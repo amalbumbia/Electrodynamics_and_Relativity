@@ -4,6 +4,8 @@
 
 Here is the web interface of this repository: [https://azalamer.com/Electrodynamics_and_Relativity/](https://azalamer.com/Electrodynamics_and_Relativity/)
 
+Note: Jupyter notebooks are not visualizable on the web interface, they would need to be downloaded. This will be rectified shortly. 
+
  <a href="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/3f5572803e2bd33150d4df1aa6eab6cc5d50ca77/Flowcharts%20Electro%20Project.svg">
   <img src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/8949d0f65fec955abbe48ba7cf1304b824eb021d/mega_flowchart.png" width="800" alt="flowchart">
 </a>
@@ -27,6 +29,10 @@ Here is the web interface of this repository: [https://azalamer.com/Electrodynam
 <a href="https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/interactive/solenoid_3d.html">
   <img src="assets/solenoid.png" width="400" alt="solenoid">
 </a>
+
+## Interactive Doppler Effect
+
+## Interactive Relativistic Fields
 
 ## References
 
