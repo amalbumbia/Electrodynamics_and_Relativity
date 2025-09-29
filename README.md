@@ -25,3 +25,16 @@
 <a href="https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/interactive/solenoid_3d.html">
   <img src="assets/solenoid.png" width="400" alt="solenoid">
 </a>
+
+## References
+
+Here are some books we believe are great references for practice problems and more depth into electrodynamics and relativity! Many of these will sound familiar. 
+
+Textbooks:
+- [Introduction to Electrodynamics by David J. Griffiths] This book is conventionally used for upper undergraduate level courses.
+- [Classical Electrodynamics by John David Jackson] This book is conventionally used for graduate classes.
+- [Electromagnetism by G. L. Pollack and D. R. Stump]()
+- [A Traveller's Guide to Spacetime by Thomas Moore] Struggling with special relativity? This book provides a wonderful overview of the topic and is quite short!
+- [An Introduction to General Relativity: Spacetime and Geometry by Sean Carroll] The classic textbook for a graduate level GR class. 
+
+Lecture Notes: 
