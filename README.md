@@ -31,10 +31,12 @@
 Here are some books we believe are great references for practice problems and more depth into electrodynamics and relativity! Many of these will sound familiar. 
 
 Textbooks:
-- [Introduction to Electrodynamics by David J. Griffiths] This book is conventionally used for upper undergraduate level courses.
-- [Classical Electrodynamics by John David Jackson] This book is conventionally used for graduate classes.
-- [Electromagnetism by G. L. Pollack and D. R. Stump]()
-- [A Traveller's Guide to Spacetime by Thomas Moore] Struggling with special relativity? This book provides a wonderful overview of the topic and is quite short!
-- [An Introduction to General Relativity: Spacetime and Geometry by Sean Carroll] The classic textbook for a graduate level GR class. 
+- Introduction to Electrodynamics by David J. Griffiths -- This book is conventionally used for upper undergraduate level courses.
+- Classical Electrodynamics by John David Jackson -- This book is conventionally used for graduate classes.
+- [Electromagnetism by G. L. Pollack and D. R. Stump](https://web.pa.msu.edu/people/stump/EM/chaps.html) -- Created by professors at MSU. They link all the chapters!
+- A Traveler's Guide to Spacetime by Thomas Moore -- Struggling with special relativity? This book provides a wonderful overview of the topic and is quite short!
+- [An Introduction to General Relativity: Spacetime and Geometry by Sean Carroll](https://www.preposterousuniverse.com/grnotes/) -- The classic textbook for a graduate level GR class. It started as a set of linked lecture notes.
 
 Lecture Notes: 
+
+- [David Tong](https://www.damtp.cam.ac.uk/user/tong/em.html) -- This site hosts all of David Tong's lecture notes, including those on electrodynamics and relativity. These are an amazing resource.
