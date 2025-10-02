@@ -39,6 +39,13 @@
   .pop-card{display:none; position:absolute; left:0; top:1.8rem; max-width:360px; background:#fff; border:1px solid #e5e7eb; border-radius:12px; padding:.8rem 1rem; box-shadow:0 12px 34px rgba(0,0,0,.14); z-index:9}
   .popover.open .pop-card{display:block}
   a{ color: var(--accent); }
+
+  .img-center { display:block; margin:1rem auto; height:auto; }
+  .w-600     { width:600px; max-width:100%; }   /* scales down on small screens */
+  .w-800     { width:800px; max-width:100%; }   /* optional bigger size */
+  figure     { margin:1.2rem auto; }
+  figure figcaption { text-align:center; color:#666; font-size:.9rem; }
+
 </style>
 <script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -81,7 +88,7 @@ At any event we can define a <em>light cone</em> representative of all possible 
 <p>Consider a 3D lattice of clocks with equidistant spacing so that the position of an event can be described along any point relative to a defined spatial origin; an origin event occurs at t = 0 and all clocks on the lattice are synced to t = 0 at said origin event. When another event occurs at some spatial position of the lattice, its time is measured by the nearest clock. How do we sync these clocks? We set them with respect to a master clock so that they may measure the flow of an `absolute' time.</p>
 
 <figure>
-  <img src="pictures/clock_lattice.png" alt="Clock lattice attempt" width="600">
+  <img src="pictures/clock_lattice.png" alt="Clock lattice" class="img-center w-600">
   <figcaption>Clock lattice</figcaption>
 </figure>
 
