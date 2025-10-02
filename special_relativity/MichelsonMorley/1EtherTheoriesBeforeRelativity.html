@@ -32,28 +32,28 @@ details.fold[open] > summary::after{ transform:rotate(90deg); }
   border:1px solid #e5e7eb; background:#f8fafc; border-radius:8px; padding:.4rem .7rem; cursor:pointer;
 }
 </style>
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.container');
   if (!container) return;
 
-  const isHeader = (el) => {
+  // Target headers: H1, H3, and <p><strong>…</strong></p>
+  const isTargetHeader = (el) => {
     if (!el || el.nodeType !== 1) return false;
-    const tag = el.tagName;
-    if (tag === 'H1' || tag === 'H2' || tag === 'H3') return true;
-    // Paragraph-as-header: <p><strong>Only child</strong></p>
-    if (tag === 'P' && el.children.length === 1 && el.firstElementChild.tagName === 'STRONG') return true;
+    const t = el.tagName;
+    if (t === 'H1' || t === 'H3') return true;
+    if (t === 'P' && el.children.length === 1 && el.firstElementChild.tagName === 'STRONG') return true;
     return false;
   };
 
+  // Order/priority for grouping: H1 < H3 < P-STRONG (lower number = higher level)
   const headerLevel = (el) => {
-    const tag = el.tagName;
-    if (tag === 'H1') return 1;
-    if (tag === 'H2') return 2;
-    if (tag === 'H3') return 3;
-    // Treat <p><strong>…</strong></p> as a subheader below H3
-    if (tag === 'P') return 4;
-    return 9;
+    const t = el.tagName;
+    if (t === 'H1') return 1;
+    if (t === 'H3') return 3;
+    // treat <p><strong>…</strong></p> as a subheader below H3
+    return 4;
   };
 
   // Optional controls at the top
@@ -65,84 +65,63 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
   container.insertBefore(controls, container.firstChild);
 
-  // We’ll skip the very first H1 (page title) from becoming collapsible.
-  let firstH1Seen = false;
-
-  // Snapshot children because we'll be moving nodes
+  // Snapshot current children; we'll move nodes into <details>
   const nodes = Array.from(container.childNodes);
 
   for (let i = 0; i < nodes.length; i++) {
     const node = nodes[i];
-    if (node.nodeType !== 1) continue; // elements only
-
-    if (node.tagName === 'H1') {
-      if (!firstH1Seen) { firstH1Seen = true; continue; } // keep top title static
-    }
-
-    if (!isHeader(node)) continue;
+    if (node?.nodeType !== 1) continue;
+    if (!isTargetHeader(node)) continue;
 
     const level = headerLevel(node);
 
-    // Build details/summary
+    // Build <details> + <summary>
     const details = document.createElement('details');
     details.className = 'fold';
-    // Open sections by default? set details.open=true if you like
+    if (node.tagName === 'H1') details.open = true;   // H1 open by default
     const summary = document.createElement('summary');
-    summary.innerHTML = node.innerHTML; // keep math/inline formatting
+    summary.innerHTML = node.innerHTML;               // keep inline math/formatting
 
-    // Preserve anchors: move id from header to details for # links
-    if (node.id) {
-      details.id = node.id;
-      node.removeAttribute('id');
-    }
+    // Preserve anchor IDs for deep links (#id)
+    if (node.id) { details.id = node.id; node.removeAttribute('id'); }
 
     const content = document.createElement('div');
     content.className = 'fold-content';
+    details.append(summary, content);
 
-    details.appendChild(summary);
-    details.appendChild(content);
-
-    // Insert details where header was
+    // Insert <details> where the header was
     container.insertBefore(details, node);
     container.removeChild(node);
 
-    // Move following siblings until next header of same or higher level
+    // Move following siblings until next target header of equal or higher level
     while (details.nextSibling) {
       const sib = details.nextSibling;
-      if (sib.nodeType === 1 && isHeader(sib)) {
-        const nextLevel = headerLevel(sib);
-        if (nextLevel <= level) break; // stop at equal/higher-level header
-      }
+      if (sib.nodeType === 1 && isTargetHeader(sib) && headerLevel(sib) <= level) break;
       content.appendChild(sib);
     }
   }
 
-  // Controls
-  document.getElementById('expandAll').addEventListener('click', () => {
+  // Expand/Collapse all
+  document.getElementById('expandAll').onclick = () =>
     document.querySelectorAll('details.fold').forEach(d => d.open = true);
-  });
-  document.getElementById('collapseAll').addEventListener('click', () => {
+  document.getElementById('collapseAll').onclick = () =>
     document.querySelectorAll('details.fold').forEach(d => d.open = false);
-  });
 
-  // If URL has a hash, open the relevant section
+  // If URL has a hash, open the corresponding section
   const openHashTarget = () => {
     if (!location.hash) return;
-    const id = location.hash.slice(1);
-    const target = document.getElementById(id);
-    if (!target) return;
-    if (target.tagName === 'DETAILS') target.open = true;
-    target.scrollIntoView({behavior:'smooth', block:'start'});
+    const t = document.getElementById(location.hash.slice(1));
+    if (t && t.tagName === 'DETAILS') t.open = true;
+    if (t) t.scrollIntoView({behavior:'smooth', block:'start'});
   };
   window.addEventListener('hashchange', openHashTarget);
   openHashTarget();
 
   // Re-typeset MathJax after moving nodes
-  if (window.MathJax && MathJax.typesetPromise) {
-    MathJax.typesetPromise();
-  }
+  if (window.MathJax?.typesetPromise) MathJax.typesetPromise();
 });
 </script>
+
 
 <body>
   <div id="header-placeholder"></div>
