@@ -2,18 +2,153 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>ApparentSimultaneityParadox</title>
+  <title>Apparent Simultaneity Paradox</title>
   <link rel="stylesheet" href="../../assets/header-css.css">
   <link rel="stylesheet" href="../../assets/mainStyle.css">
   <!-- MathJax Configuration -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
+<style>
+/* Collapsible sections */
+details.fold{
+  border:1px solid #e5e7eb; border-radius:10px; background:#fff;
+  box-shadow:0 4px 12px rgba(0,0,0,.04); margin:1rem 0;
+}
+details.fold > summary{
+  list-style:none; cursor:pointer; font-weight:700; padding:.75rem 1rem; position:relative;
+}
+details.fold > summary::-webkit-details-marker{ display:none; }
+details.fold > summary::after{
+  content:"▸"; position:absolute; right:12px; transition:transform .2s ease;
+}
+details.fold[open] > summary::after{ transform:rotate(90deg); }
+.fold-content{ padding:.25rem 1rem 1rem; }
+
+/* Optional: Expand/Collapse all buttons */
+.fold-controls{ display:flex; gap:.5rem; margin:0 0 1rem; }
+.fold-controls button{
+  border:1px solid #e5e7eb; background:#f8fafc; border-radius:8px; padding:.4rem .7rem; cursor:pointer;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.querySelector('.container');
+  if (!container) return;
+
+  const isHeader = (el) => {
+    if (!el || el.nodeType !== 1) return false;
+    const tag = el.tagName;
+    if (tag === 'H1' || tag === 'H2' || tag === 'H3') return true;
+    // Paragraph-as-header: <p><strong>Only child</strong></p>
+    if (tag === 'P' && el.children.length === 1 && el.firstElementChild.tagName === 'STRONG') return true;
+    return false;
+  };
+
+  const headerLevel = (el) => {
+    const tag = el.tagName;
+    if (tag === 'H1') return 1;
+    if (tag === 'H2') return 2;
+    if (tag === 'H3') return 3;
+    // Treat <p><strong>…</strong></p> as a subheader below H3
+    if (tag === 'P') return 4;
+    return 9;
+  };
+
+  // Optional controls at the top
+  const controls = document.createElement('div');
+  controls.className = 'fold-controls';
+  controls.innerHTML = `
+    <button type="button" id="expandAll">Expand all</button>
+    <button type="button" id="collapseAll">Collapse all</button>
+  `;
+  container.insertBefore(controls, container.firstChild);
+
+  // We’ll skip the very first H1 (page title) from becoming collapsible.
+  let firstH1Seen = false;
+
+  // Snapshot children because we'll be moving nodes
+  const nodes = Array.from(container.childNodes);
+
+  for (let i = 0; i < nodes.length; i++) {
+    const node = nodes[i];
+    if (node.nodeType !== 1) continue; // elements only
+
+    if (node.tagName === 'H1') {
+      if (!firstH1Seen) { firstH1Seen = true; continue; } // keep top title static
+    }
+
+    if (!isHeader(node)) continue;
+
+    const level = headerLevel(node);
+
+    // Build details/summary
+    const details = document.createElement('details');
+    details.className = 'fold';
+    // Open sections by default? set details.open=true if you like
+    const summary = document.createElement('summary');
+    summary.innerHTML = node.innerHTML; // keep math/inline formatting
+
+    // Preserve anchors: move id from header to details for # links
+    if (node.id) {
+      details.id = node.id;
+      node.removeAttribute('id');
+    }
+
+    const content = document.createElement('div');
+    content.className = 'fold-content';
+
+    details.appendChild(summary);
+    details.appendChild(content);
+
+    // Insert details where header was
+    container.insertBefore(details, node);
+    container.removeChild(node);
+
+    // Move following siblings until next header of same or higher level
+    while (details.nextSibling) {
+      const sib = details.nextSibling;
+      if (sib.nodeType === 1 && isHeader(sib)) {
+        const nextLevel = headerLevel(sib);
+        if (nextLevel <= level) break; // stop at equal/higher-level header
+      }
+      content.appendChild(sib);
+    }
+  }
+
+  // Controls
+  document.getElementById('expandAll').addEventListener('click', () => {
+    document.querySelectorAll('details.fold').forEach(d => d.open = true);
+  });
+  document.getElementById('collapseAll').addEventListener('click', () => {
+    document.querySelectorAll('details.fold').forEach(d => d.open = false);
+  });
+
+  // If URL has a hash, open the relevant section
+  const openHashTarget = () => {
+    if (!location.hash) return;
+    const id = location.hash.slice(1);
+    const target = document.getElementById(id);
+    if (!target) return;
+    if (target.tagName === 'DETAILS') target.open = true;
+    target.scrollIntoView({behavior:'smooth', block:'start'});
+  };
+  window.addEventListener('hashchange', openHashTarget);
+  openHashTarget();
+
+  // Re-typeset MathJax after moving nodes
+  if (window.MathJax && MathJax.typesetPromise) {
+    MathJax.typesetPromise();
+  }
+});
+</script>
+
 <body>
   <div id="header-placeholder"></div>
   
   <div class="container">
-    <h1>ApparentSimultaneityParadox</h1>
+    <h1>Apparent Simultaneity Paradox</h1>
     <h1
     id="apparent-paradoxes-length-contraction-and-simultaneity">Apparent
     Paradoxes: Length Contraction and Simultaneity</h1>
