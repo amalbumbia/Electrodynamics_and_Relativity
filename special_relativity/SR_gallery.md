@@ -1,15 +1,8 @@
-# Special Relativity Through Visual Aids
-
-<img width="465" alt="superconductivity_chart" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/1a3f42e46388645fd727754045087313e29289ba/memes/trump_einstein_meme.png">
-
 ## Interactive Boost Diagram
 
 <a href="https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/interactive/minkowski_boost.html">
   <img src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/3c1f1f9c512ca96993b0caf8efc6c65fca7f9e04/assets/boost_diagram.png" width="400" alt="Minkowski Boost Diagram">
 </a>
-
-## Clock Lattice Visualizer
-<img width="600" alt="clock_lattice" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/d32a1f979cf35d78682c23d700417be0085d320d/special_relativity/pictures/clock_lattice.png">
 
 ## Reference Frames
 <img width="400" alt="reference_frame" src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/0a56a44daa56c2ea8d0e41d8d61404629970d161/special_relativity/pictures/ref_frames.png">
