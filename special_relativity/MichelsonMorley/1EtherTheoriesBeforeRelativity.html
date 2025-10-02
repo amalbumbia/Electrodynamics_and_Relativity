@@ -8,55 +8,44 @@
   <!-- MathJax Configuration -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+  /* Collapsible sections */
+  details.fold{
+    border:1px solid #e5e7eb; border-radius:10px; background:#fff;
+    box-shadow:0 4px 12px rgba(0,0,0,.04); margin:1rem 0;
+  }
+  details.fold > summary{
+    list-style:none; cursor:pointer; font-weight:700; padding:.75rem 1rem; position:relative;
+  }
+  details.fold > summary::-webkit-details-marker{ display:none; }
+  details.fold > summary::after{
+    content:"▸"; position:absolute; right:12px; transition:transform .2s ease;
+  }
+  details.fold[open] > summary::after{ transform:rotate(90deg); }
+  .fold-content{ padding:.25rem 1rem 1rem; }
+  
+  /* Optional Expand/Collapse all buttons */
+  .fold-controls{ display:flex; gap:.5rem; margin:0 0 1rem; }
+  .fold-controls button{
+    border:1px solid #e5e7eb; background:#f8fafc; border-radius:8px; padding:.4rem .7rem; cursor:pointer;
+  }
+  </style>
+
 </head>
 
-<style>
-/* Collapsible sections */
-details.fold{
-  border:1px solid #e5e7eb; border-radius:10px; background:#fff;
-  box-shadow:0 4px 12px rgba(0,0,0,.04); margin:1rem 0;
-}
-details.fold > summary{
-  list-style:none; cursor:pointer; font-weight:700; padding:.75rem 1rem; position:relative;
-}
-details.fold > summary::-webkit-details-marker{ display:none; }
-details.fold > summary::after{
-  content:"▸"; position:absolute; right:12px; transition:transform .2s ease;
-}
-details.fold[open] > summary::after{ transform:rotate(90deg); }
-.fold-content{ padding:.25rem 1rem 1rem; }
 
-/* Optional: Expand/Collapse all buttons */
-.fold-controls{ display:flex; gap:.5rem; margin:0 0 1rem; }
-.fold-controls button{
-  border:1px solid #e5e7eb; background:#f8fafc; border-radius:8px; padding:.4rem .7rem; cursor:pointer;
-}
-</style>
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const container = document.querySelector('.container');
   if (!container) return;
 
-  // Target headers: H1, H3, and <p><strong>…</strong></p>
-  const isTargetHeader = (el) => {
-    if (!el || el.nodeType !== 1) return false;
-    const t = el.tagName;
-    if (t === 'H1' || t === 'H3') return true;
-    if (t === 'P' && el.children.length === 1 && el.firstElementChild.tagName === 'STRONG') return true;
-    return false;
-  };
+  const isPStrong = (el) =>
+    el && el.tagName === 'P' &&
+    el.children.length === 1 &&
+    el.firstElementChild.tagName === 'STRONG';
 
-  // Order/priority for grouping: H1 < H3 < P-STRONG (lower number = higher level)
-  const headerLevel = (el) => {
-    const t = el.tagName;
-    if (t === 'H1') return 1;
-    if (t === 'H3') return 3;
-    // treat <p><strong>…</strong></p> as a subheader below H3
-    return 4;
-  };
-
-  // Optional controls at the top
+  // --- Controls (optional) ---
   const controls = document.createElement('div');
   controls.className = 'fold-controls';
   controls.innerHTML = `
@@ -65,49 +54,77 @@ document.addEventListener('DOMContentLoaded', () => {
   `;
   container.insertBefore(controls, container.firstChild);
 
-  // Snapshot current children; we'll move nodes into <details>
-  const nodes = Array.from(container.childNodes);
-
-  for (let i = 0; i < nodes.length; i++) {
-    const node = nodes[i];
-    if (node?.nodeType !== 1) continue;
-    if (!isTargetHeader(node)) continue;
-
-    const level = headerLevel(node);
-
-    // Build <details> + <summary>
+  // --- 1) Fold H3 (top-level collapsibles) ---
+  const h3s = Array.from(container.querySelectorAll(':scope > h3'));
+  h3s.forEach(h3 => {
     const details = document.createElement('details');
     details.className = 'fold';
-    if (node.tagName === 'H1') details.open = true;   // H1 open by default
-    const summary = document.createElement('summary');
-    summary.innerHTML = node.innerHTML;               // keep inline math/formatting
+    // details.open = true; // <- uncomment if you want H3 sections open by default
 
-    // Preserve anchor IDs for deep links (#id)
-    if (node.id) { details.id = node.id; node.removeAttribute('id'); }
+    const summary = document.createElement('summary');
+    summary.innerHTML = h3.innerHTML; // keep inline math/formatting
+
+    if (h3.id) { details.id = h3.id; h3.removeAttribute('id'); }
 
     const content = document.createElement('div');
     content.className = 'fold-content';
+
+    container.insertBefore(details, h3);
+    container.removeChild(h3);
     details.append(summary, content);
 
-    // Insert <details> where the header was
-    container.insertBefore(details, node);
-    container.removeChild(node);
-
-    // Move following siblings until next target header of equal or higher level
+    // Move siblings until the next top-level H3
     while (details.nextSibling) {
       const sib = details.nextSibling;
-      if (sib.nodeType === 1 && isTargetHeader(sib) && headerLevel(sib) <= level) break;
+      if (sib.nodeType === 1 && sib.tagName === 'H3') break;
       content.appendChild(sib);
     }
-  }
+  });
 
-  // Expand/Collapse all
+  // --- 2) Inside each H3 section, fold <p><strong>…</strong></p> subsections ---
+  const foldPStrongWithin = (root) => {
+    const kids = Array.from(root.childNodes);
+    for (let i = 0; i < kids.length; i++) {
+      const node = kids[i];
+      if (!(node && node.nodeType === 1)) continue;
+      if (!isPStrong(node)) continue;
+
+      const details = document.createElement('details');
+      details.className = 'fold'; // collapsed by default
+      const summary = document.createElement('summary');
+      // Use the bold text as the summary (strip the <strong> wrapper)
+      summary.textContent = node.textContent.trim();
+
+      if (node.id) { details.id = node.id; node.removeAttribute('id'); }
+
+      const content = document.createElement('div');
+      content.className = 'fold-content';
+
+      root.insertBefore(details, node);
+      root.removeChild(node);
+      details.append(summary, content);
+
+      // Move siblings until the next p-strong "header"
+      while (details.nextSibling) {
+        const sib = details.nextSibling;
+        if (sib.nodeType === 1 && isPStrong(sib)) break;
+        content.appendChild(sib);
+      }
+    }
+  };
+
+  // Apply to each H3's content block
+  document.querySelectorAll('.fold > .fold-content').forEach(foldPStrongWithin);
+  // Also handle any top-level p-strong blocks that might be outside H3s
+  foldPStrongWithin(container);
+
+  // --- Controls wiring ---
   document.getElementById('expandAll').onclick = () =>
     document.querySelectorAll('details.fold').forEach(d => d.open = true);
   document.getElementById('collapseAll').onclick = () =>
     document.querySelectorAll('details.fold').forEach(d => d.open = false);
 
-  // If URL has a hash, open the corresponding section
+  // Open section if URL has a hash
   const openHashTarget = () => {
     if (!location.hash) return;
     const t = document.getElementById(location.hash.slice(1));
@@ -117,10 +134,11 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('hashchange', openHashTarget);
   openHashTarget();
 
-  // Re-typeset MathJax after moving nodes
+  // Re-typeset MathJax after DOM changes
   if (window.MathJax?.typesetPromise) MathJax.typesetPromise();
 });
 </script>
+
 
 
 <body>
