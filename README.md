@@ -18,7 +18,7 @@ Note: Jupyter notebooks are not visualizable on the web interface, they would ne
  - [Electrodynamics as a Gauge Theory](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/why_electrodynamics.html)
  - [Applications](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/ff9ae8776cff9a50dcd0e7260373b456f1a29108/applications)
 
-   TEST: [SR Tutorial](https://rawcdn.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/special_relativity/index.html)
+   [SR Tutorial](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/special_relativity/index_from_tex_boxes.html)
 
 ## Interactive Boost Diagram
 
