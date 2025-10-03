@@ -31,6 +31,27 @@
   }
   </style>
 
+  <style>
+    /* Make all content images responsive */
+.container img {
+    max-width: 100%;
+    height: auto;         /* keep aspect ratio */
+    display: block;       /* so margin auto centers */
+    margin: 0.75rem auto; /* center nicely */
+    border-radius: 8px;   /* optional polish */
+    box-shadow: 0 6px 20px rgba(0,0,0,.08); /* optional */
+  }
+  
+  /* Optional: a “figure with max width” pattern */
+  .figure { --w: 800px; max-width: min(100%, var(--w)); margin: 1rem auto; }
+  .figure > img { width: 100%; height: auto; display: block; }
+  .figure > figcaption { text-align: center; color:#666; font-size:.9rem; margin-top:.5rem; }
+  
+  /* Optional: side-by-side images that wrap on small screens */
+  .img-row { display:flex; flex-wrap:wrap; gap:12px; justify-content:center; }
+  .img-row img { flex: 1 1 260px; max-width: 100%; height:auto; }
+
+  </style>
 </head>
 
 <script>
