@@ -12,7 +12,7 @@ Note: Jupyter notebooks are not visualizable on the web interface, they would ne
 
  The outline of subtopics covered in this repository are as follows:
 
- - [Special Relativity](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/dfdc289b99c800f50e0a8377334629b777b9947b/special_relativity) - Paradoxes and Michelson Morley are CLEAN HTML (image scaling needs to be rectified)
+ - [Special Relativity](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/dfdc289b99c800f50e0a8377334629b777b9947b/special_relativity) - [Paradoxes](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/special_relativity/MichelsonMorley/1EtherTheoriesBeforeRelativity.html) and [Michelson Morley]() are CLEAN HTML
  - [Relativistic Mechanics](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/d878b18f4b3361b7f9c400208f3ab3cfad1a70a3/relativistic_mechanics) 
  - [Relativistic Electrodynamics](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/952f1fca399028505015da584a8aee010d9dcebf/relativistic_electrodynamics) 
  - [Electrodynamics as a Gauge Theory](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/why_electrodynamics.html) - CLEAN HTML
