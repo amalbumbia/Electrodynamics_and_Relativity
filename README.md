@@ -1,10 +1,11 @@
 ﻿# A Pedagogical Study of Relativistic Electrodynamics
 
- This repository serves as a final project for the PHY 352L Classical Electrodynamics II class at UT Austin under Prof. Michael Downer. It is essentially an experiment --- myself and a few other students will broadly cover relativistic electrodynamics at a similar scope to Griffiths' text, pulling from more advanced or detailed sources as we see fit. The motivation behind this project is to develop a pedagogical resource for understanding and visualizing a variety of topics under the umbrella of electrodynamics and relativity as it is a subject that is not nearly as intuitive compared to other areas of physics. There is a notable lack of approachable resources on advanced physics topics that are of high quality to be useful to an undergraduate or graduate student without essentially being a dense textbook or long set of lecture notes. 
-
 Here is the web interface of this repository: [https://azalamer.com/Electrodynamics_and_Relativity/](https://azalamer.com/Electrodynamics_and_Relativity/)
 
-Note: Jupyter notebooks are not visualizable on the web interface, they would need to be downloaded. This will be rectified shortly. 
+## Why do we need to account for relativity in electrodynamics?
+
+COMING SOON
+
 
  <a href="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/3f5572803e2bd33150d4df1aa6eab6cc5d50ca77/Flowcharts%20Electro%20Project.svg">
   <img src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/8949d0f65fec955abbe48ba7cf1304b824eb021d/mega_flowchart.png" width="800" alt="flowchart">
@@ -36,6 +37,9 @@ Note: Jupyter notebooks are not visualizable on the web interface, they would ne
 ## Interactive Relativistic Fields
 
 ## Interactive Velocity and Proper Time
+
+## About this Repository
+This repository serves as a final project for the PHY 352L Classical Electrodynamics II class at UT Austin under Prof. Michael Downer. The motivation behind this project is to develop a pedagogical resource for understanding and visualizing a variety of topics under the umbrella of electrodynamics and relativity as it is a subject that is not nearly as intuitive compared to other areas of physics. There is a notable lack of approachable resources on advanced physics topics that are of high quality to be useful to an undergraduate or graduate student without essentially being a dense textbook or long set of lecture notes. 
 
 ## References
 
