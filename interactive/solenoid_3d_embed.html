@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="../assets/header-css.css">
+  <link rel="stylesheet" href="../assets/mainStyle.css">
+  <meta charset="UTF-8">
+  <title>Relativistic Solenoid – 3D View</title>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  
+</head>
+<body>
+  <div id="header-placeholder"></div> 
+
+  <div class="container">
+    <h1>Relativistic Solenoid – 3D View</h1>
+    
+    <div class="interactive-controls">
+      <div class="control-group">
+        <label>β (v/c): <span id="betaVal">0.00</span></label><br>
+        <input type="range" id="betaSlider" min="0" max="0.99" step="0.01" value="0">
+      </div>
+
+      <div class="control-group">
+        <button id="playPause" class="control-button">Play</button>
+      </div>
+
+      <div class="control-group">
+        <label>Time frame: <span id="timeVal">0</span></label><br>
+        <input type="range" id="timeSlider" min="0" max="200" step="1" value="0">
+      </div>
+    </div>
+
+    <div id="plot" class="visualization-plot"></div>
+    <div id="readout" class="data-readout">I / I₀ = 1.000   γ = 1.000</div>
+  </div>
+
+  <script>
+    // ---- Physics parameters ----
+    const R     = 10.0;
+    const pitch0= 24.0;
+    const vd0   = 36.0;
+    const num_pts = 7;
+    const extra = 2;
+
+    // ---- Helper functions ----
+    function lorentz(beta) {
+      const γ = 1/Math.sqrt(1-beta*beta);
+      return {γ, pitch: pitch0/γ, vd: vd0/γ};
+    }
+
+    function helixCoords(pitch, turns) {
+      const N = 400;
+      const θ = Array.from({length:N}, (_,i)=>2*Math.PI*turns*i/(N-1));
+      return {
+        x: θ.map(t=> (pitch/(2*Math.PI))*t),
+        y: θ.map(t=> R*Math.sin(t)),
+        z: θ.map(t=> R*Math.cos(t))
+      };
+    }
+
+    // ---- DOM elements ----
+    const betaSlider = document.getElementById('betaSlider');
+    const timeSlider = document.getElementById('timeSlider');
+    const betaVal    = document.getElementById('betaVal');
+    const timeVal    = document.getElementById('timeVal');
+    const readout    = document.getElementById('readout');
+    const playBtn    = document.getElementById('playPause');
+    let animHandle   = null;
+
+    // ---- Plot initialization ----
+    const traceHelix = {
+      x: [], y: [], z: [],
+      mode:'lines',
+      line:{width:4,color:'black'},
+      type:'scatter3d'
+    };
+    const traceCharges = {
+      x: [], y: [], z: [],
+      mode:'markers',
+      marker:{size:6,color:'red'},
+      type:'scatter3d'
+    };
+    Plotly.newPlot('plot',[traceHelix,traceCharges],{
+      scene:{
+        xaxis:{title:'x (coil axis)'},
+        yaxis:{title:'y'},
+        zaxis:{title:'z'},
+        aspectmode:'data'
+      },
+      margin:{l:0,r:0,b:0,t:0}
+    });
+
+    // ---- Update function ----
+    function updatePlot() {
+      const β = parseFloat(betaSlider.value);
+      const tIdx = parseInt(timeSlider.value);
+      betaVal.textContent = β.toFixed(2);
+      timeVal.textContent = tIdx;
+
+      const t = tIdx * 0.05;  // 50 ms per frame
+      const {γ, pitch, vd} = lorentz(β);
+
+      // how many turns to cover ~80 units width
+      const turns = Math.ceil(80/pitch) + extra;
+      const {x: xh, y: yh, z: zh} = helixCoords(pitch, turns);
+
+      // charges positions
+      const totalLen0 = turns * pitch0;
+      const leadS = (vd * t) % totalLen0;
+      const spacing = totalLen0 / num_pts;
+      const xs = [], ys = [], zs = [];
+      for(let i=0; i<num_pts; i++){
+        const s = (leadS + i*spacing) % totalLen0;
+        const θ = 2*Math.PI*(s/pitch0);
+        xs.push((pitch/(2*Math.PI))*θ);
+        ys.push(R*Math.sin(θ));
+        zs.push(R*Math.cos(θ));
+      }
+
+      // update Plotly traces
+      Plotly.update('plot', {
+        x: [xh, xs],
+        y: [yh, ys],
+        z: [zh, zs]
+      }, {}, [0,1]);
+
+      // update readout
+      readout.textContent = `I / I₀ = ${(1/γ).toFixed(3)}   γ = ${γ.toFixed(3)}`;
+    }
+
+    // ---- Event listeners ----
+    betaSlider.addEventListener('input', ()=>{ updatePlot(); });
+    timeSlider.addEventListener('input', ()=>{ updatePlot(); });
+
+    // ---- Play / Pause ----
+    playBtn.addEventListener('click', ()=>{
+      if(animHandle===null){
+        playBtn.textContent = 'Pause';
+        animHandle = setInterval(()=>{
+          let v = parseInt(timeSlider.value) + 1;
+          if(v > parseInt(timeSlider.max)) v = parseInt(timeSlider.min);
+          timeSlider.value = v;
+          updatePlot();
+        }, 50);
+      } else {
+        playBtn.textContent = 'Play';
+        clearInterval(animHandle);
+        animHandle = null;
+      }
+    });
+
+    // initial draw
+    updatePlot();
+  </script>
+  <script src="../header-loader.js"></script>
+
+</body>
+</html>
