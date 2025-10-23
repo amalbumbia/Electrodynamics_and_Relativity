@@ -34,6 +34,8 @@ Note: Jupyter notebooks are not visualizable on the web interface, they would ne
 
 ## Interactive Relativistic Fields
 
+## Interactive Velocity and Proper Time
+
 ## References
 
 Here are some books we believe are great references for practice problems and more depth into electrodynamics and relativity! Many of these will sound familiar. 
