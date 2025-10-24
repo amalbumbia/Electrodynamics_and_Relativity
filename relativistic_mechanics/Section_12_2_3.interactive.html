@@ -3,7 +3,7 @@
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Notebook</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Relativistic Kinematics</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7553,7 +7553,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="Section-12.2.3:-Relativistic-Kinematics">Section 12.2.3: Relativistic Kinematics<a class="anchor-link" href="#Section-12.2.3:-Relativistic-Kinematics">¶</a></h1>
+<h1 id="Relativistic-Kinematics">Relativistic Kinematics<a class="anchor-link" href="#Relativistic-Kinematics">¶</a></h1>
 </div>
 </div>
 </div>
@@ -7564,7 +7564,6 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p><img alt="Trump Einstein" src="12_2_images/trump_dark_matter.jpeg"/></p>
 </div>
 </div>
 </div>
@@ -7625,7 +7624,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Let's consider a system of particles and explore the implications of the Lorentz invariance of $E^2-\bold{p}^2=m^2$. Since $p^\mu$ undergoes Lorentz transformations in a similar fashion as $x^\mu$, we have that $p^\mu p_\mu$ is invariant.</p>
+<p>Let's consider a system of particles and explore the implications of the Lorentz invariance of $E^2-p^2=m^2$. Since $p^\mu$ undergoes Lorentz transformations in a similar fashion as $x^\mu$, we have that $p^\mu p_\mu$ is invariant.</p>
 <p>These vectors in 4-dimensional spacetime can be summed; for a system of n particles, we have:
 $$
 p^\mu = \sum_{i=1}^n p_i^\mu
@@ -7642,7 +7641,7 @@ $$</p>
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p>Combining, we get the "invariant mass" for a system of particles:
 $$
-p^\mu p_\mu = (\sum_{i=1}^{n}E_i)^2 - (\sum_{i=1}^{n}\bold{p}_i)^2
+p^\mu p_\mu = (\sum_{i=1}^{n}E_i)^2 - (\sum_{i=1}^{n}p_i)^2
 $$
 which is relevant especially when discussing the decays of particles. Let me paint the picture: at CERN, protons are smashed together at near the speed of light, providing enough energy to form other massive particles (mass-energy equivalence). Some of these particles decay faster than they can reach the detectors; therefore, we cannot see them on their own. However, if we see their decay prodcuts, we can use the invariant mass formula to reconstruct the mass of the decayed particle.</p>
 <p>Let's see an example of this using pythia8, a Monte Carlo event generator that can be used to simulate proton-proton collisions.</p>
