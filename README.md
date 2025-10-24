@@ -15,7 +15,7 @@ COMING SOON
 
  - [Special Relativity](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/dfdc289b99c800f50e0a8377334629b777b9947b/special_relativity) - [Paradoxes](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/special_relativity/ParadoxExamples/ApparentSimultaneityParadox.html) and [Michelson Morley](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/special_relativity/MichelsonMorley/1EtherTheoriesBeforeRelativity.html) and [SR Tutorial](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/special_relativity/index_from_tex_boxes.html) (more visuals may be added) are CLEAN HTML
  - [Relativistic Mechanics]() [1](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/relativistic_mechanics/Section_12_2_1.no-input.html) [2](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/relativistic_mechanics/Section_12_2_2.no-input.html)
-   [3] [4]
+   [3](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/relativistic_mechanics/Section_12_2_3.interactive.html) [4]
  - [Relativistic Electrodynamics](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/relativistic_electrodynamics/12.3%20(1).no-input.html) CLEAN HTML
  - [Electrodynamics as a Gauge Theory](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/why_electrodynamics.html) - CLEAN HTML
  - [Applications](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/ff9ae8776cff9a50dcd0e7260373b456f1a29108/applications) 
