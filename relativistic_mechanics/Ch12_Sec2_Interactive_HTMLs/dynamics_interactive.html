@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Relativistically Accelerated Particle (Constant Force)</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- Plotly for plotting -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <!-- MathJax for LaTeX labels (optional) -->
+  <script id="MathJax-script" async
+    src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <style>
+    body { font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; margin: 24px; line-height: 1.5; }
+    h1 { margin: 0 0 8px; font-size: 1.35rem; }
+    .subtitle { margin: 0 0 16px; color: #555; }
+    .panel { display: grid; gap: 14px; max-width: 1000px; }
+    .controls { display: grid; gap: 10px; background: #f9fafb; border: 1px solid #e5e7eb; border-radius: 12px; padding: 14px; }
+    .row { display: grid; grid-template-columns: 120px 1fr 64px; align-items: center; gap: 10px; }
+    .row label { font-weight: 600; }
+    .plot { border: 1px solid #e5e7eb; border-radius: 12px; padding: 10px; }
+    .meta { color:#6b7280; font-size: 0.9rem; }
+    .flex { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <h1>Spacetime Diagram of a Relativistically Accelerated Particle (Constant Force)</h1>
+  <p class="subtitle">Plot of \(x(\tau)\) vs \(c\tau\) with \(c=1\). Adjust \(m\) and \(F\).</p>
+
+  <div class="panel">
+    <div class="controls">
+      <div class="row">
+        <label for="m">Mass \(m\)</label>
+        <input id="m" type="range" min="0.1" max="10" step="0.1" value="1.0">
+        <output id="m_val">1.0</output>
+      </div>
+      <div class="row">
+        <label for="F">Force \(F\)</label>
+        <input id="F" type="range" min="0.1" max="10" step="0.1" value="1.0">
+        <output id="F_val">1.0</output>
+      </div>
+      <div class="flex">
+        <span class="meta">Points: <span id="npts">1000</span></span>
+        <span class="meta">Range: \(\tau \in [0, 10]\)</span>
+      </div>
+    </div>
+
+    <div id="spacetime-plot" class="plot"></div>
+  </div>
+
+  <script>
+    // Constants (natural units)
+    const c = 1.0;
+    const N = 1000;
+    const tMin = 0.0, tMax = 10.0;
+
+    // Precompute tau grid once
+    const tau = Array.from({length: N}, (_, i) => tMin + (tMax - tMin) * i / (N - 1));
+
+    // x(tau) in JS, matching your Python formula
+    function x_of_tau(t, m, F) {
+      // Guard against tiny F
+      if (Math.abs(F) < 1e-12) return 0;
+      return (m * c * c / F) * (Math.sqrt(1 + Math.pow(F * t / (m * c), 2)) - 1);
+    }
+
+    function computeCurve(m, F) {
+      const xvals = new Array(tau.length);
+      for (let i = 0; i < tau.length; i++) {
+        xvals[i] = x_of_tau(tau[i], m, F);
+      }
+      return xvals;
+    }
+
+    // Draw or update plot
+    function render(m, F, first=false) {
+      const xvals = computeCurve(m, F);
+
+      const trace = {
+        x: xvals,
+        y: tau,               // y = ct; with c=1, it's just tau
+        mode: 'lines',
+        name: `m = ${m.toFixed(2)}, F = ${F.toFixed(2)}`
+      };
+
+      const layout = {
+        title: { text: 'Spacetime Diagram (x vs. c\u03C4)', font: { size: 20 } },
+        xaxis: { title: 'x', zerolinecolor: '#aaa', gridcolor: '#ddd' },
+        yaxis: {
+          title: 'c\u03C4',
+          zerolinecolor: '#aaa',
+          gridcolor: '#ddd',
+          // Enforce equal aspect ratio like Matplotlib's axis('equal'):
+          scaleanchor: 'x',
+          scaleratio: 1
+        },
+        margin: { l: 60, r: 20, t: 50, b: 50 },
+        showlegend: true
+      };
+
+      const config = { responsive: true, displayModeBar: false };
+
+      if (first) {
+        Plotly.newPlot('spacetime-plot', [trace], layout, config).then(() => MathJax.typesetPromise?.());
+      } else {
+        Plotly.react('spacetime-plot', [trace], layout, config).then(() => MathJax.typesetPromise?.());
+      }
+    }
+
+    // Hook up sliders
+    const mEl = document.getElementById('m');
+    const FEl = document.getElementById('F');
+    const mOut = document.getElementById('m_val');
+    const FOut = document.getElementById('F_val');
+
+    function onInput() {
+      const m = parseFloat(mEl.value);
+      const F = parseFloat(FEl.value);
+      mOut.textContent = m.toFixed(1);
+      FOut.textContent = F.toFixed(1);
+      render(m, F);
+    }
+
+    mEl.addEventListener('input', onInput);
+    FEl.addEventListener('input', onInput);
+
+    // Initial render
+    mOut.textContent = parseFloat(mEl.value).toFixed(1);
+    FOut.textContent = parseFloat(FEl.value).toFixed(1);
+    render(parseFloat(mEl.value), parseFloat(FEl.value), true);
+  </script>
+</body>
+</html>
