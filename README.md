@@ -38,6 +38,8 @@ COMING SOON
 
 ## Interactive Velocity and Proper Time
 
+## Relativistically Accelerated Particle 
+
 ## About this Repository
 This repository serves as a final project for the PHY 352L Classical Electrodynamics II class at UT Austin under Prof. Michael Downer. The motivation behind this project is to develop a pedagogical resource for understanding and visualizing a variety of topics under the umbrella of electrodynamics and relativity as it is a subject that is not nearly as intuitive compared to other areas of physics. There is a notable lack of approachable resources on advanced physics topics that are of high quality to be useful to an undergraduate or graduate student without essentially being a dense textbook or long set of lecture notes. 
 
