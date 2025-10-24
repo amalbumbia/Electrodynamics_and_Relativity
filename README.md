@@ -19,7 +19,7 @@ COMING SOON
  - [Relativistic Electrodynamics](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/relativistic_electrodynamics/12.3%20(1).no-input.html) CLEAN HTML
  - [Electrodynamics as a Gauge Theory](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/why_electrodynamics.html) - CLEAN HTML
  - [Applications](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/ff9ae8776cff9a50dcd0e7260373b456f1a29108/applications) 
-
+ - [Gauge Invariance Simulation](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/gauge_invariance.html)
 ## Interactive Boost Diagram
 
 <a href="https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/interactive/minkowski_boost.html">
