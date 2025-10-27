@@ -4,7 +4,17 @@ Here is the web interface of this repository: [https://azalamer.com/Electrodynam
 
 ## Why do we need to account for relativity in electrodynamics?
 
-COMING SOON
+When you first learned about electromagnetism, chances are it was treated classically. However, by this point you probably know that there is always more to the core ideas typically discussed in undergraduate-level classes. 
+Taking a second semester of electrodynamics may be the first time you encounter the idea that electrodynamic fields may be considered collectively, through a quantum perspective, or treated relativistically. It's possible you were not taught special relativity properly. And it's very likely that gauge theory is not something you encountered in other classes. This is all ok! Considering electrodynamics with relativity can be difficult to wrap your head around - afterall, neither are particularly intuitive or approachable in many cases. Before you (hopefully) use this repository to help you build a better understanding of this topic, we find it important to motivate relativistic electrodynamics. Why do we need it?
+
+The breifest answer is that non-relativistic electrodynamics is just not a complete formalism that accounts for every physical system. It is quite limited in terms of the simplifications you tend to have to apply to a system so that it can be solved. When we progress to considering real particles, things get complicated fast. Not accounting for relativistic effects means that theoretical predictions may significantly deviate form real-life observations. 
+
+Let's consider...
+
+- muon particle lifetime
+- cosmic rays reaching us
+- atomic clocks on airplanes
+- how large would a particle accelerator need to be in order to accelerate particles without considering relativistic effects? 
 
 
  <a href="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/3f5572803e2bd33150d4df1aa6eab6cc5d50ca77/Flowcharts%20Electro%20Project.svg">
