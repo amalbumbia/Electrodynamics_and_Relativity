@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('Current URL:', window.location.href);
     
     // Detect GitHub Pages vs local development
-    const isGitHubPages = window.location.hostname.includes('azalamer.com');
+    const isGitHubPages = window.location.hostname.includes('amalbumbia.github.io');
     console.log('Environment:', isGitHubPages ? 'GitHub Pages' : 'Local development');
     
     // Get repository name (needed for GitHub Pages path calculation)
