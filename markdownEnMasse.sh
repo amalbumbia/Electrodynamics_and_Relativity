@@ -2,7 +2,7 @@
 # Save as convert_all_markdown_with_math.sh
 
 # Store the root directory
-ROOT_DIR=$(pwd)
+ROOT_DIR="$(pwd)/relativistic_mechanics"
 
 # Create a temporary template file with MathJax support
 cat > "$ROOT_DIR/temp_template.html" << 'EOF'
