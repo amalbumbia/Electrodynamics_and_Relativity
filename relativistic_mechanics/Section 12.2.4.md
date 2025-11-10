@@ -1,7 +1,7 @@
 # Section 12.2.4 Relativistic Dynamics
 ![GOATs](12_2_images/Solvay_conference_1927.jpg)
 
-Newton's second law $\bold{F}=\frac{d\bold{p}}{dt}$ can be extrapolated to relativity by using the relativistic momentum.
+Newton's second law ${F}=\frac{d{p}}{dt}$ can be extrapolated to relativity by using the relativistic momentum.
 
 ```python
 import numpy as np
@@ -43,6 +43,6 @@ K^\mu = \frac{dp^\mu}{d\tau}
 $$
 where the spatial components are related by
 $$
-\bold{K} = \frac{1}{\sqrt{1-u^2/c^2}}\bold{F}
+{K} = \frac{1}{\sqrt{1-u^2/c^2}}{F}
 $$
 As we will see later, the Lorentz force turns out to be an ordinary force, and we cannot use this nice Minkowski force here.

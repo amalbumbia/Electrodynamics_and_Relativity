@@ -10,7 +10,7 @@ For reference (recall that we are using natural units):
 * proton- 938 MeV
 
 ## Bonus!
-Let's consider a system of particles and explore the implications of the Lorentz invariance of $E^2-\bold{p}^2=m^2$. Since $p^\mu$ undergoes Lorentz transformations in a similar fashion as $x^\mu$, we have that $p^\mu p_\mu$ is invariant.
+Let's consider a system of particles and explore the implications of the Lorentz invariance of $E^2-{p}^2=m^2$. Since $p^\mu$ undergoes Lorentz transformations in a similar fashion as $x^\mu$, we have that $p^\mu p_\mu$ is invariant.
 
 These vectors in 4-dimensional spacetime can be summed; for a system of n particles, we have:
 $$
@@ -18,7 +18,7 @@ p^\mu = \sum_{i=1}^n p_i^\mu
 $$
 Combining, we get the "invariant mass" for a system of particles:
 $$
-p^\mu p_\mu = (\sum_{i=1}^{n}E_i)^2 - (\sum_{i=1}^{n}\bold{p}_i)^2
+p^\mu p_\mu = (\sum_{i=1}^{n}E_i)^2 - (\sum_{i=1}^{n}{p}_i)^2
 $$
 which is relevant especially when discussing the decays of particles. Let me paint the picture: at CERN, protons are smashed together at near the speed of light, providing enough energy to form other massive particles (mass-energy equivalence). Some of these particles decay faster than they can reach the detectors; therefore, we cannot see them on their own. However, if we see their decay prodcuts, we can use the invariant mass formula to reconstruct the mass of the decayed particle. 
 

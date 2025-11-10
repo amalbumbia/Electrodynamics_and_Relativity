@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Section 12.2.4</title>
+  <link rel="stylesheet" href="../assets/header-css.css">
+  <link rel="stylesheet" href="../assets/mainStyle.css">
+  <!-- MathJax Configuration -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  
+  <div class="container">
+    <h1>Section 12.2.4</h1>
+    <h1 id="section-12.2.4-relativistic-dynamics">Section 12.2.4
+    Relativistic Dynamics</h1>
+    <figure>
+    <img src="12_2_images/Solvay_conference_1927.jpg" alt="GOATs" />
+    <figcaption aria-hidden="true">GOATs</figcaption>
+    </figure>
+    <p>Newton’s second law <span
+    class="math inline">\({F}=\frac{d{p}}{dt}\)</span> can be
+    extrapolated to relativity by using the relativistic momentum.</p>
+    <div class="sourceCode" id="cb1"><pre
+    class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact, FloatSlider</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">1</span>  <span class="co"># speed of light in natural units so that we can look at shape</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> x_t(t, m, F):</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (m <span class="op">*</span> c<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> F) <span class="op">*</span> (np.sqrt(<span class="dv">1</span> <span class="op">+</span> (F <span class="op">*</span> t <span class="op">/</span> (m <span class="op">*</span> c))<span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> <span class="dv">1</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># spacetime diagram</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_spacetime(m<span class="op">=</span><span class="fl">1.0</span>, F<span class="op">=</span><span class="fl">1.0</span>):</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    t_vals <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">1000</span>)  <span class="co"># time in natural units (ct)</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    x_vals <span class="op">=</span> x_t(t_vals, m, F)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    plt.plot(x_vals, t_vals, label<span class="op">=</span><span class="ss">f&#39;m = </span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">, F = </span><span class="sc">{</span>F<span class="sc">}</span><span class="ss">&#39;</span>)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">&#39;x&#39;</span>)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">&#39;ct&#39;</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">&#39;Spacetime Diagram of a Relativistically Accelerated Particle (Constant Force)&#39;</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    plt.grid(<span class="va">True</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    plt.axis(<span class="st">&#39;equal&#39;</span>) </span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#  controls</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>interact(</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    plot_spacetime,</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span>FloatSlider(value<span class="op">=</span><span class="fl">1.0</span>, <span class="bu">min</span><span class="op">=</span><span class="fl">0.1</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">10.0</span>, step<span class="op">=</span><span class="fl">0.1</span>, description<span class="op">=</span><span class="st">&#39;Mass m&#39;</span>),</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    F<span class="op">=</span>FloatSlider(value<span class="op">=</span><span class="fl">1.0</span>, <span class="bu">min</span><span class="op">=</span><span class="fl">0.1</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">10.0</span>, step<span class="op">=</span><span class="fl">0.1</span>, description<span class="op">=</span><span class="st">&#39;Force F&#39;</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
+    <p>Newton’s 3rd law, as we find out, does not hold in Special
+    Relativity. This should be disappointing but not too surprising,
+    especially when we recall that the same is true for an accelerating
+    point charge and stationary point charge: the forces they exert on
+    each other are not equal and opposite. The separation of time and
+    space renders it compatible with the theory. As we found with proper
+    and ordinary velocity, we can define a proper force (called
+    Minkowski force) <span class="math display">\[
+    K^\mu = \frac{dp^\mu}{d\tau}
+    \]</span> where the spatial components are related by <span
+    class="math display">\[
+    {K} = \frac{1}{\sqrt{1-u^2/c^2}}{F}
+    \]</span> As we will see later, the Lorentz force turns out to be an
+    ordinary force, and we cannot use this nice Minkowski force
+    here.</p>
+  </div>
+  
+  <script src="../header-loader.js"></script>
+</body>
+</html>

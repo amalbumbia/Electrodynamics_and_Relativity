@@ -5,7 +5,7 @@
 Noether's Theorem regarding conservation of momentum is sacred and can never be broken (see problem 12.29 in Griffiths); as such, we define relativistic momentum as:
 
 $$
-\bold{p} = m\bold{\eta} = \frac{m\bold{u}}{\sqrt{1-u^2/c^2}}
+{p} = m{\eta} = \frac{m{u}}{\sqrt{1-u^2/c^2}}
 $$
 
 In 4-vector notation, this is:

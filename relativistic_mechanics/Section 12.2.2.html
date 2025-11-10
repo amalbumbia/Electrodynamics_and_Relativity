@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Section 12.2.2</title>
+  <link rel="stylesheet" href="../assets/header-css.css">
+  <link rel="stylesheet" href="../assets/mainStyle.css">
+  <!-- MathJax Configuration -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  
+  <div class="container">
+    <h1>Section 12.2.2</h1>
+    <h1 id="section-12.2.2-relativistic-energy-and-momentum">Section
+    12.2.2: Relativistic Energy and Momentum</h1>
+    <figure>
+    <img src="12_2_images/trump_irrelevant.jpg" alt="Trump Einstein" />
+    <figcaption aria-hidden="true">Trump Einstein</figcaption>
+    </figure>
+    <p>(I don’t get the joke this meme is trying to make and that makes
+    it funnier) Noether’s Theorem regarding conservation of momentum is
+    sacred and can never be broken (see problem 12.29 in Griffiths); as
+    such, we define relativistic momentum as:</p>
+    <p><span class="math display">\[
+    {p} = m{\eta} = \frac{m{u}}{\sqrt{1-u^2/c^2}}
+    \]</span></p>
+    <p>In 4-vector notation, this is:</p>
+    <p><span class="math display">\[
+    p^\mu = m \eta^\mu
+    \]</span></p>
+    <p>Einstein also defines: <span class="math display">\[
+    p^0c \equiv E \equiv \frac{mc^2}{\sqrt{1-u^2/c^2}}
+    \]</span></p>
+    <p>Famously, as you have probably heard before, even the mass at
+    rest has energy. Evaluating this at <span
+    class="math inline">\(u=0\)</span> gives: <span
+    class="math display">\[
+    E_{rest}=mc^2
+    \]</span></p>
+    <p>Everything else that isn’t the rest energy is kinetic; therefore,
+    <span class="math display">\[
+    E_{kin} = E - E_{rest} = \frac{mc^2}{\sqrt{1-u^2/c^2}} - mc^2
+    \]</span> What’s very nice is that in the nonrelativistic regime
+    <span class="math inline">\(u &lt;&lt; c\)</span>, we can Taylor
+    expand the square root and recover <span class="math display">\[
+    E_{kin} \approx \frac{1}{2}mu^2 \text{   ; $u &lt;&lt; c$}
+    \]</span> This is vital to all theories in the sense that we must
+    check that our new theories can recover our established equation and
+    rules. This is similar to the classical theory of gravity in that we
+    recover <span class="math inline">\(F=-mg\hat{z}\)</span> for
+    objects that are close to the Earth. We cannot have our new theories
+    be incompatible with our old ones without some clever
+    explanation.</p>
+    <p>Ultimately, we arrive at: <span class="math display">\[
+    E^2 - p^2c^2 = m^2c^4
+    \]</span></p>
+    <h3 id="bonus">BONUS!</h3>
+    <p><span class="math inline">\(c = 3 \times 10^8\)</span> m/s makes
+    you happy, doesn’t it? What if I made you unhappy by making <span
+    class="math inline">\(c=1\)</span>? Although, Griffiths doesn’t have
+    a chance to touch on this, it’s important to talk about <span
+    style="color:red">natural units</span>, because they come up often
+    in relativistic particle physics and other fields where relativistic
+    frames are typical. Essentially, a simplification is made where
+    <span class="math inline">\(c=1\)</span> in order so that constants
+    don’t obscure the algebra. The idea is that we can simply add them
+    back later via simple dimensional analysis. In particle physics,
+    this has the consequence of rendering our equation <span
+    class="math display">\[
+    E^2 - p^2 = m^2
+    \]</span> Where [E] = [GeV], [p]=[GeV/c], and [m]=[GeV/c^2] also
+    becomes [E] = [GeV], [p]=[GeV], and [m]=[GeV]. With natural units,
+    GeV now becomes energy, momentum, or mass depending on the context.
+    If we want to go back to normal units, we can just multiply by the
+    appropriate 1, <span class="math inline">\(c\)</span>, or <span
+    class="math inline">\(c^2\)</span> respectively.</p>
+  </div>
+  
+  <script src="../header-loader.js"></script>
+</body>
+</html>

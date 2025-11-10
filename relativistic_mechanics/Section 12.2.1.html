@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Section 12.2.1</title>
+  <link rel="stylesheet" href="../assets/header-css.css">
+  <link rel="stylesheet" href="../assets/mainStyle.css">
+  <!-- MathJax Configuration -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  
+  <div class="container">
+    <h1>Section 12.2.1</h1>
+    <h1 id="section-12.2.1-proper-time-and-proper-velocity">Section
+    12.2.1: Proper Time and Proper Velocity</h1>
+    <p><img src="12_2_images/time_dilation_trump_2.png"
+    alt="Time Dilation" /> Let’s again consider the effects of time
+    dilation. However, let’s now consider a differential time step of
+    <span class="math display">\[
+    d\tau = dt \sqrt{1 - \frac{u^2}{c^2}}
+    \]</span> where <span class="math inline">\(\tau\)</span> is the
+    proper time. According to Griffiths, this makes since if you’re a
+    French person because “propre” means your own. Since this is in your
+    own frame, it will always be invariant, making it useful in the
+    regard. The difference between the two is pretty straightforward. We
+    have ordinary velocity, which is length in some external reference
+    frame (coordinate distance) over time in that same frame (coordinate
+    frame): <span class="math display">\[
+    {u} = \frac{d{l}}{dt}
+    \]</span> But coordinate time may not always the most relevant to
+    you, perhaps you’re more interested in how much distance you travel
+    in this external frame over YOUR time: <span class="math display">\[
+    {\eta}=\frac{d{l}}{d\tau}
+    \]</span> If we insert these into our equation that relates these
+    differential time steps, we get: <span class="math display">\[
+    {\eta} = \frac{1}{\sqrt{1-u^2/c^2}} {u}
+    \]</span> Since the proper time is our own time, it transforms very
+    simply from one inertial system to another. Starting with <span
+    class="math display">\[
+    \eta^\mu = \frac{dx^\mu}{d\tau}
+    \]</span> When transforming from system <span
+    class="math inline">\(S\)</span> to system <span
+    class="math inline">\(\bar{S}\)</span> that moves at speed <span
+    class="math inline">\(v\)</span> along the common <span
+    class="math inline">\(x\bar{x}\)</span> axis, we accordinly get the
+    equations 12.18 <span class="math display">\[
+    \bar{t} = \gamma (t - \frac{v}{c^2}x) \\
+    \bar{x} = \gamma (x - v t) \\
+    \bar{y} = y \\
+    \bar{z} = z
+    \]</span> with the derivatives applied using the differential proper
+    time interval <span class="math display">\[
+    \bar{t} = \gamma (\eta^0 - \beta\eta^1) \\
+    \bar{\eta}^1 = \gamma (\eta^1 - \beta \eta^0) \\
+    \bar{\eta}^2 = \eta^2 \\
+    \bar{\eta}^3 = \eta^3
+    \]</span> To become more acquainted with notation in the literature,
+    this is <span class="math display">\[
+    \bar{\eta}^\mu = \Lambda^\mu_\nu \eta^\nu
+    \]</span> using a tensor contraction. The transformation rules for
+    ordinary velocity require a change in both differentials and can be
+    found in the book. ### BONUS!</p>
+    <p>Let’s make things more interesting by talking about the <span
+    style="color:red">Relativistic Doppler effect</span> (refer to the
+    associated html to play around with a simple plot of this). The
+    equations describing this phenomenon take on a slightly new form, so
+    let’s derive it. Consider a source moving towards a stationary
+    observer.</p>
+    <p>We will first make use of the Lorentz transformations: <span
+    class="math display">\[
+    \bar{t} = \gamma(t - \frac{vx}{c^2})
+    \]</span> and <span class="math display">\[
+    \bar{x} = \gamma(x - vt)
+    \]</span></p>
+    <p>Firstly, by convention, <span class="math inline">\(v \rightarrow
+    -v\)</span> since the source is moving towards the observer.
+    Secondly, let’s say we have two events that occur at <span
+    class="math inline">\((0,0)\)</span> and <span
+    class="math inline">\((\tau,0)\)</span> in the source’s rest frame,
+    where <span class="math inline">\(\tau\)</span> is the period of the
+    wave in the source’s frame. WLOG and for convenience, we can say
+    that the observer and source experience the event at <span
+    class="math inline">\((0,0)\)</span> simulataneously.<br />
+    The second spacetime event, which does not occur simulataneously,
+    thereby transforms to <span class="math display">\[
+    \bar{t} = \gamma(t - \frac{vx}{c^2}) = \gamma\tau
+    \]</span> and <span class="math display">\[
+    \bar{x} = \gamma(x - vt) = \gamma v \tau
+    \]</span> Meaning that the second event occurs at <span
+    class="math inline">\((\gamma\tau,\gamma v \tau)\)</span> in the
+    observer’s frame. Because the event is spatially at a distance <span
+    class="math inline">\(\gamma v \tau\)</span>, the observer has to
+    wait not only for the event to occur in their frame but ALSO the
+    time it takes for the light to travel that distance, <span
+    class="math inline">\(\gamma v \tau /c\)</span>; therefore, the
+    observer sees the signal at <span class="math display">\[
+    \tau_{obs} = \gamma\tau_{src} + \gamma v \tau_{src}/c
+    \]</span> Since <span class="math inline">\(\tau_{obs} =
+    1/f_{obs}\)</span> and <span class="math inline">\(\tau_{src} =
+    1/f_{src}\)</span>, we can rearrange to get:</p>
+    <p><span class="math display">\[
+    \frac{f_{src}}{f_{obs}} = \gamma(1 + v/c) = \frac{1+
+    v/c}{\sqrt{1-v^2/c^2}} = \frac{1+ v/c}{\sqrt{(1-v/c)(1+v/c))}} =
+    \sqrt{\frac{1+v/c}{1-v/c}}
+    \]</span> Another derivation may not seem very interesting, but this
+    is relevant to astrophysics and relativistic beaming, in which
+    relativistic aberration, time dilation, and the doppler shifting can
+    affect the apparent brightness of a source.</p>
+    <figure>
+    <img src="12_2_images/radio_galaxy_3C31.png"
+    alt="Relativistic Beaming" />
+    <figcaption aria-hidden="true">Relativistic Beaming</figcaption>
+    </figure>
+    <p>Here, you can see this effect from a jet that is pointed towards
+    Earth while the plumes are pointed away.</p>
+  </div>
+  
+  <script src="../header-loader.js"></script>
+</body>
+</html>

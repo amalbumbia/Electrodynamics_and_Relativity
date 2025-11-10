@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Section 12.3</title>
+  <link rel="stylesheet" href="../assets/header-css.css">
+  <link rel="stylesheet" href="../assets/mainStyle.css">
+  <!-- MathJax Configuration -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  
+  <div class="container">
+    <h1>Section 12.3</h1>
+    <h1 id="relativistic-electrodynamics">Relativistic
+    Electrodynamics</h1>
+    <h2 id="a-reassurance">A Reassurance:</h2>
+    <p>The term ‘Relativistic Electrodynamics’ may come off as quite
+    intimidating; you may think that electrodynamics is hard enough, and
+    accounting for relativity at the same time would make our lives even
+    harder. However, you are fortunately very wrong!</p>
+    <ul>
+    <li>First of all, Maxwell’s equations and the Lorentz force law are
+    already invariant between inertial reference frames. So, we do not
+    have to alter the equations based on the reference frame, we just
+    need to determine how the fields and field sources transform</li>
+    <li>We get to see how electric and magnetic fields are
+    interconnected - while one observer will attribute some particle
+    motion to an electric field, an observer in a different frame will
+    attribute it to a magnetic field. In this way, we see how
+    electricity and magnetism can not exist without the other!</li>
+    <li>As we fit our electrodynamic variables into Minkowski space (as
+    we have for mechanics) we will find that our equations get compacted
+    into really nice tensor equations.</li>
+    </ul>
+    <h2 id="field-transformations">Field Transformations</h2>
+    <p>Our entire field formulation of classical electrodynamics hinges
+    on the statement that the field at a particular point should be able
+    to give us all the information needed to calculate forces on the
+    particle; that is, we dont need to know anything about the field
+    sources. This means that if we want to find out how fields
+    transform, we have our pick of field sources and our derived
+    transformation rule will apply to fields caused by any other source.
+    So, let us turn to our old friend the capacitor!</p>
+    <p>In its own rest frame, the capacitor has a constant electric
+    field in between the plates oriented perpendicular to the plates.
+    Let’s see what happens in a reference frame <span
+    class="math inline">\(S\)</span> moving at velocity <span
+    class="math inline">\(v_0\)</span> laterally relative to the
+    capacitor:</p>
+    <figure>
+    <img src="v_0_capacitor.png" alt="reference frame S" />
+    <figcaption aria-hidden="true">reference frame <span
+    class="math inline">\(S\)</span></figcaption>
+    </figure>
+    <p>Since the capacitor plates are moving, length contraction
+    increases the surface charge, thereby increases the electric field
+    amplitude by a factor of <span
+    class="math inline">\(\gamma\)</span>.</p>
+    <p>Also, since the charged plates are moving, we now have surface
+    current <span class="math inline">\(\textbf{K}\)</span>, which
+    produces a magnetic field!.</p>
+    <p>Now we can compare the fields <span
+    class="math inline">\(E_y\)</span> and <span
+    class="math inline">\(B_z\)</span> of reference frame <span
+    class="math inline">\(S\)</span> to the fields <span
+    class="math inline">\(\overline{E}_y\)</span> and <span
+    class="math inline">\(\overline{B}_z\)</span> in reference frame
+    <span class="math inline">\(\overline{S}\)</span> which is moving at
+    <span class="math inline">\(v\)</span> velocity relative to <span
+    class="math inline">\(S\)</span> and at <span
+    class="math inline">\(\overline{v}\)</span> relative to the rest
+    frame of the capacitor:</p>
+    <figure>
+    <img src="overline_v_capacitor.png"
+    alt="reference frame \overline{S} - picture is an example of when v &gt; 0" />
+    <figcaption aria-hidden="true">reference frame <span
+    class="math inline">\(\overline{S}\)</span> - picture is an example
+    of when <span class="math inline">\(v &gt; 0\)</span></figcaption>
+    </figure>
+    <p>We conclude the following transformation rules:</p>
+    <p><span class="math display">\[
+    \begin{align}
+        \overline{E}_y &amp;= \gamma(E_y - vB_z) \\
+        \overline{B}_z &amp;= \gamma(B_z - \frac{v}{c^2}E_y) \\
+    \end{align}
+    \]</span></p>
+    <p>Considering the same capacitor rotated by <span
+    class="math inline">\(\pi/2\)</span> around thr <span
+    class="math inline">\(x\)</span>-axis gives us analogous
+    transformation rules for <span class="math inline">\(E_z\)</span>
+    and <span class="math inline">\(B_y\)</span>:</p>
+    <p><span class="math display">\[
+    \begin{align}
+        \overline{E}_z &amp;= \gamma(E_z + vB_y) \\
+        \overline{B}_y &amp;= \gamma(B_y + \frac{v}{c^2}E_z) \\
+    \end{align}
+    \]</span></p>
+    <p>Now, if we consider our original the capacitor rotated by <span
+    class="math inline">\(\pi/2\)</span> aroundkfvbehfajlkcsb fejvsdc,
+    then the length contraction only affects the distance between the
+    plates - since the electric field does not depend on that, we have
+    <span class="math inline">\(\overline{E}_x = E_x\)</span>. Also, the
+    symmetry of the plates means that there is no magnetic field in any
+    inertial reference frame, so we will need another field source to
+    study how <span class="math inline">\(B_x\)</span> transforms. We
+    will now turn to our friend the solenoid!</p>
+    <p><a href="https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/interactive/solenoid_3d.html">
+    <img src="assets/solenoid.png" width="400" alt="solenoid"> </a></p>
+    <p>As you can see, in a reference frame moving at <span
+    class="math inline">\(v\)</span> relative to the solenoid, the
+    solenoid experiences length contraction and the density of coils
+    increases by a factor of <span
+    class="math inline">\(\gamma\)</span>. However, it also experiences
+    time dilation, which decreases the current by a factor of <span
+    class="math inline">\(\gamma\)</span> as well. These cancel out to
+    give us the transformation rule <span
+    class="math inline">\(\overline{B_x} = B_x\)</span>.</p>
+    <h2 id="minkowski-space">Minkowski Space</h2>
+    <p>If you are familiar with Quantum Mechanics, you remember the
+    Hilbert Space, and how we dealt with kets (row vectors), bras
+    (column vectors) and operators (matrices acting on keta/bras) inside
+    the Hilbert Space. Well, in special relativity we have Minkowski
+    space! Let me tell you the main characters of the Minkowski
+    space:</p>
+    <ul>
+    <li><p><strong>4-vectors</strong>: examples include displacement
+    <span class="math inline">\((ct, x, y, z)\)</span>, proper velocity,
+    proper momentum, current density (will be formulated below)</p></li>
+    <li><p><strong>Minkowski metric</strong>: matrix (<span
+    class="math inline">\(\eta\)</span>) that defines the inner product:
+    Given two 4-vectors <span class="math inline">\(X^\mu\)</span> and
+    <span class="math inline">\(Y^\mu\)</span>, their inner product in
+    Minkowski space is <span
+    class="math inline">\(X^\mu\eta_{\mu\nu}Y^\nu\)</span></p></li>
+    <li><p><strong>4-covectors</strong>: Instead of having to write
+    <span class="math inline">\(\eta_{\mu\nu}\)</span> over and over
+    again, we will simply embed it into our vectors. Let the covector
+    <span class="math inline">\(X_\mu\)</span> be defined by:</p>
+    <p><span class="math display">\[\begin{align}
+    X_\mu &amp;= \eta_{\mu\nu}X^\nu
+    \end{align}
+    \]</span></p>
+    <p>Similarly,</p>
+    <p><span class="math display">\[\begin{align}
+    X^\nu &amp;= X_\mu\eta^{\mu\nu}
+    \end{align}
+    \]</span></p>
+    <p>Now, there is deeper mathematical meaning to this, these
+    covectors actually live in a dual space to Minkowski space. But the
+    main cool convenience to us physicists is that now as long as all of
+    our indices are paired (one superscripted, one subscripted), we know
+    it is invariant between reference frames (since the Minkowski metric
+    is invariant). Later, we are going to rewrite Maxwell’s equations in
+    tensor form, and the paired indices will prove to us that the
+    equations are invariant!</p>
+    <p>One useful covector to keep in mind is the
+    <em>four-derivative</em> (the relativistic form of <span
+    class="math inline">\(\nabla\)</span>):</p>
+    <p><span class="math display">\[\begin{align}
+    \partial_\mu &amp;= \left(\frac{1}{c}\frac{\partial}{\partial t},
+    \nabla\right)
+    \end{align}\]</span></p></li>
+    <li><p><strong>Lorentz group</strong>: This is the group of possible
+    transformation matrices <span class="math inline">\(\Lambda\)</span>
+    that transform 4-vectors into other 4-vectors while preserving the
+    Minkowski inner product; that is,</p></li>
+    </ul>
+    <p><span class="math display">\[\begin{align}
+      \Lambda^\rho_\mu\eta_{\rho\sigma}\Lambda^\sigma_\nu &amp;=
+    \eta_{\mu\nu}
+      \end{align}\]</span></p>
+    <p>Therefore, if we have <span class="math inline">\((X&#39;)^\mu =
+    \Lambda^\mu_\nu X^\nu\)</span> and <span
+    class="math inline">\((Y&#39;)^\mu = \Lambda^\mu_\nu Y^\nu\)</span>,
+    then</p>
+    <p><span class="math display">\[\begin{align}
+      (X&#39;)_\mu (Y&#39;)^\mu &amp;= (X&#39;)^\rho \eta_{\rho\mu}
+    (Y&#39;)^\mu \\
+      &amp;= X^\sigma \Lambda^\rho_\sigma \eta_{\rho\mu}
+    \Lambda^\mu_\lambda Y^\lambda\\
+      &amp;= X^\sigma \eta_{\sigma\lambda} Y^\lambda\\
+      &amp;= X_\lambda Y^\lambda
+      \end{align}\]</span></p>
+    <p>Thus, the inner product stays the same even after transforming
+    <span class="math inline">\(X\)</span> and <span
+    class="math inline">\(Y\)</span>. Again, this means that any
+    expression involving our vector/covectors and <span
+    class="math inline">\(\Lambda\)</span> is invariant as long as all
+    indices are in pairs. There are two main types of Lorentz
+    transformations:</p>
+    <ul>
+    <li><p><em>Rotations</em>: Reference frames rotated with respect to
+    one another</p></li>
+    <li><p><em>Lorentz boosts</em>: Reference frames moving along an
+    axis with respect to one another</p></li>
+    <li><p>Any linear combination on the above type of Lorentz
+    transformations is also a Lorentz transformation</p></li>
+    <li><p><strong>Tensors</strong>: A tensor is a very generalized
+    4-vector, with not just one indice up or down, but any possible
+    amount of superscripted and/or subscripted indices. It forms by
+    carrying out dyad products between vectors and/or covectors (and
+    then possibly having a linear combination of different dyads).
+    Instead of cancelling out indice pairs to represent decreasing in
+    dimension like an inner product does, the dyad product between two
+    vectors/covectors keeps all their indices, so it increases in
+    dimension from its multiplied parts. The Tensor transforms as
+    follows:</p>
+    <p><span class="math display">\[\begin{align}
+    (T&#39;)^{\mu_1 ... \mu_n}_{\nu_1 ... \nu_m} &amp;=
+    \Lambda^{\mu_1}_{\rho_1} ... \Lambda^{\mu_n}_{\rho_n}
+    \Lambda^{\sigma_1}_{\nu_1} ... \Lambda^{\sigma_m}_{\nu_m} T^{\rho_1
+    ... \rho_n}_{\sigma_1 ... \sigma_m}
+    \end{align}\]</span></p></li>
+    </ul>
+    <h2 id="fitting-electrodynamics-into-minkowski-space">Fitting
+    Electrodynamics into Minkowski space</h2>
+    <p>Now, lets take a look at our transformation rules for <span
+    class="math inline">\(E\)</span> and <span
+    class="math inline">\(B\)</span> fields, as see how to represent
+    that as a quantity that Lorentz tranforms in Minkowski space. The
+    electric and magnetic field have a total of 6 components, so that
+    can’t fit into a 4-vector? And the transformation rules look
+    different from the 4-vector transformation rules anyway, so what is
+    happening here? Let us turn to the potentials. We have</p>
+    <p><span class="math display">\[E = -\nabla\phi - \frac{\partial
+    \textbf{A}}{\partial t}$ and $B = \nabla \times
+    \textbf{A}\]</span></p>
+    <p>With some flexibility in how to define <span
+    class="math inline">\(A\)</span> and <span
+    class="math inline">\(\phi\)</span>:</p>
+    <p><span class="math display">\[\phi \to \phi-\frac{\partial
+    \chi}{\partial t}$ and $\textbf{A} \to \textbf{A} +
+    \nabla\chi\]</span>.</p>
+    <p>We can put these potentials into a 4-vector that transforms as
+    so:</p>
+    <p><span class="math display">\[A^\mu = \left(\begin{array}
+    &amp; \phi/c \\
+    \textbf{A}
+    \end{array}\right) \to A^\mu - \partial^\mu \chi\]</span></p>
+    <p>Now consider the <span
+    class="math inline">\(\textbf{anitsymmetric rank 2
+    tensor}\)</span>:</p>
+    <p><span class="math display">\[F_{\mu\nu} = \partial_\mu A_\nu -
+    \partial_\nu A_\mu\]</span></p>
+    <p>What’s an antisymmetric tensor?</p>
+    <p><span class="math display">\[
+    F_{\mu\nu} = \left\{
+    \begin{array}
+    &amp; 0 &amp; F_{10} &amp; F_{20} &amp; F_{30} \\
+    -F_{10} &amp; 0 &amp; F_{12} &amp; F_{13} \\
+    -F_{20} &amp; -F_{12} &amp; 0 &amp; F_{23} \\
+    -F_{30} &amp; -F_{13} &amp; -F_{23} &amp; 0 \\
+    \end{array} \right\}
+    \]</span></p>
+    <ul>
+    <li><em>Antisymmetric</em>: <span class="math inline">\(t^{\mu\nu} =
+    t^{\nu\mu}\)</span>, while <span class="math inline">\(t^{\mu\mu} =
+    0\)</span></li>
+    </ul>
+    <p>As you can see, <span class="math inline">\(t\)</span> has 6
+    distinct elements, and we can show that the vairous elements are
+    elements of the <span class="math inline">\(E\)</span> and <span
+    class="math inline">\(B\)</span> fields. For example,:</p>
+    <p><span class="math display">\[\begin{align*}
+    F_{10} &amp;= \partial_1 A_0 - \partial_0 A_1 \\
+    &amp;= \nabla \phi/c - \frac{1}{c}\frac{\partial A_x}{\partial t} \\
+    &amp;= E_x/c \\
+    \end{align*}\]</span></p>
+    <p>When we Lorentz transform <span
+    class="math inline">\(F_{\mu\nu}\)</span>, we also get the same
+    transformation rules we derived earlier with our capacitors and
+    solenoids zooming at arbitrary velocities:</p>
+    <p>(will insert the transformation rules here…)</p>
+    <p>Thus, we can represent the <span class="math inline">\(E\)</span>
+    and <span class="math inline">\(B\)</span> fields and how they
+    transform as the field tensor <span
+    class="math inline">\(F_{\mu\nu}\)</span>.</p>
+    <p><span class="math display">\[
+    F_{\mu\nu} = \left\{
+    \begin{array}
+    &amp; 0 &amp; E_x/c &amp; E_y/c &amp; E_z/c \\
+    -E_x/c &amp; 0 &amp; -B_z &amp; B_y \\
+    -E_y/c &amp; B_z &amp; 0 &amp; -B_x \\
+    -E_z/c &amp; -B_y &amp; B_x &amp; 0 \\
+    \end{array} \right\}
+    \]</span></p>
+    <h2 id="dual-tensor">Dual Tensor</h2>
+    <p>We need yet another tensor in order to formulate Maxwell’s
+    equations. And we will create it using the antisymmetric tensor
+    <span class="math inline">\(\epsilon^{\mu\nu\rho\sigma}\)</span>,
+    defined as:</p>
+    <p><span class="math display">\[\epsilon^{\mu\nu\rho\sigma} =
+    \begin{cases}
+    1 \;\text{if $\mu\nu\rho\sigma = 0123$} \\
+    -1 \;\text{if $\mu\nu\rho\sigma = 3210$} \\
+    0 \;\text{if any indices are equal}
+    \end{cases}\]</span></p>
+    <p>This is like the generalized Levi-Civita symbol. Now let us
+    define</p>
+    <p><span class="math inline">\(G^{\mu\nu} = \frac{1}{2}
+    \epsilon^{\mu\nu\rho\sigma} F_{\rho\sigma}\)</span></p>
+    <p>We will call this the ‘dual electromagnetic tensor’</p>
+    <h2 id="current-density">Current Density</h2>
+    <p>We have one last step before we can rewrite the Maxwell’s
+    equations in terms of <span
+    class="math inline">\(F_{\mu\nu}\)</span> and <span
+    class="math inline">\(G_{\mu\nu}\)</span>. We need to put current
+    and current density in 4-vector form:</p>
+    <p><span class="math display">\[J^\mu = \left(\begin{array}
+    &amp; \rho c \\
+    \textbf{J}
+    \end{array}\right)\]</span></p>
+    <p>Consider <span class="math inline">\(J^\mu = (\rho_0 c,
+    0)\)</span>. Under a Lorentz boost it becomes</p>
+    <p><span class="math display">\[\Lambda^\mu_\nu J^\mu =
+    \left(\begin{array}
+    &amp; \gamma \rho_0 c \\
+    -\gamma \rho_0 v
+    \end{array}\right)\]</span></p>
+    <p>This makes physical sense, as the charge density would increase
+    due to lorentz contraction, and in the frame moving at <span
+    class="math inline">\(\textbf{v}\)</span> this new charge density
+    <span class="math inline">\(\gamma \rho_0\)</span> is moving at
+    <span class="math inline">\(-\textbf{v}\)</span>, thereby causing
+    there to be a nonzero current density.</p>
+    <h2 id="the-new-maxwells-equations">The New Maxwell’s
+    Equations:</h2>
+    <p>Now, we finally have Maxwell’s equations:</p>
+    <p><span class="math display">\[\partial_\mu F^{\mu\nu} = \mu_0
+    J^\nu$ and $\partial_\mu G^{\mu\nu} = 0\]</span></p>
+    <p>Note that there is a hanging <span
+    class="math inline">\(\nu\)</span> in each of thses equations. You
+    may think this is a problem, since it indicates that these equations
+    are not necessarily invariant. That is correct, but it turns out
+    that Maxwell’s equations will tranform into eachother in different
+    reference frames. By that I mean that Gauss’s Law in one reference
+    frame turns into Ampere’s Law in the other, and vice versa. So,
+    while these equations transform, it is in a way that does not make a
+    difference. We say that they are covariant under Lorentz
+    tranformations.</p>
+  </div>
+  
+  <script src="../header-loader.js"></script>
+</body>
+</html>

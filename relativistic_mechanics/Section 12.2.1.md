@@ -7,15 +7,15 @@ $$
 where $\tau$ is the proper time. According to Griffiths, this makes since if you're a French person because "propre" means your own. Since this is in your own frame, it will always be invariant, making it useful in the regard.
 The difference between the two is pretty straightforward. We have ordinary velocity, which is length in some external reference frame (coordinate distance) over time in that same frame (coordinate frame):
 $$
-\bold{u} = \frac{d\bold{l}}{dt}
+{u} = \frac{d{l}}{dt}
 $$
 But coordinate time may not always the most relevant to you, perhaps you're more interested in how much distance you travel in this external frame over YOUR time:
 $$
-\bold{\eta}=\frac{d\bold{l}}{d\tau}
+{\eta}=\frac{d{l}}{d\tau}
 $$
 If we insert these into our equation that relates these differential time steps, we get:
 $$
-\bold{\eta} = \frac{1}{\sqrt{1-u^2/c^2}} \bold{u}
+{\eta} = \frac{1}{\sqrt{1-u^2/c^2}} {u}
 $$
 Since the proper time is our own time, it transforms very simply from one inertial system to another. Starting with
 $$
@@ -73,6 +73,7 @@ $$
 \frac{f_{src}}{f_{obs}} = \gamma(1 + v/c) = \frac{1+ v/c}{\sqrt{1-v^2/c^2}} = \frac{1+ v/c}{\sqrt{(1-v/c)(1+v/c))}} = \sqrt{\frac{1+v/c}{1-v/c}}
 $$
 Another derivation may not seem very interesting, but this is relevant to astrophysics and relativistic beaming, in which relativistic aberration, time dilation, and the doppler shifting can affect the apparent brightness of a source.
+
 ![Relativistic Beaming](12_2_images/radio_galaxy_3C31.png)
 
 Here, you can see this effect from a jet that is pointed towards Earth while the plumes are pointed away.

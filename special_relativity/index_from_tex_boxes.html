@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Special Relativity In a Nutshell</title>
+
 <style>
   :root {
     --accent:#2f6feb;
@@ -71,6 +72,8 @@
   .w-200{ width:200px; max-width:100%; }
 
 </style>
+<link rel="stylesheet" href="../assets/header-css.css">
+<link rel="stylesheet" href="../assets/mainStyle.css">
 <script>window.MathJax={tex:{inlineMath:[["$","$"],["\\(","\\)"]]}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
@@ -151,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <body>
+  <div id="header-placeholder"></div> 
 <header>
   <strong>Special Relativity In A Nutshell</strong>
 </header>
@@ -397,5 +401,6 @@ document.addEventListener('click', (e)=>{
 });
 document.addEventListener('keydown', (e)=>{ if(e.key==='Escape'){ document.querySelectorAll('.popover.open').forEach(p=>p.classList.remove('open')); } });
 </script>
+ <script src="../header-loader.js"></script>
 </body>
 </html>

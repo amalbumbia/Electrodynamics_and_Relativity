@@ -2,7 +2,7 @@
 # Save as convert_all_markdown_with_math.sh
 
 # Store the root directory
-ROOT_DIR="$(pwd)/relativistic_mechanics"
+ROOT_DIR="$(pwd)/relativistic_electrodynamics"
 
 # Create a temporary template file with MathJax support
 cat > "$ROOT_DIR/temp_template.html" << 'EOF'
@@ -11,8 +11,8 @@ cat > "$ROOT_DIR/temp_template.html" << 'EOF'
 <head>
   <meta charset="UTF-8">
   <title>$title$</title>
-  <link rel="stylesheet" href="{{CSS_PATH_HEADER}}">
-  <link rel="stylesheet" href="{{CSS_PATH_MAIN}}">
+  <link rel="stylesheet" href="../{{CSS_PATH_HEADER}}">
+  <link rel="stylesheet" href="../{{CSS_PATH_MAIN}}">
   <!-- MathJax Configuration -->
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -25,7 +25,7 @@ cat > "$ROOT_DIR/temp_template.html" << 'EOF'
     $body$
   </div>
   
-  <script src="{{JS_PATH}}"></script>
+  <script src="../{{JS_PATH}}"></script>
 </body>
 </html>
 EOF
