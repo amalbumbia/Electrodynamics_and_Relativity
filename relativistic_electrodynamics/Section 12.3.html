@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Section 12.3</title>
+  <title></title>
   <link rel="stylesheet" href="../assets/header-css.css">
   <link rel="stylesheet" href="../assets/mainStyle.css">
   <!-- MathJax Configuration -->
@@ -13,7 +13,7 @@
   <div id="header-placeholder"></div>
   
   <div class="container">
-    <h1>Section 12.3</h1>
+    <h1>Relativistic Electrodynamics</h1>
     <h1 id="relativistic-electrodynamics">Relativistic
     Electrodynamics</h1>
     <h2 id="a-reassurance">A Reassurance:</h2>
@@ -63,14 +63,14 @@
     current <span class="math inline">\(\textbf{K}\)</span>, which
     produces a magnetic field!.</p>
     <p>Now we can compare the fields <span
-    class="math inline">\(E_y\)</span> and <span
+    class="math inline">\(E_y\)</span> <p>and</p> <span
     class="math inline">\(B_z\)</span> of reference frame <span
     class="math inline">\(S\)</span> to the fields <span
-    class="math inline">\(\overline{E}_y\)</span> and <span
+    class="math inline">\(\overline{E}_y\)</span> <p>and</p> <span
     class="math inline">\(\overline{B}_z\)</span> in reference frame
     <span class="math inline">\(\overline{S}\)</span> which is moving at
     <span class="math inline">\(v\)</span> velocity relative to <span
-    class="math inline">\(S\)</span> and at <span
+    class="math inline">\(S\)</span> <p>and</p> at <span
     class="math inline">\(\overline{v}\)</span> relative to the rest
     frame of the capacitor:</p>
     <figure>
@@ -91,7 +91,7 @@
     class="math inline">\(\pi/2\)</span> around thr <span
     class="math inline">\(x\)</span>-axis gives us analogous
     transformation rules for <span class="math inline">\(E_z\)</span>
-    and <span class="math inline">\(B_y\)</span>:</p>
+    <p>and</p> <span class="math inline">\(B_y\)</span>:</p>
     <p><span class="math display">\[
     \begin{align}
         \overline{E}_z &amp;= \gamma(E_z + vB_y) \\
@@ -99,7 +99,7 @@
     \end{align}
     \]</span></p>
     <p>Now, if we consider our original the capacitor rotated by <span
-    class="math inline">\(\pi/2\)</span> aroundkfvbehfajlkcsb fejvsdc,
+    class="math inline">\(\pi/2\)</span>,
     then the length contraction only affects the distance between the
     plates - since the electric field does not depend on that, we have
     <span class="math inline">\(\overline{E}_x = E_x\)</span>. Also, the
@@ -107,8 +107,14 @@
     inertial reference frame, so we will need another field source to
     study how <span class="math inline">\(B_x\)</span> transforms. We
     will now turn to our friend the solenoid!</p>
-    <p><a href="https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/interactive/solenoid_3d.html">
-    <img src="assets/solenoid.png" width="400" alt="solenoid"> </a></p>
+    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
+      <iframe
+        src="../interactive/solenoid_3d_embed.html"
+        title="Solenoid 3D Simulation"
+        style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
+        loading="lazy"
+      ></iframe>
+    </div>
     <p>As you can see, in a reference frame moving at <span
     class="math inline">\(v\)</span> relative to the solenoid, the
     solenoid experiences length contraction and the density of coils
@@ -131,7 +137,7 @@
     proper momentum, current density (will be formulated below)</p></li>
     <li><p><strong>Minkowski metric</strong>: matrix (<span
     class="math inline">\(\eta\)</span>) that defines the inner product:
-    Given two 4-vectors <span class="math inline">\(X^\mu\)</span> and
+    Given two 4-vectors <span class="math inline">\(X^\mu\)</span> <p>and</p>
     <span class="math inline">\(Y^\mu\)</span>, their inner product in
     Minkowski space is <span
     class="math inline">\(X^\mu\eta_{\mu\nu}Y^\nu\)</span></p></li>
@@ -173,7 +179,7 @@
     \eta_{\mu\nu}
       \end{align}\]</span></p>
     <p>Therefore, if we have <span class="math inline">\((X&#39;)^\mu =
-    \Lambda^\mu_\nu X^\nu\)</span> and <span
+    \Lambda^\mu_\nu X^\nu\)</span> <p>and</p> <span
     class="math inline">\((Y&#39;)^\mu = \Lambda^\mu_\nu Y^\nu\)</span>,
     then</p>
     <p><span class="math display">\[\begin{align}
@@ -185,7 +191,7 @@
       &amp;= X_\lambda Y^\lambda
       \end{align}\]</span></p>
     <p>Thus, the inner product stays the same even after transforming
-    <span class="math inline">\(X\)</span> and <span
+    <span class="math inline">\(X\)</span> <p>and</p> <span
     class="math inline">\(Y\)</span>. Again, this means that any
     expression involving our vector/covectors and <span
     class="math inline">\(\Lambda\)</span> is invariant as long as all
@@ -218,7 +224,7 @@
     <h2 id="fitting-electrodynamics-into-minkowski-space">Fitting
     Electrodynamics into Minkowski space</h2>
     <p>Now, lets take a look at our transformation rules for <span
-    class="math inline">\(E\)</span> and <span
+    class="math inline">\(E\)</span> <p>and</p> <span
     class="math inline">\(B\)</span> fields, as see how to represent
     that as a quantity that Lorentz tranforms in Minkowski space. The
     electric and magnetic field have a total of 6 components, so that
@@ -226,13 +232,13 @@
     different from the 4-vector transformation rules anyway, so what is
     happening here? Let us turn to the potentials. We have</p>
     <p><span class="math display">\[E = -\nabla\phi - \frac{\partial
-    \textbf{A}}{\partial t}$ and $B = \nabla \times
+    \textbf{A}}{\partial t}$ \text{ and } $B = \nabla \times
     \textbf{A}\]</span></p>
     <p>With some flexibility in how to define <span
-    class="math inline">\(A\)</span> and <span
+    class="math inline">\(A\)</span> <p>and</p> <span
     class="math inline">\(\phi\)</span>:</p>
     <p><span class="math display">\[\phi \to \phi-\frac{\partial
-    \chi}{\partial t}$ and $\textbf{A} \to \textbf{A} +
+    \chi}{\partial t}$ \text{ and } $\textbf{A} \to \textbf{A} +
     \nabla\chi\]</span>.</p>
     <p>We can put these potentials into a 4-vector that transforms as
     so:</p>
@@ -241,8 +247,7 @@
     \textbf{A}
     \end{array}\right) \to A^\mu - \partial^\mu \chi\]</span></p>
     <p>Now consider the <span
-    class="math inline">\(\textbf{anitsymmetric rank 2
-    tensor}\)</span>:</p>
+    class="math inline">\(\textbf{anitsymmetric rank 2 tensor}\)</span>:</p>
     <p><span class="math display">\[F_{\mu\nu} = \partial_\mu A_\nu -
     \partial_\nu A_\mu\]</span></p>
     <p>What’s an antisymmetric tensor?</p>
@@ -272,8 +277,7 @@
     <p>When we Lorentz transform <span
     class="math inline">\(F_{\mu\nu}\)</span>, we also get the same
     transformation rules we derived earlier with our capacitors and
-    solenoids zooming at arbitrary velocities:</p>
-    <p>(will insert the transformation rules here…)</p>
+    solenoids zooming at arbitrary velocities.</p>
     <p>Thus, we can represent the <span class="math inline">\(E\)</span>
     and <span class="math inline">\(B\)</span> fields and how they
     transform as the field tensor <span
@@ -306,7 +310,7 @@
     <h2 id="current-density">Current Density</h2>
     <p>We have one last step before we can rewrite the Maxwell’s
     equations in terms of <span
-    class="math inline">\(F_{\mu\nu}\)</span> and <span
+    class="math inline">\(F_{\mu\nu}\)</span> <p>and</p> <span
     class="math inline">\(G_{\mu\nu}\)</span>. We need to put current
     and current density in 4-vector form:</p>
     <p><span class="math display">\[J^\mu = \left(\begin{array}
@@ -330,7 +334,7 @@
     Equations:</h2>
     <p>Now, we finally have Maxwell’s equations:</p>
     <p><span class="math display">\[\partial_\mu F^{\mu\nu} = \mu_0
-    J^\nu$ and $\partial_\mu G^{\mu\nu} = 0\]</span></p>
+    J^\nu$ <p> and </p> $\partial_\mu G^{\mu\nu} = 0\]</span></p>
     <p>Note that there is a hanging <span
     class="math inline">\(\nu\)</span> in each of thses equations. You
     may think this is a problem, since it indicates that these equations
