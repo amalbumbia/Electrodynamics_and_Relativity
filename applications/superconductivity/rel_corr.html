@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Relativistic Corrections to Experimental Data – Visualizer</title>
+
+  <!-- Site-wide header and main styles (adjust paths if needed) -->
+  <link rel="stylesheet" href="../assets/header-css.css">
+  <link rel="stylesheet" href="../assets/mainStyle.css">
+
+  <!-- Header loader -->
+  <script src="../header-loader.js" defer></script>
+
+  <!-- Highlight.js theme + core -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script>hljs.highlightAll();</script>
+
+  <!-- Code block overrides: light background + darker colors -->
+  <style>
+    main.content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+
+    main.content h1 {
+      margin-top: 0;
+    }
+
+    /* Light gray code box with nice font */
+    pre code.hljs {
+      display: block;
+      padding: 1rem;
+      background: #f5f5f5 !important;  /* light grey */
+      border-radius: 6px;
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      overflow-x: auto;
+      color: #222;  /* base text */
+    }
+
+    pre {
+      margin: 1.2rem 0;
+    }
+
+    /* Darker, higher-contrast token colors */
+    .hljs-keyword,
+    .hljs-built_in,
+    .hljs-type,
+    .hljs-selector-tag {
+      color: #00008b;   /* dark navy */
+      font-weight: 600;
+    }
+
+    .hljs-string,
+    .hljs-title.hljs-class,
+    .hljs-attr {
+      color: #a31515;   /* dark red */
+    }
+
+    .hljs-number,
+    .hljs-literal {
+      color: #0451a5;   /* dark blue */
+    }
+
+    .hljs-title,
+    .hljs-function .hljs-title {
+      color: #795e26;   /* brownish */
+    }
+
+    .hljs-comment {
+      color: #008000;   /* dark green */
+      font-style: italic;
+    }
+
+    .hljs-punctuation,
+    .hljs-operator {
+      color: #444;
+    }
+
+    /* Make function parameters and variables darker (they were too light) */
+    .hljs-params,
+    .hljs-variable,
+    .hljs-property {
+      color: #222 !important;
+    }
+
+    /* Centered image helper */
+    figure {
+      margin: 1.5rem auto;
+      text-align: center;
+    }
+
+    .img-center {
+      display: block;
+      margin: 0 auto;
+      max-width: 100%;
+      height: auto;
+    }
+
+    figure figcaption {
+      font-size: 0.9rem;
+      color: #555;
+      margin-top: 0.5rem;
+    }
+  </style>
+
+  <!-- MathJax for LaTeX -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML-full,Safe"></script>
+  <script type="text/x-mathjax-config">
+    init_mathjax = function() {
+      if (window.MathJax) {
+        MathJax.Hub.Config({
+          TeX: {
+            equationNumbers: {
+              autoNumber: "AMS",
+              useLabelIds: true
+            }
+          },
+          tex2jax: {
+            inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+            displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+            processEscapes: true,
+            processEnvironments: true
+          },
+          displayAlign: 'center',
+          CommonHTML: {
+            linebreaks: { automatic: true }
+          }
+        });
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+      }
+    };
+    init_mathjax();
+  </script>
+</head>
+<body>
+  <main class="content">
+    <h1>Relativistic Corrections to Experimental Data – Visualizer</h1>
+
+    <p>
+      To obtain a complete picture of high-\(T_c\) superconductors such as those based on Bi
+      or heavy fermion systems, it is necessary to account for relativistic effects.
+      BCS theory can be modified to describe single-particle effects. In this case, some unexpected
+      relativistic phenomena emerge, like superconductor-specific spin–orbit coupling.
+    </p>
+
+    <p>
+      The task of describing relativistic effects is more efficiently done within the Bogoliubov–de Gennes (BdG)
+      extension. Since Cooper pairs consist of two fermions, the description begins with a Dirac equation and
+      involves a set of relativistic order parameters. This includes 16 components that can be grouped into 5 sets
+      (which are the relevant order parameters): scalar (1 component), four-vector (4 components), pseudoscalar
+      (1 component), axial vector (4 components) and antisymmetric tensor (6 components).
+    </p>
+
+    <p>
+      For our purposes, it is enough to note that the Dirac BdG equation obtained is a relativistic generalization
+      of the BdG equation and can be expanded to second order in \(1/c\) to get to the weakly relativistic limit.
+      Additional corrective terms arise at this point, specifically spin–orbit (involving the gradient of the lattice
+      potential), Darwin (containing second derivatives of the lattice potential) and mass–velocity corrections.
+      Correction terms that appear only in the superconducting state are called the anomalous spin–orbit coupling
+      (ASOC) and anomalous Darwin terms.
+    </p>
+
+    <p>
+      What happens if we try to crudely model our experimental result with BCS theory and then account for the
+      aforementioned relativistic corrections? It turns out that the calculations for Bi-2223 have not been done
+      yet in this regard, but we do know that there should be an upwards shift in the determination for the critical
+      temperature. A ballpark of \(0.3\)–\(1\ \text{K}\) is a reasonable assumption based on the claim in the
+      literature that for the dominant ASOC, the modification is “a few per mille”.
+    </p>
+
+    <!-- Pretty-printed Python code -->
+    <pre><code class="language-python">
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from scipy.optimize import curve_fit
+
+data = np.loadtxt('superwarm.txt')
+T_exp, R_exp = data[:,0], data[:,1]
+
+# load experimental data to be modified
+
+# BCS fit for reference (crude model)
+def BCS_model(T, Tc, w, p2, p1, p0):
+    quadratic = p2*T**2 + p1*T + p0
+    log_drop = 1.0/(1.0 + np.exp((T - Tc)/w))
+    return quadratic * (1.0 - log_drop)
+
+# initial guesses:  Tc = 110 K, width = 1 K
+norm = T_exp > 150
+p2, p1, p0 = np.polyfit(T_exp[norm], R_exp[norm], 2)
+initial = [110, 1.0, p2, p1, p0]
+
+popt, _ = curve_fit(BCS_model, T_exp, R_exp, p0=initial, maxfev=10000)
+Tc_fit, w_fit, p2_fit, p1_fit, p0_fit = popt
+
+# shift to account for relativistic model from Dirac BdG equation
+delta_Tc_rel = 0.4     # upward shift
+Tc_rel = Tc_fit + delta_Tc_rel
+
+def BCS_clean(T, Tc):
+    quadratic = p2_fit*T**2 + p1_fit*T + p0_fit
+    log_drop = 1.0/(1.0 + np.exp((T - Tc)/w_fit))
+    return quadratic * (1.0 - log_drop)
+
+# Plotting
+T_plot = np.linspace(T_exp.min(), T_exp.max(), 1200)
+
+plt.figure(figsize=(7, 4.5))
+plt.plot(T_exp, R_exp, '.', ms=1, label='Experiment $T_c = 112.3 + 2.3$ K')
+plt.plot(T_plot, BCS_clean(T_plot, Tc_fit), label=f'BCS  $T_c$ = {Tc_fit:.2f} K')
+plt.plot(T_plot, BCS_clean(T_plot, Tc_rel), '--', lw=2,
+         label=f'Relativistic  $T_c$ = {Tc_rel:.2f} K')
+
+plt.xlim(90, 280)
+plt.ylim(-0.05, 3.9)
+plt.xlabel('Temperature (K)')
+plt.ylabel('Resistance (Ω)')
+plt.title('Bi-2223: Experiment vs. Relativistic and Nonrelativistic Theory')
+plt.legend()
+plt.tight_layout()
+plt.show()
+    </code></pre>
+
+    <figure>
+      <img src="relsup.png" alt="Relativistic corrections visualization" class="img-center" />
+    </figure>
+
+    <p>
+      This is by no means the most accurate simulation, but it provides an interesting visual consistent with the literature:
+      it shows that there is not a significant difference between the theoretical models, but the relativistic correction is
+      still marginally closer to the experimental results.
+    </p>
+  </main>
+</body>
+</html>
