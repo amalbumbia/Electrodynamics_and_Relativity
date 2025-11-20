@@ -3,6 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <style>
+    pre code {
+    display: block;
+    padding: 1rem;
+    background: #f5f5f5;
+    border-radius: 6px;
+    font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-size: 0.9rem;
+    line-height: 1.4;
+    overflow-x: auto;
+  }
+  </style>
   <link rel="stylesheet" href="../assets/header-css.css">
   <link rel="stylesheet" href="../assets/mainStyle.css">
   <!-- MathJax Configuration -->
@@ -19,40 +31,42 @@
     <p>Newton’s second law <span
     class="math inline">\({F}=\frac{d{p}}{dt}\)</span> can be
     extrapolated to relativity by using the relativistic momentum.</p>
-    <div class="sourceCode" id="cb1"><pre
-    class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> ipywidgets <span class="im">import</span> interact, FloatSlider</span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>c <span class="op">=</span> <span class="dv">1</span>  <span class="co"># speed of light in natural units so that we can look at shape</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> x_t(t, m, F):</span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> (m <span class="op">*</span> c<span class="op">**</span><span class="dv">2</span> <span class="op">/</span> F) <span class="op">*</span> (np.sqrt(<span class="dv">1</span> <span class="op">+</span> (F <span class="op">*</span> t <span class="op">/</span> (m <span class="op">*</span> c))<span class="op">**</span><span class="dv">2</span>) <span class="op">-</span> <span class="dv">1</span>)</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># spacetime diagram</span></span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> plot_spacetime(m<span class="op">=</span><span class="fl">1.0</span>, F<span class="op">=</span><span class="fl">1.0</span>):</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    t_vals <span class="op">=</span> np.linspace(<span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">1000</span>)  <span class="co"># time in natural units (ct)</span></span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    x_vals <span class="op">=</span> x_t(t_vals, m, F)</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    plt.figure(figsize<span class="op">=</span>(<span class="dv">8</span>, <span class="dv">6</span>))</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>    plt.plot(x_vals, t_vals, label<span class="op">=</span><span class="ss">f&#39;m = </span><span class="sc">{</span>m<span class="sc">}</span><span class="ss">, F = </span><span class="sc">{</span>F<span class="sc">}</span><span class="ss">&#39;</span>)</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>    plt.xlabel(<span class="st">&#39;x&#39;</span>)</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>    plt.ylabel(<span class="st">&#39;ct&#39;</span>)</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    plt.title(<span class="st">&#39;Spacetime Diagram of a Relativistically Accelerated Particle (Constant Force)&#39;</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>    plt.grid(<span class="va">True</span>)</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    plt.legend()</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    plt.axis(<span class="st">&#39;equal&#39;</span>) </span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    plt.show()</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="co">#  controls</span></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>interact(</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>    plot_spacetime,</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>    m<span class="op">=</span>FloatSlider(value<span class="op">=</span><span class="fl">1.0</span>, <span class="bu">min</span><span class="op">=</span><span class="fl">0.1</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">10.0</span>, step<span class="op">=</span><span class="fl">0.1</span>, description<span class="op">=</span><span class="st">&#39;Mass m&#39;</span>),</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>    F<span class="op">=</span>FloatSlider(value<span class="op">=</span><span class="fl">1.0</span>, <span class="bu">min</span><span class="op">=</span><span class="fl">0.1</span>, <span class="bu">max</span><span class="op">=</span><span class="fl">10.0</span>, step<span class="op">=</span><span class="fl">0.1</span>, description<span class="op">=</span><span class="st">&#39;Force F&#39;</span>)</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>)<span class="op">;</span></span></code></pre></div>
+    <pre><code class="language-python">
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from ipywidgets import interact, FloatSlider
+
+    c = 1  # speed of light in natural units so that we can look at shape
+
+    def x_t(t, m, F):
+        return (m * c**2 / F) * (np.sqrt(1 + (F * t / (m * c))**2) - 1)
+
+    # spacetime diagram
+    def plot_spacetime(m=1.0, F=1.0):
+        t_vals = np.linspace(0, 10, 1000)  # time in natural units (ct)
+        x_vals = x_t(t_vals, m, F)
+        
+        plt.figure(figsize=(8, 6))
+        plt.plot(x_vals, t_vals, label=f"m = {m}, F = {F}")
+        plt.xlabel("x")
+        plt.ylabel("ct")
+        plt.title("Spacetime Diagram of a Relativistically Accelerated Particle (Constant Force)")
+        plt.grid(True)
+        plt.legend()
+        plt.axis("equal")
+        plt.show()
+
+    # controls
+    interact(
+        plot_spacetime,
+        m=FloatSlider(value=1.0, min=0.1, max=10.0, step=0.1, description="Mass m"),
+        F=FloatSlider(value=1.0, min=0.1, max=10.0, step=0.1, description="Force F"),
+    );
+    </code></pre>
+
     <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
       <iframe
-        src="/Ch12_Sec2_Interactive_HTMLs/Section_12_2_4_interactive.html"
+        src="Ch12_Sec2_Interactive_HTMLs/Section_12_2_4_interactive.html"
         title=""
         style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;"
         loading="lazy"
