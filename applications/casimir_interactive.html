@@ -67,27 +67,20 @@
 
   <div class="controls">
     <div class="control-group">
-      <label for="g-slider">Coupling \( g \)</label>
+      <label for="g-slider">Coupling</label>
       <input id="g-slider" type="range" min="0" max="5" step="0.1" value="1.0">
       <div class="value-display">g = <span id="g-value">1.0</span></div>
     </div>
 
     <div class="control-group">
-      <label for="m-slider">Mass parameter \( m \)</label>
+      <label for="m-slider">Mass</label>
       <input id="m-slider" type="range" min="0" max="2" step="0.05" value="0.0">
       <div class="value-display">m = <span id="m-value">0.0</span></div>
     </div>
   </div>
 
   <div id="plot"></div>
-  <div class="note">
-    This is a numerical approximation of the generalized Casimir force
-    \(
-      F(a,g,m) = -\frac{g^2}{\pi} \int_m^\infty
-      \frac{t^2\,e^{-2at}}{\sqrt{t^2 - m^2}\,\big(4t^2 + 4gt + g^2(1 - e^{-2at})\big)}\,dt
-    \)
-    using a finite integration range and trapezoidal rule.
-  </div>
+
 
   <script>
     // Numerical integrand (JS version of your Python integrand)
@@ -160,8 +153,8 @@
 
       const layout = {
         margin: { t: 40, r: 10, l: 50, b: 50 },
-        xaxis: { title: 'Separation a' },
-        yaxis: { title: 'Force F(a, g, m)' },
+        xaxis: { title: 'Separation (a)' },
+        yaxis: { title: 'F(a, g, m)' },
         title: 'Casimir-like Force vs. Separation',
       };
 
