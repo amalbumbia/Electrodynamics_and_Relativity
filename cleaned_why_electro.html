@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Electromagnetism from U(1) Gauge Symmetry in the Dirac Equation</title>
+  <link rel="stylesheet" href="../assets/header-css.css">
+  <link rel="stylesheet" href="../assets/mainStyle.css">
+
+  <!-- MathJax v3 for LaTeX in $...$ and $$...$$ -->
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+  </script>
+  <script id="MathJax-script" async
+          src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+  </script>
+</head>
+<body>
+  <div id="header-placeholder"></div>
+  
+  <div class="container">
+    <h1>Electromagnetism from U(1) Gauge Symmetry in the Dirac Equation</h1>
+
+    <p>In classical electrodynamics, we learn that our potentials $(\phi,\mathbf{A})$ have gauge freedom $\chi(\mathbf{r},t)$. Or, as in the language of chapter 12 of Griffiths Electrodynamics: $$A^\mu \mapsto A^{\mu'} = A^{\mu} + \frac{\partial \lambda}{\partial x_\mu}$$ </p>
+
+    <p>However, this symmetry by itself doesn't give us answers to several key questions: </p>
+    <ul>
+      <li>Why does electromagnitism satisfy gauge invariance?</li>
+      <li>Why do these transformations follow U(1) symmetry?</li>
+      <li>How do these symmetries relate to the electromagnetic forces that we observe?</li>
+    </ul>
+
+    <p>In order to continue this discussion, we'll have to introduce electrodynamics in a slightly different perspective. Following the unification of electromagnetism in the mid-19th century and the advent of special relativity in the early 20th century, came quantum mechanics in the 1920s. We know that **any proper theory of electromagnetism must be lorentz in variant**, however, it wasn't until 1926 with the Klein-Gordon equation that the first relativistic wave equation was formulated. For reasons that will become clear in a moment though, we'll be looking more closely at the Dirac equation, the second major relativistic wave equation. First, let's introduce the Klein-Gordon equation and see where it fails  </p>
+
+    <h2>Lorentz Invariance and the Klein–Gordon Equation</h2>
+
+    <p>The requirement of Lorentz invariance led to the development of relativistic wave equations. The most direct approach is to use the relativistic energy-momentum relation from special relativity: 
+    $$ E^2 = p^2c^2 + m^2c^4\,. $$
+    Promoting $E$ to the operator $i\hbar\partial_t$ and momentum $\mathbf{p}$ to $-i\hbar\nabla$ (in free space, $V=0$) gives a second-order wave equation:
+    $$ \left(\frac{1}{c^2}\frac{\partial^2}{\partial t^2} - \nabla^2 + \frac{m^2c^2}{\hbar^2}\right)\phi(t,\mathbf{x}) = 0\,. $$
+    This is the **Klein–Gordon equation** (KGE), which is manifestly Lorentz-invariant and is second-order in time (and space). It successfully reproduces the correct energy-momentum relation and thus is a **relativistic** wave equation for a quantum particle. In fact, we now understand the KGE as the equation for spin-0 particles (scalar fields).</p>
+
+    <p>However, the Klein–Gordon equation also presented problems. Because it is second-order in time, its interpretation as a quantum wave equation for a single particle was difficult. The probability density defined in analogy to the Schrödinger case is not positive-definite; indeed, solutions of KGE can have probability densities that are negative in some regions, which is not physically acceptable. Essentially, the KGE does not have a built-in mechanism to ensure a positive probability density (it yields a conserved current, but the “density” in that current can take negative values for certain states). Additionally, the KGE did not incorporate spin -- it describes a spin-0 particle, and the electron is spin-½.</p>
+
+    <p>These issues signaled that a different approach was needed. Instead of a second-order equation, perhaps a **first-order** (in time) relativistic equation could avoid the negative-probability problem. This was the route taken by Paul Dirac. ## The Dirac Equation
+    Paul Dirac sought a linear (first-order) relativistic wave equation for the electron that would overcome the Klein–Gordon equation’s issues. He postulated an equation of the form:
+    $$ i\hbar \frac{\partial}{\partial t}\Psi(t,\mathbf{x}) = \hat{H}\,\Psi(t,\mathbf{x})\,, $$
+    with a Hamiltonian that is linear in the momentum operator. Dirac assumed an ansatz $\hat{H} = c\,\boldsymbol{\alpha}\cdot \hat{\mathbf{p}} + \beta\, m c^2$, where $\boldsymbol{\alpha}$ and $\beta$ would be new operators (later understood as matrices) and $\hat{\mathbf{p}} = -i\hbar\nabla$. Requiring that this Hamiltonian squared equals the relativistic $E^2$ operator led to conditions on $\alpha_i$ and $\beta$ (they must anticommute and square to 1). The smallest representation satisfying these conditions are $4\times4$ matrices. Thus, $\Psi$ must be a four-component object (Dirac spinor), and $\boldsymbol{\alpha}$ and $\beta$ can be represented by $4\times4$ matrices (related to what are now called the gamma matrices $\gamma^\mu$).</p>
+
+    <p>In one convenient representation, the Dirac equation can be written as:
+    $$ i\hbar \frac{\partial \Psi}{\partial t} = c\,\boldsymbol{\alpha}\cdot \hat{\mathbf{p}}\;\Psi + \beta\, m c^2\,\Psi\,, $$
+    where $\Psi(t,\mathbf{x})$ is a four-component wavefunction. Equivalently, in a manifestly Lorentz-covariant form the Dirac equation is:
+    $$ (i\hbar \gamma^\mu \partial_\mu - m c)\,\psi(x) = 0\,, $$
+    where $x=(ct,\mathbf{x})$ and $\gamma^0,\gamma^1,\gamma^2,\gamma^3$ are the Dirac gamma matrices (with $\gamma^0=\beta$ and $\gamma^i = \beta \alpha^i$). This equation is first-order in both time and space derivatives, ensuring Lorentz invariance, and it naturally incorporates the spin of the electron: solutions of the Dirac equation describe spin-½ particles. In fact, the four-component Dirac spinor can be understood as describing two spin states of the electron (spin up/down) *and* two spin states of the positron (the electron’s antiparticle). </p>
+
+    <p>The Dirac equation was spectacularly successful. Not only did it reduce to the Schrödinger equation in the low-velocity limit, but it also correctly predicted the electron’s magnetic moment and introduced the concept of antiparticles (via its negative energy solutions). **Global U(1) Symmetry:** The free Dirac equation (for an electron with no electromagnetic interactions) possesses a simple internal symmetry: one can multiply the spinor by a constant phase factor without changing the form of the equation. That is, if $\psi(x)$ is a solution, then $\psi'(x) = e^{i\theta}\psi(x)$ (with $\theta$ constant) is also a solution. This global phase invariance is a U(1) symmetry (the group of complex phase rotations). It implies, via Noether’s theorem, a conserved current: the Dirac current 
+    $$ j^\mu = \bar\psi \gamma^\mu \psi $$ 
+    obeys $\partial_\mu j^\mu = 0$. In quantum mechanical terms, this corresponds to conservation of electric charge (or, in a single-particle context, conservation of probability). In electrodynamics, $j^\mu$ would be identified (up to a constant $q$) with the electric four-current of the particle. In short, the Dirac equation has an associated conserved charge thanks to its **global U(1)** phase symmetry. ## Global vs. Local U(1) Symmetry
+    While a global phase symmetry is exciting on its own, Weyl introduced another idea of considering **local** phase symmetry. Instead of a constant $\theta$, one promotes the phase to an arbitrary function of spacetime $\theta(x)$. That is, consider a transformation:
+    $$ \psi(x) \;\to\; \psi'(x) = e^{\,i \theta(x)}\,\psi(x)\,, $$
+    where the phase angle $\theta$ (or $\Lambda(x)$, often used) can vary from point to point. This is a **local U(1) gauge transformation**. If $\theta(x)$ is constant, we recover the global symmetry which we know is harmless. However, if $\theta$ varies with $x$, the Dirac equation as written is generally **not invariant**. The culprit is the derivative term. Under the local transformation:
+    $$ \partial_\mu \psi(x) \;\to\; \partial_\mu(e^{\,i\theta(x)}\psi) = e^{\,i\theta(x)}\partial_\mu\psi + i\, e^{\,i\theta(x)}(\partial_\mu \theta)\,\psi\,. $$
+    The extra term $i(\partial_\mu \theta)\psi$ means that $i\hbar \bar\psi \gamma^\mu \partial_\mu \psi$ will pick up an additional contribution and no longer cancel out in the Dirac Lagrangian. In other words, the Dirac Lagrangian (or equation) acquires extra pieces involving $\partial_\mu \theta(x)$ and thus is not invariant under this local phase change. To re-iterate this key point, the Dirac equation **is not invariant** by itself as we want it to be under this symmetry. Fixing this will give us some of the exciting insights we've been looking for.</p>
+
+    <p>To restore invariance, we **introduce a new field** (a four-vector field) that compensates for the position-dependent phase. We seek a modified derivative $D_\mu$ (called the *covariant derivative*) that transforms “covariantly” along with $\psi$. The covariant derivative should be defined as:
+    $$ D_\mu \psi = \partial_\mu \psi + \frac{i\,q}{\hbar}\,A_\mu(x)\,\psi\,, $$
+    where $A_\mu(x)$ is the newly introduced field and $q$ is a coupling constant. We also require that under the gauge transformation, $A_\mu(x)$ itself shifts in such a way as to cancel the troublesome extra term. Specifically, we demand the gauge field transforms as:
+    $$ A_\mu(x) \;\to\; A'_\mu(x) = A_\mu(x) - \partial_\mu \theta(x)\,. $$
+    (Choice of sign is a convention) Now, applying a local phase change to the combination $D_\mu\psi$ gives:
+    $$ D_\mu \psi \;\to\; \partial_\mu(e^{i\theta}\psi) + \frac{i q}{\hbar} A'_\mu e^{i\theta}\psi = e^{i\theta}\partial_\mu\psi + i(\partial_\mu \theta)e^{i\theta}\psi + \frac{i q}{\hbar} e^{i\theta}(A_\mu - \partial_\mu\theta)\psi\,. $$
+    The extra $i(\partial_\mu \theta)\psi$ from the derivative is exactly canceled by the $-\,\frac{i q}{\hbar}(\partial_\mu\theta)\psi$ coming from the shift in $A_\mu$. What remains is $e^{i\theta}( \partial_\mu + \frac{i q}{\hbar}A_\mu)\psi = e^{i\theta} D_\mu \psi$. In other words:
+    $$ D_\mu \psi(x) \;\to\; e^{\,i\theta(x)} D_\mu \psi(x)\,, $$
+    which shows that $D_\mu \psi$ transforms in the same way as $\psi$ itself. By construction, the Dirac equation written in terms of $D_\mu$ is now invariant under the local U(1) transformation. We have **gauged** the symmetry by introducing $A_\mu(x)$.</p>
+
+    <p>In summary, to achieve local U(1) gauge invariance we:
+    1. Replace ordinary derivatives with covariant derivatives: $\partial_\mu \to D_\mu = \partial_\mu + \frac{i q}{\hbar}A_\mu(x)$.
+    2. Introduce a new field $A_\mu(x)$, which transforms as $A_\mu \to A_\mu - \partial_\mu\theta(x)$ under the gauge symmetry.</p>
+
+    <p>By this *minimal coupling* procedure, the Dirac Lagrangian can be made locally gauge-invariant. Notably, these modifications yield interaction terms between $\psi$ and $A_\mu$ which we recognize as the coupling of a charged particle to the electromagnetic potential. The constant $q$ introduced is identified with the electric charge of the field $\psi$. For an electron, $q = -e$ (where $e>0$ is the magnitude of the electron charge). Enforcing local U(1) symmetry has thus required the existence of a vector field $A_\mu$ that couples to the Dirac field exactly like an electromagnetic potential. **We found that electromagnetism comes out of enforcing local U(1) symmetry!!!**  ## Minimal Coupling and the Electromagnetic Field
+    The process above is essentially the *minimal coupling* scheme well-known in classical and quantum physics: one introduces the electromagnetic four-potential into the momentum operator. In fact, our covariant derivative can be written as:
+    $$ D_\mu = \partial_\mu + \frac{i q}{\hbar}A_\mu \qquad \implies \qquad i\hbar D_\mu = i\hbar \partial_\mu + q A_\mu\,. $$
+    If we separate time and space components, this yields $i\hbar \frac{\partial}{\partial t} + q\Phi$ for the time-component ($A_0 = \Phi/c$ is related to the scalar potential $\Phi$) and $-i\hbar \nabla + q\mathbf{A}$ for the spatial components ($\mathbf{A}$ is the usual vector potential). Thus the Dirac equation in the presence of the gauge field $A_\mu$ becomes:
+    $$ i\hbar \frac{\partial \psi}{\partial t} = c\,\boldsymbol{\alpha}\cdot(\hat{\mathbf{p}} - q\mathbf{A})\,\psi + \beta\, m c^2\,\psi + q\,\Phi\,\psi\,. $$
+    The term $q\Phi$ acts as an electrostatic potential energy, and $\hat{\mathbf{p}} - q\mathbf{A}$ is the canonical momentum shifted by the vector potential. All the familiar interactions appear: for example, the spatial pieces $\boldsymbol{\alpha}\cdot(q\mathbf{A})$ will produce the interaction of the magnetic field with the electron’s magnetic moment, etc. We stress that *we did not put these interaction terms in by hand*; they arose inevitably from the demand of local gauge symmetry.</p>
+
+    <p>Crucially, the field $A_\mu(x)$ introduced by this procedure has exactly the properties of the **electromagnetic four-potential**. In fact, we can now identify $A_\mu$ with the electromagnetic potential: $A_0 = \Phi/c$ (the scalar potential, up to factors of $c$ in unit conventions) and $\mathbf{A}$ is the magnetic vector potential. The transformation $A_\mu \to A_\mu - \partial_\mu \theta$ is precisely the U(1) *gauge transformation* of electromagnetism (adding the gradient of a scalar function to the four-potential), which leaves the electric and magnetic fields unchanged. Therefore, by requiring local U(1) symmetry of the Dirac equation, we have essentially “discovered” the electromagnetic field. In more physical terms, the invariance of the laws of physics under a position-dependent phase rotation of the electron field requires the existence of an electromagnetic interaction mediated by a gauge potential.</p>
+
+    <p>In modern terms, the gauge field $A_\mu$ is often called an **abelian gauge field** (associated with the abelian group U(1)), and its quantum is the **photon**. The quantum electrodynamics (QED) of an electron is built by coupling the Dirac field to this U(1) gauge field; the photon emerges as the force carrier required by local symmetry.  ## Physical Interpretation and Connection to Maxwell’s Equations
+    Having identified $A_\mu$ with the electromagnetic four-potential, we can connect this formulation to Maxwell’s equations. Recall that in classical electromagnetism, the fields are given in terms of the four-potential by:
+    $$ F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu\,, $$
+    which encodes the electric and magnetic fields ($E_i = F_{0i}$ and $B_i = -\frac{1}{2}\epsilon_{ijk}F_{jk}$ in Cartesian coordinates). The homogeneous Maxwell equations ($\nabla \cdot \mathbf{B}=0$ and $\nabla\times \mathbf{E} + \partial \mathbf{B}/\partial t = 0$) are automatically satisfied by this definition of $F_{\mu\nu}$. The remaining Maxwell equations (Gauss’s law and Ampère’s law with Maxwell’s correction) are the equations of motion for the $A_\mu$ field when coupled to electric charges and currents:
+    $$ \partial_\mu F^{\mu\nu} = \mu_0 J^\nu \,,$$ 
+    in SI units (or $\partial_\mu F^{\mu\nu} = J^\nu$ in appropriate units where $\mu_0=1$). Here $J^\nu$ is the four-current of charged matter. In our case, the Dirac field provides a conserved current $j^\mu = \bar\psi\gamma^\mu \psi$. When we introduce the coupling $qA_\mu \bar\psi \gamma^\mu \psi$ (from the covariant derivative expansion), the equations of motion obtained by varying the $A_\mu$ field in the action yield:
+    $$ \partial_\mu F^{\mu\nu} = q\, \bar\psi \gamma^\nu \psi \,. $$
+    This is the Maxwell equation with the Dirac current $J^\nu = q\, \bar\psi \gamma^\nu \psi$ as the source. In other words, the conservation of the Dirac current (originating from global U(1) symmetry) and the dynamics of the gauge field $A_\mu$ (originating from local U(1) symmetry) together reproduce **Maxwell’s equations**. The field $A_\mu(x)$ introduced as a mere device to maintain symmetry is revealed to obey the same equations that govern classical electromagnetic fields.</p>
+
+    <p>To see this in a Lagrangian formalism: one can write down the locally invariant Dirac Lagrangian coupled to $A_\mu$,
+    $$ \mathcal{L}_{\text{Dirac+EM}} = \bar\psi(i\hbar \gamma^\mu D_\mu - m c)\psi - \frac{1}{4\mu_0}F_{\mu\nu}F^{\mu\nu}\,, $$
+    where the second term $-\frac{1}{4\mu_0}F^2$ is the standard Maxwell Lagrangian (written in covariant form). Varying this Lagrangian with respect to $A_\mu$ reproduces Maxwell’s equations in the presence of the Dirac current $J^\mu = q \bar\psi\gamma^\mu \psi$. The inclusion of the $\frac{1}{4}F_{\mu\nu}F^{\mu\nu}$ term is the final step to make $A_\mu$ a dynamical field rather than just an auxiliary one; it encodes the free propagation of electromagnetic waves (photons) and is required for a complete theory of electromagnetism. Once that term is included, we have the full **QED action**, and the equations of motion of this action are exactly the Dirac equation with minimal coupling and the full set of Maxwell’s equations.</p>
+
+    <p>In summary, **electromagnetism emerges naturally from the demand of local U(1) gauge symmetry** in the Dirac theory of a charged particle. The requirement of local phase invariance forces the introduction of a massless spin-1 field $A_\mu(x)$, which we recognize as the electromagnetic four-potential. The interactions between the Dirac field and this gauge field precisely reproduce the known electromagnetic interaction (minimal coupling). Moreover, the dynamics of the gauge field (introduced by including the appropriate field energy term) are governed by Maxwell’s equations. This principle – that symmetries dictate interactions – is a cornerstone of modern physics. Electromagnetism, in the form of QED, can thus be understood as the inevitable outcome of making the global phase symmetry of the electron’s wavefunction a local one.</p>
+  </div>
+  
+  <script src="../header-loader.js"></script>
+</body>
+</html>
