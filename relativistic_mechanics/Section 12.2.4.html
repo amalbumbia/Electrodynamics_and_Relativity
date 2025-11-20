@@ -10,15 +10,58 @@
     pre code.hljs {
       display: block;
       padding: 1rem;
-      background: #f5f5f5 !important;   /* light grey */
+      background: #f5f5f5 !important;  /* light grey */
       border-radius: 6px;
       font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
       font-size: 0.9rem;
       line-height: 1.4;
       overflow-x: auto;
-      color: #222;           /* darker text for contrast, optional */
+      color: #222;  /* base text */
+    }
+
+    /* ✅ Darker, higher-contrast token colors */
+
+    /* Keywords, builtins, types */
+    .hljs-keyword,
+    .hljs-built_in,
+    .hljs-type,
+    .hljs-selector-tag {
+      color: #00008b;   /* dark navy */
+      font-weight: 600;
+    }
+
+    /* Strings */
+    .hljs-string,
+    .hljs-title.hljs-class,
+    .hljs-attr {
+      color: #a31515;   /* classic dark red string color */
+    }
+
+    /* Numbers, constants */
+    .hljs-number,
+    .hljs-literal {
+      color: #0451a5;   /* dark blue */
+    }
+
+    /* Function names */
+    .hljs-title,
+    .hljs-function .hljs-title {
+      color: #795e26;   /* brownish, VS-ish */
+    }
+
+    /* Comments */
+    .hljs-comment {
+      color: #008000;   /* dark green */
+      font-style: italic;
+    }
+
+    /* Operators / punctuation (optional small tweak) */
+    .hljs-punctuation,
+    .hljs-operator {
+      color: #444;
     }
   </style>
+
   <link rel="stylesheet" href="../assets/header-css.css">
   <link rel="stylesheet" href="../assets/mainStyle.css">
   <!-- MathJax Configuration -->
