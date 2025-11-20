@@ -3,6 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <title></title>
+  <style>
+    pre code {
+      display: block;
+      padding: 1rem;
+      background: #f5f5f5;
+      border-radius: 6px;
+      font-family: Menlo, Monaco, Consolas, "Courier New", monospace;
+      font-size: 0.9rem;
+      line-height: 1.4;
+      overflow-x: auto;
+    }
+  </style>
   <link rel="stylesheet" href="../assets/header-css.css">
   <link rel="stylesheet" href="../assets/mainStyle.css">
   <!-- MathJax Configuration -->
@@ -30,7 +42,7 @@
     down) make up only about 1% of the proton’s mass. The rest of the
     mass comes from energy in the gluon fields (what holds the quarks
     together) and quantum chromodynamics (QCD) effects. <img
-    src="quark_structure_proton.png" alt="proton quarks" /> For
+    src="Quark_structure_proton.png" alt="proton quarks" /> For
     reference (recall that we are using natural units): * up quark- 2.2
     MeV * down quark- 4.7 MeV * proton- 938 MeV</p>
     <h2 id="bonus">Bonus!</h2>
@@ -57,59 +69,59 @@
     mass of the decayed particle.</p>
     <p>Let’s see an example of this using pythia8, a Monte Carlo event
     generator that can be used to simulate proton-proton collisions.</p>
-    <div class="sourceCode" id="cb1"><pre
-    class="sourceCode python"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">#If you would like to figure out how to download pythia8, go ahead (it&#39;s really fun to experiment with). </span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">#It can sometimes be painful to install, but maybe I&#39;m just being dramatic since it&#39;s not a simple pip install.</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pythia8</span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>pythia <span class="op">=</span> pythia8.Pythia()</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>pythia.readString(<span class="st">&quot;Beams:idA = 2212&quot;</span>)  <span class="co"># proton ID</span></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>pythia.readString(<span class="st">&quot;Beams:idB = 2212&quot;</span>)</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>pythia.readString(<span class="st">&quot;Beams:eCM = 10.&quot;</span>)   <span class="co"># Low energy, soft QCD</span></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>pythia.readString(<span class="st">&quot;SoftQCD:nonDiffractive = on&quot;</span>)</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>pythia.init()</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>n_events <span class="op">=</span> <span class="dv">100000</span></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>masses <span class="op">=</span> []</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(n_events):</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> pythia.<span class="bu">next</span>(): <span class="cf">continue</span></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Collect all pi+ and pi- in the final state</span></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>    piplus <span class="op">=</span> []</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>    piminus <span class="op">=</span> []</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> i <span class="kw">in</span> <span class="bu">range</span>(pythia.event.size()):</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>        p <span class="op">=</span> pythia.event[i]</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> <span class="kw">not</span> p.isFinal(): <span class="cf">continue</span></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> p.<span class="bu">id</span>() <span class="op">==</span> <span class="dv">211</span>: piplus.append(p)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> p.<span class="bu">id</span>() <span class="op">==</span> <span class="op">-</span><span class="dv">211</span>: piminus.append(p)</span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>    <span class="co"># Form all pi+ pi- pairs and compute invariant mass</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> pi_p <span class="kw">in</span> piplus:</span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> pi_m <span class="kw">in</span> piminus:</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>            e <span class="op">=</span> pi_p.e() <span class="op">+</span> pi_m.e()</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>            px <span class="op">=</span> pi_p.px() <span class="op">+</span> pi_m.px()</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>            py <span class="op">=</span> pi_p.py() <span class="op">+</span> pi_m.py()</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>            pz <span class="op">=</span> pi_p.pz() <span class="op">+</span> pi_m.pz()</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>            m2 <span class="op">=</span> e<span class="op">**</span><span class="dv">2</span> <span class="op">-</span> (px<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> py<span class="op">**</span><span class="dv">2</span> <span class="op">+</span> pz<span class="op">**</span><span class="dv">2</span>)</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> m2 <span class="op">&gt;</span> <span class="dv">0</span>:</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>                masses.append(np.sqrt(m2))</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>pythia.stat()</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>plt.hist(masses, bins<span class="op">=</span><span class="dv">200</span>, <span class="bu">range</span><span class="op">=</span>(<span class="dv">0</span>, <span class="fl">1.5</span>), histtype<span class="op">=</span><span class="st">&#39;step&#39;</span>, color<span class="op">=</span><span class="st">&#39;blue&#39;</span>)</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>plt.title(<span class="vs">r&quot;Invariant mass of </span><span class="dv">$</span><span class="er">\</span><span class="vs">pi</span><span class="dv">^</span><span class="op">+</span><span class="er">\</span><span class="vs">pi</span><span class="dv">^</span><span class="vs">-</span><span class="dv">$</span><span class="vs"> pairs&quot;</span>)</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="vs">r&quot;</span><span class="dv">$</span><span class="vs">m_{</span><span class="er">\</span><span class="vs">pi</span><span class="dv">^</span><span class="op">+</span><span class="er">\</span><span class="vs">pi</span><span class="dv">^</span><span class="vs">-}</span><span class="dv">$</span><span class="vs"> </span><span class="pp">[GeV]</span><span class="vs">&quot;</span>)</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">&quot;Counts&quot;</span>)</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>plt.axvspan(<span class="fl">0.4</span>, <span class="fl">0.6</span>, color<span class="op">=</span><span class="st">&#39;red&#39;</span>, alpha<span class="op">=</span><span class="fl">0.2</span>, label<span class="op">=</span><span class="vs">r&#39;</span><span class="dv">$\s</span><span class="vs">igma</span><span class="dv">$</span><span class="vs"> region&#39;</span>)</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>plt.legend()</span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>plt.savefig(<span class="st">&quot;pipi_invariant_mass.pdf&quot;</span>)</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">&quot;Plot saved as pipi_invariant_mass.pdf&quot;</span>)</span></code></pre></div>
+
+    <pre><code class="language-python">
+    # If you would like to figure out how to download pythia8, go ahead (it's really fun to experiment with).
+    # It can sometimes be painful to install, but maybe I'm just being dramatic since it's not a simple pip install.
+
+    import pythia8
+    import numpy as np
+    import matplotlib.pyplot as plt
+
+    pythia = pythia8.Pythia()
+    pythia.readString("Beams:idA = 2212")  # proton ID
+    pythia.readString("Beams:idB = 2212")
+    pythia.readString("Beams:eCM = 10.")   # Low energy, soft QCD
+    pythia.readString("SoftQCD:nonDiffractive = on")
+    pythia.init()
+
+    n_events = 100000
+    masses = []
+
+    for i in range(n_events):
+        if not pythia.next(): continue
+
+        # Collect all pi+ and pi- in the final state
+        piplus = []
+        piminus = []
+        for i in range(pythia.event.size()):
+            p = pythia.event[i]
+            if not p.isFinal(): continue
+            if p.id() == 211:  piplus.append(p)
+            if p.id() == -211: piminus.append(p)
+
+        # Form all pi+ pi- pairs and compute invariant mass
+        for pi_p in piplus:
+            for pi_m in piminus:
+                e  = pi_p.e()  + pi_m.e()
+                px = pi_p.px() + pi_m.px()
+                py = pi_p.py() + pi_m.py()
+                pz = pi_p.pz() + pi_m.pz()
+                m2 = e**2 - (px**2 + py**2 + pz**2)
+                if m2 > 0:
+                    masses.append(np.sqrt(m2))
+
+    pythia.stat()
+
+    plt.hist(masses, bins=200, range=(0, 1.5), histtype='step')
+    plt.title(r"Invariant mass of $\pi^+\pi^-$ pairs")
+    plt.xlabel(r"$m_{\pi^+\pi^-}$ [GeV]")
+    plt.ylabel("Counts")
+    plt.tight_layout()
+    plt.savefig("pipi_invariant_mass.pdf")
+    print("Plot saved as pipi_invariant_mass.pdf")
+    </code></pre>
+
     <figure>
     <img src="12_2_images/inv_mass_pi_pi.png" alt="pipimasses" style="width:50%; height:auto;"/>
     <figcaption aria-hidden="true"></figcaption>
