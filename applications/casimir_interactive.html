@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Casimir-like Force Interactive</title>
+
+  <!-- Plotly for plotting -->
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 1rem;
+      box-sizing: border-box;
+      background: #ffffff;
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.2rem;
+    }
+
+    .controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      align-items: center;
+    }
+
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      min-width: 180px;
+      font-size: 0.9rem;
+    }
+
+    .control-group label {
+      margin-bottom: 0.2rem;
+    }
+
+    .control-group input[type="range"] {
+      width: 100%;
+    }
+
+    .value-display {
+      font-weight: 600;
+      margin-top: 0.2rem;
+    }
+
+    #plot {
+      width: 100%;
+      height: 400px;
+    }
+
+    .note {
+      font-size: 0.8rem;
+      color: #555;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <h2>Casimir-like Force vs. Separation</h2>
+
+  <div class="controls">
+    <div class="control-group">
+      <label for="g-slider">Coupling \( g \)</label>
+      <input id="g-slider" type="range" min="0" max="5" step="0.1" value="1.0">
+      <div class="value-display">g = <span id="g-value">1.0</span></div>
+    </div>
+
+    <div class="control-group">
+      <label for="m-slider">Mass parameter \( m \)</label>
+      <input id="m-slider" type="range" min="0" max="2" step="0.05" value="0.0">
+      <div class="value-display">m = <span id="m-value">0.0</span></div>
+    </div>
+  </div>
+
+  <div id="plot"></div>
+  <div class="note">
+    This is a numerical approximation of the generalized Casimir force
+    \(
+      F(a,g,m) = -\frac{g^2}{\pi} \int_m^\infty
+      \frac{t^2\,e^{-2at}}{\sqrt{t^2 - m^2}\,\big(4t^2 + 4gt + g^2(1 - e^{-2at})\big)}\,dt
+    \)
+    using a finite integration range and trapezoidal rule.
+  </div>
+
+  <script>
+    // Numerical integrand (JS version of your Python integrand)
+    function integrand(t, a, g, m) {
+      const numerator = t * t * Math.exp(-2 * a * t);
+
+      // Guard against negative inside sqrt due to rounding
+      const sqrtTerm = Math.sqrt(Math.max(t * t - m * m, 1e-12));
+
+      const denom = sqrtTerm * (
+        4 * t * t +
+        4 * g * t +
+        g * g * (1 - Math.exp(-2 * a * t))
+      );
+
+      return numerator / denom;
+    }
+
+    // Approximate generalized Casimir force with cutoff (trapezoidal rule)
+    function F(a, g, m) {
+      const tMin = m + 1e-5;                 // avoid sqrt(0) if m = 0
+      const upperLimit = Math.min(50, 10 / a + m);  // exponential cutoff
+      const N = 1500;                        // number of integration steps
+      const dt = (upperLimit - tMin) / N;
+
+      let sum = 0.0;
+      for (let i = 0; i <= N; i++) {
+        const t = tMin + i * dt;
+        const weight = (i === 0 || i === N) ? 0.5 : 1.0; // trapezoidal
+        sum += weight * integrand(t, a, g, m);
+      }
+
+      const integral = sum * dt;
+      return -g * g / Math.PI * integral;     // don't forget the constants!
+    }
+
+    function computeForceCurve(g, m) {
+      const aVals = [];
+      const fVals = [];
+
+      const aMin = 0.1;
+      const aMax = 5.0;
+      const steps = 80; // fewer points for speed
+
+      for (let i = 0; i <= steps; i++) {
+        const a = aMin + (aMax - aMin) * i / steps;
+        let force;
+        try {
+          force = F(a, g, m);
+        } catch (e) {
+          force = NaN;
+        }
+
+        aVals.push(a);
+        fVals.push(force);
+      }
+
+      return { aVals, fVals };
+    }
+
+    function plotForce(g, m) {
+      const { aVals, fVals } = computeForceCurve(g, m);
+
+      const trace = {
+        x: aVals,
+        y: fVals,
+        mode: 'lines',
+        name: `g = ${g.toFixed(2)}, m = ${m.toFixed(2)}`
+      };
+
+      const layout = {
+        margin: { t: 40, r: 10, l: 50, b: 50 },
+        xaxis: { title: 'Separation a' },
+        yaxis: { title: 'Force F(a, g, m)' },
+        title: 'Casimir-like Force vs. Separation',
+      };
+
+      Plotly.newPlot('plot', [trace], layout, {responsive: true});
+    }
+
+    // Hook up sliders
+    const gSlider = document.getElementById('g-slider');
+    const mSlider = document.getElementById('m-slider');
+    const gValue = document.getElementById('g-value');
+    const mValue = document.getElementById('m-value');
+
+    function updatePlot() {
+      const g = parseFloat(gSlider.value);
+      const m = parseFloat(mSlider.value);
+      gValue.textContent = g.toFixed(1);
+      mValue.textContent = m.toFixed(2);
+      plotForce(g, m);
+    }
+
+    gSlider.addEventListener('input', updatePlot);
+    mSlider.addEventListener('input', updatePlot);
+
+    // Initial plot
+    updatePlot();
+  </script>
+</body>
+</html>
