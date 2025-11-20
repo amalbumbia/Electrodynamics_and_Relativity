@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const headerPlaceholder = document.getElementById('header-placeholder');
             if (headerPlaceholder) {
                 headerPlaceholder.innerHTML = `
-                    <div class="site-header" style="background-color: #1a237e; color: white; padding: 0 40px; height: 60px; display: flex; align-items: center;">
+                    <div class="site-header" style="background-color: #1a237e; color: white; padding: 0 40px; height: 70px; display: flex; align-items: center;">
                         <div style="font-weight: bold; font-size: 0.4em;">
                             <a href="${pathToRoot}" style="color: white; text-decoration: none;">Relativistic Electrodynamics</a>
                         </div>
