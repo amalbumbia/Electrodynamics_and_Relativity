@@ -16,13 +16,13 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px;
+    padding: 0 25px;
     height: 60px;
 }
 
 .logo a {
     color: white;
-    font-size: 1.4em;
+    font-size: 1.2em;
     font-weight: bold;
     text-decoration: none;
 }
@@ -58,7 +58,8 @@
     display: none !important; /* Force hide by default */
     position: absolute;
     background-color: #283593;
-    min-width: 180px;
+    width: max-content;
+    min-width: 0px;
     box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     z-index: 1;
     top: 100%;
