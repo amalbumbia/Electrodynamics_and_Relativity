@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (headerPlaceholder) {
                 headerPlaceholder.innerHTML = `
                     <div class="site-header" style="background-color: #1a237e; color: white; padding: 0 20px; height: 60px; display: flex; align-items: center;">
-                        <div style="font-weight: bold; font-size: 0.9 em;">
+                        <div style="font-weight: bold; font-size: 0.6em;">
                             <a href="${pathToRoot}" style="color: white; text-decoration: none;">Relativistic Electrodynamics</a>
                         </div>
                     </div>
