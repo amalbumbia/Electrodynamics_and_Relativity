@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Why Electrodynamics?</title>
+
+  <!-- Site-wide header and main styles -->
+  <link rel="stylesheet" href="../assets/header-css.css">
+  <link rel="stylesheet" href="../assets/mainStyle.css">
+
+  <!-- Header loader script -->
+  <script src="../header-loader.js" defer></script>
+
+  <!-- MathJax (copied from original notebook export) -->
+  <!-- Load mathjax -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS_CHTML-full,Safe"> </script>
+  <!-- MathJax configuration -->
+  <script type="text/x-mathjax-config">
+    init_mathjax = function() {
+        if (window.MathJax) {
+        // MathJax loaded
+            MathJax.Hub.Config({
+                TeX: {
+                    equationNumbers: {
+                    autoNumber: "AMS",
+                    useLabelIds: true
+                    }
+                },
+                tex2jax: {
+                    inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+                    displayMath: [ ['$$','$$'], ["\\[","\\]"] ],
+                    processEscapes: true,
+                    processEnvironments: true
+                },
+                displayAlign: 'center',
+                CommonHTML: {
+                    linebreaks: {
+                    automatic: true
+                    }
+                }
+            });
+
+            MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+        }
+    }
+    init_mathjax();
+  </script>
+
+  <!-- Optional: page-specific layout tweaks -->
+  <style>
+    main.content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 2rem 1rem 4rem;
+    }
+
+    main.content h1 {
+      margin-top: 0;
+    }
+  </style>
+</head>
+<body>
+  <main class="content">
+    <!-- BEGIN PAGE CONTENT (from original notebook) -->
+    <h1 id="Electromagnetism-from-U(1)-Gauge-Symmetry-in-the-Dirac-Equation">Electromagnetism from U(1) Gauge Symmetry in the Dirac Equation</h1>
+    <p>One of the most beautiful results in modern physics is that the structure of the electromagnetic interaction can be understood as a consequence of a simple symmetry principle: <strong>local U(1) gauge invariance</strong> of the electron’s wavefunction. Rather than introducing electric and magnetic fields “by hand,” we can see them emerge naturally from the requirement that the theory remain invariant under certain transformations.</p>
+    <p>The starting point is the free Dirac equation for a spin-½ particle (like the electron):</p>
+    <p>$$ (i\gamma^\mu \partial_\mu - m)\psi(x) = 0\,, $$</p>
+    <p>where:</p>
+    <ul>
+    <li>$\psi(x)$ is the Dirac spinor field, describing the electron,</li>
+    <li>$m$ is the mass of the electron,</li>
+    <li>$\gamma^\mu$ are the Dirac gamma matrices, and</li>
+    <li>$\partial_\mu$ is the four-gradient.</li>
+    </ul>
+    <p>This equation is invariant under a <strong>global</strong> phase transformation of the field:</p>
+    <p>$$ \psi(x) \rightarrow e^{i\alpha} \psi(x), $$</p>
+    <p>where $\alpha$ is a constant (independent of spacetime). This is a global U(1) symmetry: multiplying the wavefunction by an overall complex phase does not change any physical predictions.</p>
+    <h2 id="From-global-to-local-U(1)-symmetry">From global to local U(1) symmetry</h2>
+    <p>The real power of gauge theory appears when we promote this global symmetry to a <strong>local</strong> one. Instead of a constant phase $\alpha$, we allow the phase to depend on spacetime:</p>
+    <p>$$ \psi(x) \rightarrow e^{i q \lambda(x)} \psi(x)\,, $$</p>
+    <p>where $q$ is the electric charge of the particle (e.g., $q = -e$ for the electron), and $\lambda(x)$ is an arbitrary real function of spacetime.</p>
+    <p>If we apply this transformation to the free Dirac equation, we run into a problem. The derivative term transforms as:</p>
+    <p>$$ \partial_\mu \psi(x) \rightarrow \partial_\mu \left(e^{i q \lambda(x)} \psi(x)\right) = e^{i q \lambda(x)} \left(\partial_\mu \psi(x) + i q (\partial_\mu \lambda(x))\psi(x)\right). $$</p>
+    <p>That extra term $\propto \partial_\mu \lambda(x)$ ruins the invariance of the equation. The theory is <strong>not</strong> invariant under local phase transformations if we only use the ordinary derivative.</p>
+    <h2 id="Introducing-the-covariant-derivative-and-the-gauge-field">Introducing the covariant derivative and the gauge field</h2>
+    <p>To restore invariance, we introduce a new field $A_\mu(x)$ and define a <strong>covariant derivative</strong>:</p>
+    <p>$$ D_\mu = \partial_\mu + i q A_\mu(x)\,. $$</p>
+    <p>We then require that, under the local U(1) transformation</p>
+    <p>$$
+    \psi(x) \rightarrow e^{i q \lambda(x)} \psi(x),
+    $$</p>
+    <p>the gauge field transforms as:</p>
+    <p>$$
+    A_\mu(x) \rightarrow A_\mu'(x) = A_\mu(x) - \partial_\mu \lambda(x)\,.
+    $$</p>
+    <p>With this transformation law, one can show that the covariant derivative of $\psi$ transforms in the same way as $\psi$ itself:</p>
+    <p>$$
+    D_\mu \psi(x) \rightarrow e^{i q \lambda(x)} D_\mu \psi(x).
+    $$</p>
+    <p>This means that the modified Dirac equation</p>
+    <p>$$
+    (i\gamma^\mu D_\mu - m)\psi(x) = 0
+    $$</p>
+    <p>is invariant under local U(1) gauge transformations.</p>
+    <p>We interpret $A_\mu(x)$ as the <strong>electromagnetic four-potential</strong>, and $q$ as the electric charge. The coupling between the field $\psi$ and $A_\mu$ is nothing more than the minimal coupling prescription familiar from classical electrodynamics:</p>
+    <p>$$
+    p_\mu \rightarrow p_\mu - q A_\mu(x).
+    $$</p>
+    <h2 id="Field-strength-tensor-and-Maxwell%E2%80%99s-equations">Field strength tensor and Maxwell’s equations</h2>
+    <p>So far we’ve seen how the interaction between the electron and the electromagnetic field arises from local U(1) invariance, but we haven’t yet described the dynamics of the field $A_\mu$ itself. To do this, we construct a gauge-invariant field strength tensor:</p>
+    <p>$$
+    F_{\mu\nu} = \partial_\mu A_\nu - \partial_\nu A_\mu\,.
+    $$</p>
+    <p>Under the gauge transformation $A_\mu \rightarrow A_\mu - \partial_\mu \lambda$, it’s straightforward to check that $F_{\mu\nu}$ is invariant:</p>
+    <p>$$
+    F_{\mu\nu}' = F_{\mu\nu}.
+    $$</p>
+    <p>Using $F_{\mu\nu}$, we can write down the action (or Lagrangian density) for the electromagnetic field:</p>
+    <p>$$
+    \mathcal{L}_{\text{EM}} = -\frac{1}{4} F_{\mu\nu} F^{\mu\nu}.
+    $$</p>
+    <p>When combined with the Dirac Lagrangian for the matter field and the interaction term arising from the covariant derivative, the full Lagrangian is:</p>
+    <p>$$
+    \mathcal{L} = \bar{\psi}(i\gamma^\mu D_\mu - m)\psi - \frac{1}{4}F_{\mu\nu}F^{\mu\nu}.
+    $$</p>
+    <p>The equations of motion derived from this Lagrangian are precisely:</p>
+    <ul>
+    <li>the Dirac equation with minimal coupling for the electron, and</li>
+    <li>Maxwell’s equations for the electromagnetic field.</li>
+    </ul>
+    <h2 id="Why-U(1)-and-what-does-it-mean-physically">Why U(1) and what does it mean physically?</h2>
+    <p>The group U(1) is the group of complex numbers with unit magnitude, $e^{i\theta}$, under multiplication. In quantum mechanics, the overall phase of a wavefunction is unobservable, but <strong>relative phase differences</strong> matter and can generate interference effects.</p>
+    <p>By demanding invariance under <strong>local</strong> phase transformations—where the phase can vary from point to point in spacetime—we are effectively encoding the idea that physics should not depend on arbitrary choices of phase at each spacetime point. To maintain this local symmetry, we are forced to introduce the gauge field $A_\mu$, which we then recognize as the electromagnetic potential.</p>
+    <p>Physically:</p>
+    <ul>
+    <li>Electric charge $q$ is the “charge” associated with the U(1) symmetry.</li>
+    <li>The photon is the quantum of the gauge field $A_\mu$.</li>
+    <li>Electromagnetic interactions are the result of the requirement that the Dirac field respect local U(1) gauge invariance.</li>
+    </ul>
+    <h2 id="Summary">Summary</h2>
+    <p>Starting from the free Dirac equation and demanding invariance under local U(1) phase transformations, we are led to introduce a gauge field $A_\mu$ and replace the ordinary derivative with a covariant derivative. This procedure:</p>
+    <ul>
+    <li>introduces the electromagnetic four-potential naturally,</li>
+    <li>leads to an interaction between the electron and the electromagnetic field via minimal coupling, and</li>
+    <li>produces Maxwell’s equations as the equations of motion for the gauge field.</li>
+    </ul>
+    <p>In this sense, <strong>electromagnetism is not just an empirical force law</strong> but the inevitable consequence of imposing a simple and elegant symmetry principle—local U(1) gauge invariance—on the quantum field describing charged particles.</p>
+    <!-- END PAGE CONTENT -->
+  </main>
+</body>
+</html>
