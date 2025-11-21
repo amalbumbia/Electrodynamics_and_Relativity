@@ -9,27 +9,14 @@ Taking a second semester of electrodynamics may be the first time you encounter 
 
 The breifest answer is that non-relativistic electrodynamics is just not a complete formalism that accounts for every physical system. It is quite limited in terms of the simplifications you tend to have to apply to a system so that it can be solved. When we progress to considering real particles, things get complicated fast. Not accounting for relativistic effects means that theoretical predictions may significantly deviate form real-life observations. 
 
-Let's consider...
+A pretty interesting particle to think about is the muon. 
 
-- muon particle lifetime
-- cosmic rays reaching us
-- atomic clocks on airplanes
-- how large would a particle accelerator need to be in order to accelerate particles without considering relativistic effects? 
 
 
  <a href="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/3f5572803e2bd33150d4df1aa6eab6cc5d50ca77/Flowcharts%20Electro%20Project.svg">
   <img src="https://github.com/amalbumbia/Electrodynamics_and_Relativity/blob/8949d0f65fec955abbe48ba7cf1304b824eb021d/mega_flowchart.png" width="800" alt="flowchart">
 </a>
 
- The outline of subtopics covered in this repository are as follows:
-
- - [Special Relativity](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/dfdc289b99c800f50e0a8377334629b777b9947b/special_relativity) - [Paradoxes](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/special_relativity/ParadoxExamples/ApparentSimultaneityParadox.html) and [Michelson Morley](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/special_relativity/MichelsonMorley/1EtherTheoriesBeforeRelativity.html) and [SR Tutorial](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/special_relativity/index_from_tex_boxes.html) (more visuals may be added) are CLEAN HTML
- - [Relativistic Mechanics]() [1](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/relativistic_mechanics/Section_12_2_1.no-input.html) [2](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/relativistic_mechanics/Section_12_2_2.no-input.html)
-   [3](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/relativistic_mechanics/Section_12_2_3.interactive.html) [4](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/relativistic_mechanics/Section_12_2_4.html)
- - [Relativistic Electrodynamics](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/relativistic_electrodynamics/12.3%20(1).no-input.html) CLEAN HTML
- - [Electrodynamics as a Gauge Theory](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/why_electrodynamics.html) - CLEAN HTML
- - [Applications](https://github.com/amalbumbia/Electrodynamics_and_Relativity/tree/ff9ae8776cff9a50dcd0e7260373b456f1a29108/applications) 
- - [Gauge Invariance Simulation](https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/refs/heads/main/gauge_invariance.html)
 ## Interactive Boost Diagram
 
 <a href="https://raw.githack.com/amalbumbia/Electrodynamics_and_Relativity/main/interactive/minkowski_boost.html">
