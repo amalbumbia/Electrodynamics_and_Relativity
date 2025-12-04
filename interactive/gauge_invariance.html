@@ -5,138 +5,31 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="../assets/header-css.css">
   <link rel="stylesheet" href="../assets/mainStyle.css">
+
 <title>Gauge Invariance</title>
 <style>
-  body {
-    margin: 0;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
-    background: #fff;
-    color: #111;
-  }
-
-  header {
-    padding: 12px 16px;
-    border-bottom: 1px solid #ddd;
-  }
-
-  h1 {
-    margin: 0;
-    font-size: 16px;
-  }
-
-  /* Layout: controls + plots */
-  .wrap {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 12px;
-    padding: 12px;
-    box-sizing: border-box;
-  }
-
-  /* Panels */
-  .panel {
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .panel h2 {
-    margin: 0;
-    padding: 8px 10px;
-    border-bottom: 1px solid #eee;
-    font-size: 14px;
-  }
-
-  .panel .body {
-    padding: 10px;
-  }
-
-  label {
-    display: block;
-    font-size: 12px;
-    margin: 6px 0 4px;
-  }
-
-  .row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  input[type=range] {
-    width: 100%;
-  }
-
-  input, select, button {
-    font-size: 12px;
-  }
-
-  button.btn {
-    padding: 6px 10px;
-    border: 1px solid #ccc;
-    background: #f5f5f5;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-
-  button.btn[aria-pressed="true"] {
-    background: #e0e0e0;
-  }
-
-  /* Plots grid: multiple panels side by side */
-  .plots-grid {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  }
-
-  .plot-card {
-    padding: 10px;
-  }
-
-  canvas {
-    width: 100%;
-    height: 220px;
-    display: block;
-  }
-
-  .legend {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    font-size: 12px;
-    color: #444;
-    flex-wrap: wrap;
-  }
-
-  .legend span.dot {
-    display: inline-block;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-  }
-
-  #E0, #kVal {
-    width: 72px;
-  }
-
-  /* Responsive: stack controls on top on narrow screens */
-  @media (max-width: 800px) {
-    .wrap {
-      grid-template-columns: 1fr;
-    }
-
-    canvas {
-      height: 200px;
-    }
-  }
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#fff;color:#111}
+  header{padding:12px 16px;border-bottom:1px solid #ddd}
+  h1{margin:0;font-size:16px}
+  .wrap{display:grid;grid-template-columns:280px 1fr;gap:12px;padding:12px}
+  .panel{border:1px solid #ddd;border-radius:8px;background:#fff}
+  .panel h2{margin:0;padding:8px 10px;border-bottom:1px solid #eee;font-size:14px}
+  .panel .body{padding:10px}
+  label{display:block;font-size:12px;margin:6px 0 4px}
+  .row{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+  input[type=range]{width:100%}
+  input,select,button{font-size:12px}
+  button.btn{padding:6px 10px;border:1px solid #ccc;background:#f5f5f5;border-radius:6px;cursor:pointer}
+  button.btn[aria-pressed="true"]{background:#e0e0e0}
+  #E0,#kVal{width:72px}
+  .plots{display:grid;gap:12px;grid-template-columns:1fr 1fr}
+  .plot-card{padding:10px}
+  canvas{width:100%;height:220px;display:block}
+  .legend{font-size:12px;color:#444;margin-top:4px}
+  @media (max-width: 900px){.wrap{grid-template-columns:1fr}.plots{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-  <div id="header-placeholder"></div>
   <header>
     <h1>Gauge Invariance</h1>
   </header>
@@ -166,42 +59,69 @@
       </div>
     </section>
 
-    <!-- Plots: all cases visible at once -->
-    <section class="plots-grid">
-      <!-- Coulomb gauge potentials -->
+    <!-- Two gauge panels -->
+    <section class="plots">
+      <!-- Coulomb panel -->
       <div class="panel">
-        <h2>Potentials — Coulomb Gauge</h2>
-        <div class="plot-card">
-          <canvas id="potCoulombCanvas" width="1000" height="240"></canvas>
-          <div class="legend">
-            <span class="dot" style="background:#c0392b;"></span><span>Aᵧ</span>
-            <span class="dot" style="background:#bbb;"></span><span>V = 0, Aₓ = 0 (not shown)</span>
+        <h2>Coulomb gauge</h2>
+        <div class="body">
+          <div class="row">
+            <label>View
+              <select id="viewC">
+                <option value="fields">Fields</option>
+                <option value="potentials">Potentials</option>
+              </select>
+            </label>
+            <label id="fieldSelC">Show
+              <select id="fieldWhichC">
+                <option value="Ey">Ey</option>
+                <option value="Bz">Bz</option>
+              </select>
+            </label>
+            <label id="potSelC" style="display:none">Quantity
+              <select id="potWhichC">
+                <option value="V">V</option>
+                <option value="Ax">Ax</option>
+                <option value="Ay">Ay</option>
+              </select>
+            </label>
           </div>
+        </div>
+        <div class="plot-card">
+          <canvas id="canvasC" width="1000" height="240"></canvas>
+          <div class="legend"><span id="legendC">E — Coulomb</span></div>
         </div>
       </div>
 
-      <!-- Lorenz gauge potentials -->
+      <!-- Lorenz panel -->
       <div class="panel">
-        <h2>Potentials — Lorenz Gauge</h2>
-        <div class="plot-card">
-          <canvas id="potLorenzCanvas" width="1000" height="240"></canvas>
-          <div class="legend">
-            <span class="dot" style="background:#c0392b;"></span><span>V</span>
-            <span class="dot" style="background:#1f77b4;"></span><span>Aₓ</span>
-            <span class="dot" style="background:#2ca02c;"></span><span>Aᵧ</span>
+        <h2>Lorenz gauge</h2>
+        <div class="body">
+          <div class="row">
+            <label>View
+              <select id="viewL">
+                <option value="fields">Fields</option>
+                <option value="potentials">Potentials</option>
+              </select>
+            </label>
+            <label id="fieldSelL">Show
+              <select id="fieldWhichL">
+                <option value="Ey">Ey</option>
+                <option value="Bz">Bz</option>
+              </select>
+            </label>
+            <label id="potSelL" style="display:none">Quantity
+              <select id="potWhichL">
+                <option value="V">V</option>
+                <option value="Ax">Ax</option>
+                <option value="Ay">Ay</option>
+              </select>
+            </label>
           </div>
         </div>
-      </div>
-
-      <!-- Fields (gauge invariant) -->
-      <div class="panel">
-        <h2>Fields (Gauge Invariant)</h2>
         <div class="plot-card">
-          <canvas id="fldCanvas" width="1000" height="240"></canvas>
-          <div class="legend">
-            <span class="dot" style="background:#1f77b4;"></span><span>Eᵧ</span>
-            <span class="dot" style="background:#2ca02c;"></span><span>B_z</span>
-          </div>
+          <canvas id="canvasL" width="1000" height="240"></canvas>
+          <div class="legend"><span id="legendL">E — Lorenz</span></div>
         </div>
       </div>
     </section>
@@ -209,255 +129,136 @@
 
 <script>
 (() => {
-  const COLORS = {
-    grid: '#eee',
-    zero: '#ccc',
-    axis: '#666',
-    potV: '#c0392b',
-    potAx: '#1f77b4',
-    potAy: '#2ca02c',
-    Ey: '#1f77b4',
-    Bz: '#2ca02c'
-  };
+  // colors, basic setup
+  const COL = { grid:'#eee', zero:'#ccc', E:'#1f77b4', B:'#2ca02c', POT:'#c0392b' };
+  const c = 1.0; // c=1
+  const TWO_PI = Math.PI*2;
+  const state = { t:0, E0:1.0, k:1.0, get w(){return c*this.k}, get alpha(){return this.E0/(this.w*this.k)}, playing:false, last:performance.now(), speed:1.0 };
 
-  const c = 1.0;            // c=1 units
-  const TWO_PI = Math.PI * 2;
-
-  const state = {
-    t: 0,
-    E0: 1.0,
-    k: 1.0,
-    get w() { return c * this.k; },
-    get alpha() { return this.E0 / (this.w * this.k); },
-    playing: false,
-    last: performance.now(),
-    speed: 1.0
-  };
-
-  // DOM elements
+  // DOM controls
   const tRange = document.getElementById('tRange');
-  const playBtn = document.getElementById('playBtn');
-  const speedEl = document.getElementById('speed');
-  const E0El = document.getElementById('E0');
-  const kEl = document.getElementById('kVal');
+  const playBtn= document.getElementById('playBtn');
+  const speedEl= document.getElementById('speed');
+  const E0El   = document.getElementById('E0');
+  const kEl    = document.getElementById('kVal');
 
-  const potCoulombCanvas = document.getElementById('potCoulombCanvas');
-  const potLorenzCanvas = document.getElementById('potLorenzCanvas');
-  const fldCanvas = document.getElementById('fldCanvas');
+  // Coulomb panel DOM
+  const viewC = document.getElementById('viewC');
+  const fieldSelC = document.getElementById('fieldSelC');
+  const potSelC   = document.getElementById('potSelC');
+  const fieldWhichC = document.getElementById('fieldWhichC');
+  const potWhichC   = document.getElementById('potWhichC');
+  const canvasC     = document.getElementById('canvasC');
+  const legendC     = document.getElementById('legendC');
+  const ctxC        = canvasC.getContext('2d');
 
-  const pCoulCtx = potCoulombCanvas.getContext('2d');
-  const pLorenCtx = potLorenzCanvas.getContext('2d');
-  const fCtx = fldCanvas.getContext('2d');
+  // Lorenz panel DOM
+  const viewL = document.getElementById('viewL');
+  const fieldSelL = document.getElementById('fieldSelL');
+  const potSelL   = document.getElementById('potSelL');
+  const fieldWhichL = document.getElementById('fieldWhichL');
+  const potWhichL   = document.getElementById('potWhichL');
+  const canvasL     = document.getElementById('canvasL');
+  const legendL     = document.getElementById('legendL');
+  const ctxL        = canvasL.getContext('2d');
 
-  // Spatial grid
-  const N = 700;
-  const xMin = -2 * Math.PI;
-  const xMax =  2 * Math.PI;
-  const xs = new Float64Array(N);
-  for (let i = 0; i < N; i++) {
-    xs[i] = xMin + (xMax - xMin) * i / (N - 1);
-  }
+  // x grid
+  const N=700, xMin=-2*Math.PI, xMax=2*Math.PI; const xs=new Float64Array(N);
+  for(let i=0;i<N;i++) xs[i]=xMin+(xMax-xMin)*i/(N-1);
+  const theta=(x,t)=> state.k*x - state.w*t;
 
-  function theta(x, t) {
-    return state.k * x - state.w * t;
-  }
-
-  // Potentials in given gauge
-  function potentials(gauge, t) {
-    const V  = new Float64Array(N);
-    const Ax = new Float64Array(N);
-    const Ay = new Float64Array(N);
-
-    for (let i = 0; i < N; i++) {
+  // Potentials
+  function potentials(gauge,t){
+    const V=new Float64Array(N), Ax=new Float64Array(N), Ay=new Float64Array(N);
+    for(let i=0;i<N;i++){
       const th = theta(xs[i], t);
-      if (gauge === 'coulomb') {
-        V[i]  = 0;
-        Ax[i] = 0;
-        Ay[i] = (state.E0 / state.w) * Math.sin(th);
-      } else { // Lorenz
-        V[i]  = - state.alpha * state.w * Math.sin(th);
-        Ax[i] = - state.alpha * state.k * Math.sin(th);
-        Ay[i] = (state.E0 / state.w) * Math.sin(th);
+      if(gauge==='coulomb'){
+        V[i]=0; Ax[i]=0; Ay[i]=(state.E0/state.w)*Math.sin(th);
+      }else{ // lorenz
+        V[i]= -state.alpha*state.w*Math.sin(th);
+        Ax[i]= -state.alpha*state.k*Math.sin(th);
+        Ay[i]=(state.E0/state.w)*Math.sin(th);
       }
     }
-    return { V, Ax, Ay };
+    return {V,Ax,Ay};
   }
 
-  // Fields (gauge invariant)
-  function fields(t) {
-    const Ey = new Float64Array(N);
-    const Bz = new Float64Array(N);
-
-    for (let i = 0; i < N; i++) {
+  // Fields computed from potentials (here reduce to analytic forms)
+  function fieldsFrom(gauge,t){
+    // E_y = -∂t A_y = E0 cosθ,  B_z = ∂x A_y = (E0/c) cosθ, independent of gauge
+    const Ey=new Float64Array(N), Bz=new Float64Array(N);
+    for(let i=0;i<N;i++){
       const th = theta(xs[i], t);
-      Ey[i] = state.E0 * Math.cos(th);
-      Bz[i] = (state.E0 / c) * Math.cos(th);
+      Ey[i]= state.E0*Math.cos(th);
+      Bz[i]= (state.E0/c)*Math.cos(th);
     }
-    return { Ey, Bz };
+    return {Ey,Bz};
   }
 
   // Drawing helpers
-  function clear(ctx) {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-  }
+  function clear(ctx){ ctx.clearRect(0,0,ctx.canvas.width, ctx.canvas.height); }
+  function mapX(x,W){ return 40 + (x - xMin)*(W-60)/(xMax-xMin); }
+  function mapY(y,yMin,yMax,H){ return 10 + (yMax - y)*(H-40)/(yMax - yMin); }
+  function maxAbs(arr){ let m=0; for(const v of arr){ const a=Math.abs(v); if(a>m)m=a; } return m; }
+  function drawAxes(ctx,yMin,yMax){ const W=ctx.canvas.width,H=ctx.canvas.height; ctx.save();
+    ctx.strokeStyle=COL.grid; ctx.lineWidth=1; ctx.beginPath();
+    for(let gx=0;gx<=10;gx++){ const x=40+(W-60)*gx/10; ctx.moveTo(x,10); ctx.lineTo(x,H-30); }
+    for(let gy=0;gy<=6;gy++){ const y=10+(H-40)*gy/6; ctx.moveTo(40,y); ctx.lineTo(W-20,y); }
+    ctx.stroke(); const y0=mapY(0,yMin,yMax,H); ctx.strokeStyle=COL.zero; ctx.beginPath(); ctx.moveTo(40,y0); ctx.lineTo(W-20,y0); ctx.stroke(); ctx.restore(); }
+  function drawLine(ctx,ys,color,yMin,yMax){ const W=ctx.canvas.width,H=ctx.canvas.height; ctx.save(); ctx.strokeStyle=color; ctx.lineWidth=2; ctx.beginPath();
+    for(let i=0;i<N;i++){ const X=mapX(xs[i],W); const Y=mapY(ys[i],yMin,yMax,H); if(i===0) ctx.moveTo(X,Y); else ctx.lineTo(X,Y);} ctx.stroke(); ctx.restore(); }
 
-  function mapX(x, W) {
-    return 40 + (x - xMin) * (W - 60) / (xMax - xMin);
-  }
-
-  function mapY(y, yMin, yMax, H) {
-    return 10 + (yMax - y) * (H - 40) / (yMax - yMin);
-  }
-
-  function maxAbs(arr) {
-    let m = 0;
-    for (let i = 0; i < arr.length; i++) {
-      const a = Math.abs(arr[i]);
-      if (a > m) m = a;
+  // Panel renderer
+  function renderPanel(ctx, gauge, view, fieldWhich, potWhich, legendEl){
+    clear(ctx);
+    if(view==='fields'){
+      const {Ey,Bz}=fieldsFrom(gauge,state.t);
+      const ydata = (fieldWhich==='Ey')? Ey : Bz;
+      const sym = (fieldWhich==='Ey') ? 'E<sub>y</sub>' : 'B<sub>z</sub>';
+      legendEl.innerHTML = sym + ' — ' + (gauge==='coulomb'?'Coulomb':'Lorenz');
+      const amp=Math.max(1,maxAbs(ydata)); const yMax=Math.max(1,amp*1.2), yMin=-yMax;
+      drawAxes(ctx,yMin,yMax); drawLine(ctx,ydata, fieldWhich==='Ey'?COL.E:COL.B, yMin,yMax);
+    } else {
+      const {V,Ax,Ay}=potentials(gauge,state.t);
+      let ydata,label;
+      if(potWhich==='V'){ ydata=V; label='V — ' + (gauge==='coulomb'?'Coulomb':'Lorenz'); }
+      else if(potWhich==='Ax'){ ydata=Ax; label='A<sub>x</sub> — ' + (gauge==='coulomb'?'Coulomb':'Lorenz'); }
+      else { ydata=Ay; label='A<sub>y</sub> — ' + (gauge==='coulomb'?'Coulomb':'Lorenz'); }
+      legendEl.innerHTML = label;
+      const amp=Math.max(1e-6,maxAbs(ydata)); const yMax=Math.max(1,amp*1.2), yMin=-yMax;
+      drawAxes(ctx,yMin,yMax); drawLine(ctx,ydata, COL.POT, yMin,yMax);
     }
-    return m;
   }
 
-  function drawAxes(ctx, yMin, yMax) {
-    const W = ctx.canvas.width;
-    const H = ctx.canvas.height;
-
-    ctx.save();
-
-    // Grid
-    ctx.strokeStyle = COLORS.grid;
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    for (let gx = 0; gx <= 10; gx++) {
-      const x = 40 + (W - 60) * gx / 10;
-      ctx.moveTo(x, 10);
-      ctx.lineTo(x, H - 30);
-    }
-    for (let gy = 0; gy <= 6; gy++) {
-      const y = 10 + (H - 40) * gy / 6;
-      ctx.moveTo(40, y);
-      ctx.lineTo(W - 20, y);
-    }
-    ctx.stroke();
-
-    // Zero line
-    const y0 = mapY(0, yMin, yMax, H);
-    ctx.strokeStyle = COLORS.zero;
-    ctx.beginPath();
-    ctx.moveTo(40, y0);
-    ctx.lineTo(W - 20, y0);
-    ctx.stroke();
-
-    ctx.restore();
+  function updateSelectors(viewSel, fieldSel, potSel){
+    const v=viewSel.value; fieldSel.style.display = (v==='fields')?'inline-block':'none'; potSel.style.display = (v==='potentials')?'inline-block':'none';
   }
 
-  function drawLine(ctx, ys, color, yMin, yMax) {
-    const W = ctx.canvas.width;
-    const H = ctx.canvas.height;
+  // Events
+  tRange.addEventListener('input', e=>{ state.t=parseFloat(e.target.value); drawAll(); });
+  playBtn.addEventListener('click', ()=>{ state.playing=!state.playing; playBtn.setAttribute('aria-pressed', state.playing); playBtn.textContent= state.playing? 'Pause':'Play'; state.last=performance.now(); if(state.playing) requestAnimationFrame(tick); });
+  speedEl.addEventListener('change', e=>{ const v=parseFloat(e.target.value); state.speed = (!isNaN(v)&&v>0)? v:1.0; e.target.value=state.speed; });
+  E0El.addEventListener('change', e=>{ const v=parseFloat(e.target.value); state.E0 = isNaN(v)?1.0:v; e.target.value=state.E0; drawAll(); });
+  kEl.addEventListener('change', e=>{ const v=parseFloat(e.target.value); state.k = (!isNaN(v)&&v>0)? v:1.0; e.target.value=state.k; drawAll(); });
 
-    ctx.save();
-    ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
-    ctx.beginPath();
-    for (let i = 0; i < N; i++) {
-      const X = mapX(xs[i], W);
-      const Y = mapY(ys[i], yMin, yMax, H);
-      if (i === 0) ctx.moveTo(X, Y);
-      else ctx.lineTo(X, Y);
-    }
-    ctx.stroke();
-    ctx.restore();
+  // Panel-specific events
+  viewC.addEventListener('change', ()=>{ updateSelectors(viewC, fieldSelC, potSelC); drawAll(); });
+  fieldWhichC.addEventListener('change', drawAll);
+  potWhichC.addEventListener('change', drawAll);
+
+  viewL.addEventListener('change', ()=>{ updateSelectors(viewL, fieldSelL, potSelL); drawAll(); });
+  fieldWhichL.addEventListener('change', drawAll);
+  potWhichL.addEventListener('change', drawAll);
+
+  function tick(now){ if(!state.playing) return; const dt=(now-state.last)/1000; state.last=now; state.t=(state.t + dt*state.speed)%TWO_PI; tRange.value=state.t; drawAll(); requestAnimationFrame(tick); }
+  function drawAll(){
+    renderPanel(ctxC, 'coulomb', viewC.value, fieldWhichC.value, potWhichC.value, legendC);
+    renderPanel(ctxL, 'lorenz',  viewL.value, fieldWhichL.value, potWhichL.value, legendL);
   }
 
-  // Render functions
-  function renderPotentialsCoulomb() {
-    clear(pCoulCtx);
-    const { Ay } = potentials('coulomb', state.t);
-    const amp = Math.max(1e-6, maxAbs(Ay)) || 1;
-    const yMax = Math.max(1, amp * 1.2);
-    const yMin = -yMax;
-
-    drawAxes(pCoulCtx, yMin, yMax);
-    drawLine(pCoulCtx, Ay, COLORS.potAy, yMin, yMax);
-  }
-
-  function renderPotentialsLorenz() {
-    clear(pLorenCtx);
-    const { V, Ax, Ay } = potentials('lorenz', state.t);
-    const amp = Math.max(maxAbs(V), maxAbs(Ax), maxAbs(Ay), 1);
-    const yMax = Math.max(1, amp * 1.2);
-    const yMin = -yMax;
-
-    drawAxes(pLorenCtx, yMin, yMax);
-    drawLine(pLorenCtx, V,  COLORS.potV,  yMin, yMax);
-    drawLine(pLorenCtx, Ax, COLORS.potAx, yMin, yMax);
-    drawLine(pLorenCtx, Ay, COLORS.potAy, yMin, yMax);
-  }
-
-  function renderFields() {
-    clear(fCtx);
-    const { Ey, Bz } = fields(state.t);
-    const amp = Math.max(maxAbs(Ey), maxAbs(Bz), 1);
-    const yMax = Math.max(1, amp * 1.2);
-    const yMin = -yMax;
-
-    drawAxes(fCtx, yMin, yMax);
-    drawLine(fCtx, Ey, COLORS.Ey, yMin, yMax);
-    drawLine(fCtx, Bz, COLORS.Bz, yMin, yMax);
-  }
-
-  function renderAll() {
-    renderPotentialsCoulomb();
-    renderPotentialsLorenz();
-    renderFields();
-  }
-
-  // Event wiring
-  tRange.addEventListener('input', e => {
-    state.t = parseFloat(e.target.value);
-    renderAll();
-  });
-
-  playBtn.addEventListener('click', () => {
-    state.playing = !state.playing;
-    playBtn.setAttribute('aria-pressed', state.playing);
-    playBtn.textContent = state.playing ? 'Pause' : 'Play';
-    state.last = performance.now();
-    if (state.playing) requestAnimationFrame(tick);
-  });
-
-  speedEl.addEventListener('change', e => {
-    const v = parseFloat(e.target.value);
-    state.speed = (isNaN(v) || v <= 0) ? 1.0 : v;
-    speedEl.value = state.speed.toString();
-  });
-
-  E0El.addEventListener('change', e => {
-    const v = parseFloat(e.target.value);
-    state.E0 = isNaN(v) ? 1.0 : v;
-    E0El.value = state.E0.toString();
-    renderAll();
-  });
-
-  kEl.addEventListener('change', e => {
-    const v = parseFloat(e.target.value);
-    state.k = (isNaN(v) || v <= 0) ? 1.0 : v;
-    kEl.value = state.k.toString();
-    renderAll();
-  });
-
-  function tick(now) {
-    if (!state.playing) return;
-    const dt = (now - state.last) / 1000;
-    state.last = now;
-    state.t = (state.t + dt * state.speed) % TWO_PI;
-    tRange.value = state.t;
-    renderAll();
-    requestAnimationFrame(tick);
-  }
-
-  // Initial draw
-  renderAll();
+  // init
+  updateSelectors(viewC, fieldSelC, potSelC); updateSelectors(viewL, fieldSelL, potSelL);
+  drawAll();
 })();
 </script>
 
